@@ -1,5 +1,5 @@
 import { Suspense, lazy } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import { CustomCursor } from './components/layout/CustomCursor'
 import { ScrollProgress } from './components/layout/ScrollProgress'
 
@@ -8,7 +8,7 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage'))
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <ScrollProgress />
       <CustomCursor />
       <Suspense
@@ -28,7 +28,7 @@ function App() {
           <Route path="/work/:slug" element={<ProjectPage />} />
         </Routes>
       </Suspense>
-    </BrowserRouter>
+    </>
   )
 }
 
