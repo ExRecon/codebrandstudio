@@ -1,0 +1,351 @@
+@import '@fontsource-variable/inter';
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=satoshi@400,500,700&f[]=general-sans@400,500,600,700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #f5f7fb;
+  background: #050505;
+  font-family: 'General Sans', 'Inter Variable', sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: auto;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: #050505;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    radial-gradient(circle at top, rgba(139, 233, 255, 0.08), transparent 20%),
+    radial-gradient(circle at 80% 10%, rgba(143, 131, 255, 0.08), transparent 24%),
+    #050505;
+  color: #f5f7fb;
+  cursor: none;
+}
+
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  body {
+    cursor: auto;
+  }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: rgba(139, 233, 255, 0.24);
+  color: white;
+}
+
+#root {
+  position: relative;
+}
+
+#root::before {
+  content: '';
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.015) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, black 25%, transparent 85%);
+  opacity: 0.18;
+  z-index: 1;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  z-index: 100;
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid rgba(139, 233, 255, 0.55);
+  background: rgba(139, 233, 255, 0.08);
+  backdrop-filter: blur(12px);
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  transition:
+    width 220ms ease,
+    height 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease;
+}
+
+.custom-cursor.is-active {
+  width: 54px;
+  height: 54px;
+  border-color: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+@layer components {
+  .section-shell {
+    @apply relative mx-auto max-w-7xl px-4 py-24 md:px-8 md:py-32;
+  }
+
+  .section-kicker {
+    margin-bottom: 1rem;
+    color: rgb(103 232 249);
+    font-size: 0.75rem;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    opacity: 0.72;
+  }
+
+  .section-title {
+    @apply font-display text-4xl leading-none tracking-[-0.05em] text-white md:text-6xl;
+  }
+
+  .section-copy {
+    margin-top: 1.5rem;
+    color: rgba(255, 255, 255, 0.58);
+    font-size: 1rem;
+    line-height: 2rem;
+  }
+
+  .glass-panel {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.045);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(28px);
+  }
+
+  .glass-card {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.75rem;
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+  }
+
+  .button-primary {
+    border: 1px solid rgba(103, 232, 249, 0.2);
+    border-radius: 999px;
+    background: linear-gradient(90deg, rgb(103, 232, 249), rgb(125, 211, 252), rgb(167, 139, 250));
+    padding: 0.75rem 1.5rem;
+    color: rgb(15, 23, 42);
+    font-size: 0.875rem;
+    font-weight: 500;
+    box-shadow: 0 15px 45px rgba(139, 233, 255, 0.18);
+  }
+
+  .button-secondary {
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.75rem 1.5rem;
+    color: white;
+    font-size: 0.875rem;
+    font-weight: 500;
+    backdrop-filter: blur(24px);
+  }
+
+  .icon-chip {
+    display: inline-flex;
+    height: 2.75rem;
+    width: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  }
+
+  .service-card {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 1.5rem;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition:
+      transform 500ms ease,
+      background 500ms ease,
+      border-color 500ms ease;
+    transform-style: preserve-3d;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(103, 232, 249, 0.25);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .project-card {
+    display: block;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2.25rem;
+    background: rgba(255, 255, 255, 0.035);
+    padding: 1.5rem;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    transition:
+      border-color 500ms ease,
+      background 500ms ease;
+  }
+
+  @media (min-width: 768px) {
+    .project-card {
+      padding: 2rem;
+    }
+  }
+
+  .project-card:hover {
+    border-color: rgba(103, 232, 249, 0.18);
+    background: rgba(255, 255, 255, 0.045);
+  }
+
+  .project-visual {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2rem;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+    padding: 1rem;
+  }
+
+  .project-screen {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.6rem;
+    background: rgba(0, 0, 0, 0.35);
+    padding: 1.25rem;
+    backdrop-filter: blur(28px);
+  }
+
+  .timeline-row {
+    @apply grid items-start gap-4 md:grid-cols-[68px_32px_1fr];
+  }
+
+  .timeline-index {
+    padding-top: 0.75rem;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+  }
+
+  .timeline-dot {
+    @apply relative flex h-full justify-center;
+  }
+
+  .timeline-dot::before {
+    content: '';
+    position: absolute;
+    top: 0.75rem;
+    height: 100%;
+    width: 1px;
+    background: linear-gradient(180deg, rgba(103, 232, 249, 0.6), transparent);
+  }
+
+  .testimonial-card {
+    min-height: 320px;
+    width: 330px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2rem;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 1.75rem;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+  }
+
+  .why-card {
+    min-height: 360px;
+    width: 430px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 2rem;
+    background:
+      radial-gradient(circle at top right, rgba(139, 233, 255, 0.08), transparent 26%),
+      rgba(255, 255, 255, 0.04);
+    padding: 2rem;
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(24px);
+  }
+
+  .marquee-track {
+    @apply flex gap-5;
+    width: max-content;
+    animation: marquee 26s linear infinite;
+  }
+}
+
+.hero-gradient {
+  background:
+    radial-gradient(circle at 15% 20%, rgba(139, 233, 255, 0.16), transparent 20%),
+    radial-gradient(circle at 75% 18%, rgba(143, 131, 255, 0.18), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 18%);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(-50% - 10px));
+  }
+}
+
+@media (max-width: 1023px) {
+  .marquee-track {
+    animation-duration: 34s;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    cursor: auto;
+  }
+
+  .marquee-track {
+    animation: none;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+}
