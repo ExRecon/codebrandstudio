@@ -358,7 +358,7 @@ export function TestimonialsSection() {
 
 export function CTASection() {
   return (
-    <section id="contact" className="section-shell pb-24">
+    <section id="contact" className="section-shell pb-16 md:pb-20">
       <div className="glass-panel relative overflow-hidden p-8 md:p-12">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(139,233,255,0.18),transparent_22%),radial-gradient(circle_at_80%_25%,rgba(143,131,255,0.18),transparent_28%)]" />
         <div className="relative">
@@ -434,7 +434,7 @@ export function CaseStudyLayout({
         </div>
       </section>
 
-      <section className="section-shell pt-6">
+      <section className="section-shell pt-6 md:pt-8">
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="glass-card p-8">
             <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/34">Problem statement</p>

@@ -1,19 +1,16 @@
 import { Suspense, lazy } from 'react'
-import { Route, Routes } from 'react-router-dom'
-import { Analytics } from '@vercel/analytics/react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { CustomCursor } from './components/layout/CustomCursor'
 import { ScrollProgress } from './components/layout/ScrollProgress'
-
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ProjectPage = lazy(() => import('./pages/ProjectPage'))
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
       <ScrollProgress />
       <CustomCursor />
-      <Analytics />
       <Suspense
         fallback={
           <div className="grid min-h-screen place-items-center bg-ink text-frost">
@@ -31,7 +28,7 @@ function App() {
           <Route path="/work/:slug" element={<ProjectPage />} />
         </Routes>
       </Suspense>
-    </>
+    </BrowserRouter>
   )
 }
 
