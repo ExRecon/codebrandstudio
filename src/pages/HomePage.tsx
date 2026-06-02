@@ -11,6 +11,7 @@ import {
   TestimonialsSection,
   WhyHireUsSection,
 } from '../components/home/HomeSections'
+import { SectionDivider } from '../components/ui/SectionDivider'
 import { useLenis } from '../hooks/useLenis'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
@@ -28,12 +29,31 @@ export default function HomePage() {
       <Navbar />
       <main>
         <HeroSection />
-        <AboutSection />
-        <ServicesSection />
-        <WhyHireUsSection />
-        <ProjectsSection />
-        <ProcessSection />
-        <TestimonialsSection />
+        <SectionDivider variant="glow" />
+        <section className="section-shift-a">
+          <AboutSection />
+        </section>
+        <SectionDivider />
+        <section className="section-shift-b">
+          <ServicesSection />
+        </section>
+        <SectionDivider variant="glow" />
+        <section className="section-shift-a">
+          <WhyHireUsSection />
+        </section>
+        <SectionDivider />
+        <section className="section-shift-b">
+          <ProjectsSection />
+        </section>
+        <SectionDivider variant="thin" />
+        <section className="section-shift-a">
+          <ProcessSection />
+        </section>
+        <SectionDivider />
+        <section className="section-shift-b">
+          <TestimonialsSection />
+        </section>
+        <SectionDivider variant="glow" />
         <CTASection />
       </main>
       <Footer />
