@@ -520,14 +520,13 @@ a {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 28px rgba(139, 233, 255, 0.45)) drop-shadow(0 0 56px rgba(167, 139, 250, 0.3));
+  filter: drop-shadow(0 0 20px rgba(139, 233, 255, 0.35)) drop-shadow(0 0 40px rgba(167, 139, 250, 0.18));
 }
 
-.hero-gradient {
+.hero-gradient-subtle {
   background:
-    radial-gradient(circle at 15% 20%, rgba(139, 233, 255, 0.16), transparent 20%),
-    radial-gradient(circle at 75% 18%, rgba(143, 131, 255, 0.18), transparent 26%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent 18%);
+    radial-gradient(circle at 50% 30%, rgba(139, 233, 255, 0.04), transparent 30%),
+    radial-gradient(circle at 60% 25%, rgba(143, 131, 255, 0.03), transparent 28%);
 }
 
 @keyframes marquee {

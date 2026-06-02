@@ -34,91 +34,75 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden px-4 pt-32 md:px-8"
+      className="relative flex min-h-screen items-center overflow-hidden px-4 pt-28 md:px-8"
     >
-      <div className="hero-gradient absolute inset-0" aria-hidden="true" />
-      <div className="absolute inset-0 opacity-60 blur-[2px]" aria-hidden="true">
-        <Suspense fallback={<div className="absolute inset-0 bg-black/30" />}>
+      {/* 3D background — heavily toned down */}
+      <div className="absolute inset-0 opacity-25 blur-[10px]" aria-hidden="true">
+        <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
       </div>
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-ink" />
 
-      <div className="relative mx-auto grid w-full max-w-7xl gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
-        <div className="space-y-8">
-          <div className="space-y-4">
-            {headlineWords.map((line, index) => (
-              <motion.h1
-                key={line.join('-')}
-                className="font-display text-5xl font-semibold leading-[0.85] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[6.2rem]"
-                initial={{ opacity: 0, y: 28, filter: 'blur(14px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                transition={{ duration: 0.9, delay: index * 0.14 }}
-              >
-                <span className="inline-flex flex-wrap gap-x-[0.18em]">
-                  {line.map((word) => (
-                    <span
-                      key={word}
-                      className={
-                        word === 'Premium'
-                          ? 'hero-premium-word'
-                          : undefined
-                      }
-                    >
-                      {word}
-                    </span>
-                  ))}
-                </span>
-              </motion.h1>
-            ))}
-          </div>
-          <motion.p
-            className="max-w-xl text-base leading-8 text-white/68 md:text-lg"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.35 }}
-          >
-            Code Brand Studio builds premium custom portfolio and business websites that increase authority, trust, and perceived value.
-          </motion.p>
-          <motion.div
-            className="flex flex-col gap-4 sm:flex-row"
-            initial={{ opacity: 0, y: 24 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.48 }}
-          >
-            <MagneticButton href="#contact">Start a Project</MagneticButton>
-            <MagneticButton href="#projects" variant="secondary">
-              View Our Work
-            </MagneticButton>
-          </motion.div>
+      {/* Gradient overlay — very subtle */}
+      <div className="hero-gradient-subtle absolute inset-0" aria-hidden="true" />
+
+      {/* Bottom fade */}
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-ink" />
+
+      {/* Content — single column, centered, headline-focused */}
+      <div className="relative mx-auto w-full max-w-4xl text-center">
+        <div className="space-y-5">
+          {headlineWords.map((line, index) => (
+            <motion.h1
+              key={line.join('-')}
+              className="font-display text-5xl font-semibold leading-[0.88] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[6.5rem]"
+              initial={{ opacity: 0, y: 32, filter: 'blur(16px)' }}
+              animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+              transition={{ duration: 1, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="inline-flex flex-wrap justify-center gap-x-[0.18em]">
+                {line.map((word) => (
+                  <span
+                    key={word}
+                    className={
+                      word === 'Premium'
+                        ? 'hero-premium-word'
+                        : undefined
+                    }
+                  >
+                    {word}
+                  </span>
+                ))}
+              </span>
+            </motion.h1>
+          ))}
         </div>
 
-        <Reveal className="relative lg:justify-self-end">
-          <div className="glass-panel mx-auto max-w-lg p-6 md:p-8">
-            <div className="mb-6 flex items-center justify-between text-xs uppercase tracking-[0.28em] text-white/42">
-              <span>Premium web systems</span>
-              <span>Realtime authority shift</span>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                ['Luxury-first branding', 'Editorial structure and cinematic transitions tuned for premium perception.'],
-                ['Performance engineering', 'Fast-loading builds with modern motion and resilient frontend architecture.'],
-                ['Interactive storytelling', 'Depth, tactility, and motion hierarchy without sacrificing clarity.'],
-                ['Business outcomes', 'More trust, stronger inquiries, and sharper brand positioning.'],
-              ].map(([title, copy]) => (
-                <div key={title} className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-4">
-                  <p className="mb-2 text-sm font-medium text-white">{title}</p>
-                  <p className="text-sm leading-7 text-white/52">{copy}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
+        <motion.p
+          className="mx-auto mt-8 max-w-lg text-base leading-8 text-white/60 md:text-lg md:leading-9"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Premium custom portfolio and business websites that increase authority, trust, and perceived value.
+        </motion.p>
+
+        <motion.div
+          className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.8, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <MagneticButton href="#contact">Start a Project</MagneticButton>
+          <MagneticButton href="#projects" variant="secondary">
+            View Our Work
+          </MagneticButton>
+        </motion.div>
       </div>
 
       <a
         href="#about"
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/50"
+        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/40 transition-colors hover:text-white/60"
       >
         <span>Scroll to explore</span>
         <ArrowDown className="h-4 w-4 animate-bounce" />
