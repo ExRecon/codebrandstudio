@@ -20,7 +20,7 @@ function GeometryCluster() {
   return (
     <group>
       <Float speed={1.3} rotationIntensity={1.4} floatIntensity={1.1}>
-        <mesh ref={group} position={[0, 0.2, 0]}>
+        <mesh ref={group} position={[1.5, 0.2, -0.5]}>
           <icosahedronGeometry args={[1.25, 8]} />
           <MeshDistortMaterial
             color="#7bd8ff"
@@ -29,7 +29,7 @@ function GeometryCluster() {
             speed={2.2}
             distort={0.35}
             transparent
-            opacity={0.75}
+            opacity={0.35}
           />
         </mesh>
       </Float>

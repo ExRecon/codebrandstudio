@@ -35,7 +35,7 @@ export function HeroSection() {
       className="relative flex min-h-screen items-center overflow-hidden px-4 pt-32 md:px-8"
     >
       <div className="hero-gradient absolute inset-0" aria-hidden="true" />
-      <div className="absolute inset-0 opacity-85" aria-hidden="true">
+      <div className="absolute inset-0 opacity-60 blur-[2px]" aria-hidden="true">
         <Suspense fallback={<div className="absolute inset-0 bg-black/30" />}>
           <HeroScene />
         </Suspense>
