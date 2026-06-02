@@ -144,7 +144,7 @@ export function AboutSection() {
                   </div>
                   <div>
                     <h3 className="text-sm font-medium text-white/90">{item.title}</h3>
-                    <p className="mt-1 text-sm leading-6 text-white/50">{item.body}</p>
+                    <p className="mt-1 text-base leading-7 text-white/50">{item.body}</p>
                   </div>
                 </div>
               ))}
@@ -168,7 +168,7 @@ export function ServicesSection() {
           <h2 className="section-title max-w-2xl">
             A futuristic service system built around premium presentation, technical clarity, and tactile interaction.
           </h2>
-          <p className="max-w-md text-sm leading-7 text-white/55">
+          <p className="max-w-md text-base leading-8 text-white/55">
             Each service is delivered as a bespoke digital product, not a recycled agency package.
           </p>
         </div>
@@ -228,7 +228,7 @@ export function ServicesSection() {
                       <service.icon className="h-5 w-5" />
                     </div>
                     <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
-                    <p className="text-sm leading-7 text-white/55">{service.description}</p>
+                    <p className="text-base leading-8 text-white/55">{service.description}</p>
                   </div>
                 </div>
               </div>
@@ -246,7 +246,7 @@ export function ServicesSection() {
                       <service.icon className="h-5 w-5" />
                     </div>
                     <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
-                    <p className="text-sm leading-7 text-white/55">{service.description}</p>
+                    <p className="text-base leading-8 text-white/55">{service.description}</p>
                   </div>
                 </div>
               </div>
@@ -333,12 +333,12 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
                   <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
                     {metric.value}
                   </p>
-                  <p className="mt-2 text-sm leading-5 text-white/45">{metric.label}</p>
+                  <p className="mt-2 text-sm leading-6 text-white/45">{metric.label}</p>
                 </div>
               ))}
             </div>
             <div className="pt-2">
-              <span className="inline-flex items-center gap-2 text-sm text-white/40 transition group-hover:text-white/70">
+              <span className="inline-flex items-center gap-2 text-base text-white/40 transition group-hover:text-white/70">
                 <span>View full case study</span>
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </span>
@@ -413,12 +413,12 @@ export function ProjectsSection() {
                       <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
                         {metric.value}
                       </p>
-                      <p className="mt-2 text-sm leading-5 text-white/45">{metric.label}</p>
+                      <p className="mt-2 text-sm leading-6 text-white/45">{metric.label}</p>
                     </div>
                   ))}
                 </div>
                 <div className="pt-2">
-                  <span className="inline-flex items-center gap-2 text-sm text-white/40 transition group-hover:text-white/70">
+                  <span className="inline-flex items-center gap-2 text-base text-white/40 transition group-hover:text-white/70">
                     <span>View full case study</span>
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                   </span>
@@ -531,7 +531,7 @@ export function TestimonialsSection() {
             <div className="mt-8 flex items-center gap-4">
               <div className="h-px flex-1 bg-white/[0.06]" />
               <div className="text-right">
-                <p className="text-sm font-medium text-white/80">{item.name}</p>
+                <p className="text-base font-medium text-white/80">{item.name}</p>
                 <p className="text-xs text-white/40">{item.role}</p>
               </div>
             </div>
@@ -604,7 +604,7 @@ export function CaseStudyLayout({
         <div className="relative z-10 mx-auto max-w-7xl">
           <Link
             to="/"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-white/56 transition hover:text-white"
+            className="mb-8 inline-flex items-center gap-2 text-base text-white/56 transition hover:text-white"
           >
             <ChevronRight className="h-4 w-4 rotate-180" />
             Back to home
@@ -621,7 +621,7 @@ export function CaseStudyLayout({
               {metrics.map((metric) => (
                 <div key={metric.label}>
                   <p className={`font-display text-3xl tracking-[-0.04em] ${studyAccent.category}`}>{metric.value}</p>
-                  <p className="mt-2 text-sm leading-6 text-white/50">{metric.label}</p>
+                  <p className="mt-2 text-base leading-6 text-white/50">{metric.label}</p>
                 </div>
               ))}
             </div>
@@ -661,7 +661,7 @@ export function CaseStudyLayout({
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Stack</p>
             <div className="flex flex-wrap gap-3">
               {stack.map((item) => (
-                <span key={item} className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/55">
+                <span key={item} className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/60">
                   {item}
                 </span>
               ))}
