@@ -12,6 +12,7 @@ import {
   studioPrinciples,
   testimonials,
 } from '../../data/site'
+import type { ProjectAccent } from '../../data/site'
 import { MagneticButton } from '../ui/MagneticButton'
 import { Reveal } from '../ui/Reveal'
 const HeroScene = lazy(() =>
@@ -327,7 +328,73 @@ const projectAccents = {
   },
 } as const
 
+function ProjectCard({ project, accent }: { project: (typeof projects)[number]; accent: (typeof projectAccents)[ProjectAccent] }) {
+  return (
+    <Reveal key={project.slug}>
+      <Link
+        to={`/work/${project.slug}`}
+        className={`project-card group block ${accent.border} ${accent.glow}`}
+      >
+        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+          <div className="space-y-6">
+            <p className={`text-xs uppercase tracking-[0.28em] ${accent.category}`}>
+              {project.category}
+            </p>
+            <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-5xl">
+              {project.name}
+            </h3>
+            <p className="max-w-xl text-base leading-8 text-white/58">{project.summary}</p>
+            <div className="grid grid-cols-3 gap-4">
+              {project.metrics.map((metric) => (
+                <div key={metric.label} className={`rounded-2xl border p-4 ${accent.metric}`}>
+                  <p className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
+                    {metric.value}
+                  </p>
+                  <p className="mt-1.5 text-xs leading-5 text-white/50">{metric.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className={`project-visual bg-gradient-to-b ${accent.visual}`}>
+            <div className={`project-screen ${accent.screen}`}>
+              <div className="mb-8 flex items-center gap-2">
+                {accent.dot.map((dotClass: string, i: number) => (
+                  <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
+                ))}
+              </div>
+              <p className="mb-3 text-sm uppercase tracking-[0.3em] text-white/35">
+                {project.heroLabel}
+              </p>
+              <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
+                <div className="rounded-[2rem] border border-white/8 bg-gradient-to-br from-white/8 to-transparent p-5">
+                  <div className={`h-40 rounded-[1.5rem] ${accent.mockup}`} />
+                </div>
+                <div className="space-y-4">
+                  <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
+                    <p className="text-xs uppercase tracking-[0.24em] text-white/34">Challenge</p>
+                    <p className="mt-3 text-sm leading-7 text-white/58">{project.challenge}</p>
+                  </div>
+                  <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
+                    <p className="text-xs uppercase tracking-[0.24em] text-white/34">Solution</p>
+                    <p className="mt-3 text-sm leading-7 text-white/58">{project.solution}</p>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-6 flex items-center gap-2 text-sm text-white/65">
+                <span>View case study</span>
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </Link>
+    </Reveal>
+  )
+}
+
 export function ProjectsSection() {
+  const [featured, ...rest] = projects
+
   return (
     <section id="projects" className="section-shell">
       <Reveal>
@@ -336,71 +403,74 @@ export function ProjectsSection() {
           Premium case studies designed to feel like digital products, not static portfolio entries.
         </h2>
       </Reveal>
+
       <div className="mt-12 space-y-6">
-        {projects.map((project, index) => {
-          const accent = projectAccents[project.accent]
-          return (
-            <Reveal key={project.slug} delay={index * 0.08}>
-              <Link
-                to={`/work/${project.slug}`}
-                className={`project-card group ${accent.border} ${accent.glow}`}
-              >
-                <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-                  <div className="space-y-6">
-                    <p className={`text-xs uppercase tracking-[0.28em] ${accent.category}`}>
-                      {project.category}
-                    </p>
-                    <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-5xl">
-                      {project.name}
-                    </h3>
-                    <p className="max-w-xl text-base leading-8 text-white/58">{project.summary}</p>
-                    <div className="grid grid-cols-3 gap-4">
-                      {project.metrics.map((metric) => (
-                        <div key={metric.label} className={`rounded-2xl border p-4 ${accent.metric}`}>
-                          <p className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
-                            {metric.value}
-                          </p>
-                          <p className="mt-1.5 text-xs leading-5 text-white/50">{metric.label}</p>
-                        </div>
+        {/* Featured project — full-width showcase */}
+        <Reveal>
+          <Link
+            to={`/work/${featured.slug}`}
+            className={`project-card-featured group block border ${projectAccents[featured.accent].border} ${projectAccents[featured.accent].glow}`}
+          >
+            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="flex flex-col justify-center space-y-6 py-2">
+                <p className={`text-xs uppercase tracking-[0.28em] ${projectAccents[featured.accent].category}`}>
+                  {featured.category}
+                </p>
+                <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-6xl">
+                  {featured.name}
+                </h3>
+                <p className="max-w-xl text-lg leading-9 text-white/60">{featured.summary}</p>
+                <div className="grid grid-cols-3 gap-4">
+                  {featured.metrics.map((metric) => (
+                    <div key={metric.label} className={`rounded-2xl border p-5 ${projectAccents[featured.accent].metric}`}>
+                      <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
+                        {metric.value}
+                      </p>
+                      <p className="mt-2 text-sm leading-5 text-white/50">{metric.label}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="pt-2">
+                  <span className="inline-flex items-center gap-2 text-sm text-white/40 transition group-hover:text-white/70">
+                    <span>View full case study</span>
+                    <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                  </span>
+                </div>
+              </div>
+              <div className={`project-showcase bg-gradient-to-br ${projectAccents[featured.accent].visual}`}>
+                <div className="p-6 md:p-8">
+                  {/* Large desktop screenshot */}
+                  <div className="project-mockup-screen">
+                    <div className="mb-4 flex items-center gap-2">
+                      {projectAccents[featured.accent].dot.map((dotClass, i) => (
+                        <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
                       ))}
                     </div>
-                  </div>
-                  <div className={`project-visual bg-gradient-to-b ${accent.visual}`}>
-                    <div className={`project-screen ${accent.screen}`}>
-                      <div className="mb-8 flex items-center gap-2">
-                        {accent.dot.map((dotClass, i) => (
-                          <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
-                        ))}
+                    <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/35">
+                      {featured.heroLabel}
+                    </p>
+                    <div className={`aspect-[16/10] rounded-[1.5rem] border border-white/10 ${projectAccents[featured.accent].mockup} overflow-hidden`} />
+                    <div className="mt-4 grid grid-cols-2 gap-3">
+                      <div className={`rounded-xl border border-white/6 bg-white/[0.03] p-4`}>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
+                        <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{featured.challenge}</p>
                       </div>
-                      <p className="mb-3 text-sm uppercase tracking-[0.3em] text-white/35">
-                        {project.heroLabel}
-                      </p>
-                      <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
-                        <div className="rounded-[2rem] border border-white/8 bg-gradient-to-br from-white/8 to-transparent p-5">
-                          <div className={`h-40 rounded-[1.5rem] ${accent.mockup}`} />
-                        </div>
-                        <div className="space-y-4">
-                          <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
-                            <p className="text-xs uppercase tracking-[0.24em] text-white/34">Challenge</p>
-                            <p className="mt-3 text-sm leading-7 text-white/58">{project.challenge}</p>
-                          </div>
-                          <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
-                            <p className="text-xs uppercase tracking-[0.24em] text-white/34">Solution</p>
-                            <p className="mt-3 text-sm leading-7 text-white/58">{project.solution}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="mt-6 flex items-center gap-2 text-sm text-white/65">
-                        <span>View case study</span>
-                        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                      <div className={`rounded-xl border border-white/6 bg-white/[0.03] p-4`}>
+                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
+                        <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{featured.solution}</p>
                       </div>
                     </div>
                   </div>
                 </div>
-              </Link>
-            </Reveal>
-          )
-        })}
+              </div>
+            </div>
+          </Link>
+        </Reveal>
+
+        {/* Remaining projects */}
+        {rest.map((project) => (
+          <ProjectCard key={project.slug} project={project} accent={projectAccents[project.accent]} />
+        ))}
       </div>
     </section>
   )
@@ -410,30 +480,39 @@ export function ProcessSection() {
   return (
     <section id="process" className="section-shell">
       <Reveal>
-        <p className="section-kicker">Process</p>
+        <p className="section-kicker">How we work</p>
         <h2 className="section-title max-w-2xl">
-          A modern timeline that turns positioning into a premium web experience with discipline at every stage.
+          A structured process that protects your time and delivers a premium outcome.
         </h2>
       </Reveal>
-      <div className="mt-14 space-y-6">
-        {processSteps.map((step, index) => (
-          <Reveal key={step.title} delay={index * 0.05}>
-            <div className="timeline-row">
-              <div className="timeline-index">{String(index + 1).padStart(2, '0')}</div>
-              <div className="timeline-dot">
-                <span className="h-3 w-3 rounded-full bg-cyan-300 shadow-[0_0_24px_rgba(139,233,255,0.8)]" />
-              </div>
-              <div className="glass-card flex-1 p-6 md:p-8">
-                <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+      <div className="relative mt-14">
+        {/* Vertical connecting line */}
+        <div className="absolute left-[1.55rem] top-0 hidden h-full w-px bg-gradient-to-b from-cyan-400/40 via-violet-400/20 to-transparent md:block" />
+
+        <div className="space-y-6">
+          {processSteps.map((step, index) => (
+            <Reveal key={step.title} delay={index * 0.08}>
+              <div className="group relative grid grid-cols-[auto_1fr] gap-5 md:gap-8">
+                {/* Timeline node */}
+                <div className="relative flex flex-col items-center">
+                  <div className="relative z-10 flex h-[3.1rem] w-[3.1rem] items-center justify-center rounded-2xl border border-white/10 bg-ink/80 shadow-[0_0_30px_rgba(103,232,249,0.08)] backdrop-blur-sm transition-all duration-500 group-hover:border-cyan-400/30 group-hover:shadow-[0_0_40px_rgba(103,232,249,0.15)]">
+                    <span className="font-display text-sm tracking-[-0.02em] text-white/50 transition-colors group-hover:text-cyan-300">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Content card */}
+                <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-6 py-6 transition-all duration-500 group-hover:border-white/[0.12] group-hover:bg-white/[0.04] md:px-8 md:py-7">
                   <h3 className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
                     {step.title}
                   </h3>
-                  <p className="max-w-2xl text-sm leading-7 text-white/58">{step.description}</p>
+                  <p className="mt-3 max-w-2xl text-base leading-8 text-white/58">{step.description}</p>
                 </div>
               </div>
-            </div>
-          </Reveal>
-        ))}
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   )

@@ -417,29 +417,50 @@ a {
     backdrop-filter: blur(28px);
   }
 
-  .timeline-row {
-    @apply grid items-start gap-4 md:grid-cols-[68px_32px_1fr];
+  .project-card-featured {
+    display: block;
+    overflow: hidden;
+    border-radius: 2.5rem;
+    background:
+      radial-gradient(ellipse 70% 50% at 75% 50%, rgba(139, 233, 255, 0.05), transparent),
+      rgba(255, 255, 255, 0.02);
+    padding: 1.5rem;
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+    transition:
+      border-color 500ms ease,
+      background 500ms ease,
+      box-shadow 500ms ease;
   }
 
-  .timeline-index {
-    padding-top: 0.75rem;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 0.75rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
+  @media (min-width: 768px) {
+    .project-card-featured {
+      padding: 2.5rem;
+    }
   }
 
-  .timeline-dot {
-    @apply relative flex h-full justify-center;
+  .project-showcase {
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 2rem;
+    padding: 0.75rem;
   }
 
-  .timeline-dot::before {
-    content: '';
-    position: absolute;
-    top: 0.75rem;
-    height: 100%;
-    width: 1px;
-    background: linear-gradient(180deg, rgba(103, 232, 249, 0.6), transparent);
+  .project-mockup-screen {
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1.75rem;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    backdrop-filter: blur(32px);
+    box-shadow:
+      0 25px 70px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  }
+
+  @media (min-width: 768px) {
+    .project-mockup-screen {
+      padding: 2rem;
+    }
   }
 
   .testimonial-card {
