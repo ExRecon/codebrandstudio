@@ -1,4 +1,4 @@
-import React from 'react'
+import type { ReactNode } from 'react'
 import { contact, navItems, socialLinks } from '../../data/site'
 import { MagneticButton } from '../ui/MagneticButton'
 
@@ -19,7 +19,7 @@ const awards = [
 ]
 
 function SocialIcon({ label }: { label: string }) {
-  const icons: Record<string, React.ReactNode> = {
+  const icons: Record<string, ReactNode> = {
     Instagram: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="h-5 w-5">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
@@ -83,14 +83,14 @@ export function Footer() {
               We craft cinematic digital products for founders and brands that refuse to look like everyone else. Every pixel earns its place.
             </p>
             {/* Social icons */}
-            <div className="flex gap-3">
+            <div className="flex gap-5">
               {socialLinks.map((item) => (
                 <a
                   key={item.label}
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/[0.08] bg-white/[0.03] text-white/45 transition-all duration-300 hover:border-cyan-300/25 hover:bg-cyan-300/[0.06] hover:text-cyan-300"
+                  className="text-white/35 transition-colors duration-300 hover:text-cyan-300"
                   aria-label={item.label}
                 >
                   <SocialIcon label={item.label} />
@@ -141,36 +141,24 @@ export function Footer() {
 
           {/* Awards & Tech */}
           <div className="space-y-8">
-            {/* Awards */}
+            {/* Awards — inline list */}
             <div>
               <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/30">Recognition</p>
-              <div className="grid grid-cols-2 gap-2">
+              <div className="flex flex-wrap gap-x-4 gap-y-2">
                 {awards.map((award) => (
-                  <div
-                    key={award.label}
-                    className="rounded-xl border border-white/[0.06] bg-white/[0.02] px-3 py-2.5"
-                  >
-                    <p className="text-xs font-medium text-white/70">{award.label}</p>
-                    <p className="mt-0.5 text-[10px] text-white/35">{award.detail}</p>
-                  </div>
+                  <span key={award.label} className="text-sm text-white/50">
+                    {award.label} <span className="text-white/30">— {award.detail}</span>
+                  </span>
                 ))}
               </div>
             </div>
 
-            {/* Tech stack */}
+            {/* Tech stack — comma-separated */}
             <div>
               <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/30">Tech Stack</p>
-              <div className="flex flex-wrap gap-2">
-                {techStack.map((tech) => (
-                  <span
-                    key={tech.name}
-                    className="inline-flex items-center gap-1.5 rounded-lg border border-white/[0.06] bg-white/[0.02] px-2.5 py-1.5 text-[11px] text-white/45"
-                  >
-                    <span className="text-[10px] opacity-60">{tech.icon}</span>
-                    {tech.name}
-                  </span>
-                ))}
-              </div>
+              <p className="text-sm text-white/40">
+                {techStack.map((tech) => tech.name).join(' · ')}
+              </p>
             </div>
           </div>
         </div>

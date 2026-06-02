@@ -36,20 +36,14 @@ export function HeroSection() {
       id="hero"
       className="relative flex min-h-screen items-center overflow-hidden px-4 pt-28 md:px-8"
     >
-      {/* 3D background — heavily toned down */}
       <div className="absolute inset-0 opacity-25 blur-[10px]" aria-hidden="true">
         <Suspense fallback={null}>
           <HeroScene />
         </Suspense>
       </div>
-
-      {/* Gradient overlay — very subtle */}
       <div className="hero-gradient-subtle absolute inset-0" aria-hidden="true" />
-
-      {/* Bottom fade */}
       <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-ink" />
 
-      {/* Content — single column, centered, headline-focused */}
       <div className="relative mx-auto w-full max-w-4xl text-center">
         <div className="space-y-5">
           {headlineWords.map((line, index) => (
@@ -64,11 +58,7 @@ export function HeroSection() {
                 {line.map((word) => (
                   <span
                     key={word}
-                    className={
-                      word === 'Premium'
-                        ? 'hero-premium-word'
-                        : undefined
-                    }
+                    className={word === 'Premium' ? 'hero-premium-word' : undefined}
                   >
                     {word}
                   </span>
@@ -114,7 +104,8 @@ export function HeroSection() {
 export function AboutSection() {
   return (
     <section id="about" className="section-shell">
-      <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+      {/* Two-column: text left, stats right — no card wrapper */}
+      <div className="grid gap-16 lg:grid-cols-[1fr_0.85fr] lg:items-start">
         <Reveal>
           <p className="section-kicker">About the studio</p>
           <h2 className="section-title max-w-xl">
@@ -124,36 +115,51 @@ export function AboutSection() {
             We design digital identities that feel composed, expensive, and unmistakably intentional. Every visual decision is connected to authority, trust, differentiation, and the way your market perceives value.
           </p>
         </Reveal>
+
         <Reveal delay={0.12}>
-          <div className="glass-panel relative p-8">
-            <div className="grid gap-4 sm:grid-cols-2">
+          <div className="space-y-8">
+            {/* Stats — clean horizontal layout, no card */}
+            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
               {stats.map((stat) => (
-                <div key={stat.label} className="rounded-[1.75rem] border border-white/8 bg-white/[0.03] p-5">
-                  <p className="font-display text-4xl tracking-[-0.06em] text-white">{stat.value}</p>
-                  <p className="mt-2 text-sm uppercase tracking-[0.24em] text-white/42">{stat.label}</p>
+                <div key={stat.label}>
+                  <p className="font-display text-4xl tracking-[-0.06em] text-white md:text-5xl">
+                    {stat.value}
+                  </p>
+                  <p className="mt-2 text-xs uppercase tracking-[0.24em] text-white/40">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div className="h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+
+            {/* Principles — horizontal icon + text rows */}
+            <div className="space-y-5">
+              {studioPrinciples.map((item) => (
+                <div key={item.title} className="flex items-start gap-4">
+                  <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/8 bg-white/[0.03]">
+                    <item.icon className="h-4 w-4 text-cyan-300/70" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-medium text-white/90">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-6 text-white/50">{item.body}</p>
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </Reveal>
       </div>
-
-      <div className="mt-12 grid gap-6 lg:grid-cols-3">
-        {studioPrinciples.map((item, index) => (
-          <Reveal key={item.title} delay={index * 0.08}>
-            <div className="glass-card h-full p-6">
-              <item.icon className="mb-5 h-6 w-6 text-cyan-300" />
-              <h3 className="mb-3 text-xl text-white">{item.title}</h3>
-              <p className="leading-7 text-white/58">{item.body}</p>
-            </div>
-          </Reveal>
-        ))}
-      </div>
     </section>
   )
 }
 
 export function ServicesSection() {
+  const featured = services.find((s) => s.featured)
+  const secondary = services.filter((s) => !s.featured)
+
   return (
     <section id="services" className="section-shell">
       <Reveal>
@@ -167,76 +173,85 @@ export function ServicesSection() {
           </p>
         </div>
       </Reveal>
-      <div className="mt-14 space-y-6">
-        {services.map((service) =>
-          service.featured ? (
-            <Reveal key={service.title}>
-              <article className="service-card-featured group relative overflow-hidden rounded-3xl border border-white/10 p-8 md:p-12">
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-[0.08] transition duration-500 group-hover:opacity-[0.18]`} />
-                <div className="relative grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
-                  <div>
-                    <p className="mb-4 text-xs uppercase tracking-[0.3em] text-cyan-300/70">Featured Service</p>
-                    <h3 className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
-                      {service.title}
-                    </h3>
-                    <p className="mt-4 max-w-xl text-base leading-8 text-white/62">{service.description}</p>
-                    <div className="mt-8">
-                      <MagneticButton href="#contact">Start a Project</MagneticButton>
-                    </div>
-                  </div>
-                  <div className="flex items-center justify-center">
+
+      <div className="mt-16 space-y-16">
+        {/* Featured service — full-width editorial, no card */}
+        {featured && (
+          <Reveal>
+            <div className="relative">
+              {/* Large background number */}
+              <span className="pointer-events-none absolute -top-6 -left-2 font-display text-[8rem] font-bold leading-none text-white/[0.02] select-none md:text-[12rem]">
+                01
+              </span>
+              <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+                <div className="space-y-6">
+                  <div className="flex items-center gap-3">
                     <div className="icon-chip-featured">
-                      <service.icon className="h-8 w-8 text-cyan-300" />
+                      <featured.icon className="h-8 w-8 text-cyan-300" />
+                    </div>
+                    <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/70">
+                      Featured Service
+                    </p>
+                  </div>
+                  <h3 className="font-display text-3xl tracking-[-0.04em] text-white md:text-5xl">
+                    {featured.title}
+                  </h3>
+                  <p className="max-w-xl text-lg leading-9 text-white/60">
+                    {featured.description}
+                  </p>
+                  <div>
+                    <MagneticButton href="#contact">Start a Project</MagneticButton>
+                  </div>
+                </div>
+                {/* Large visual accent */}
+                <div className="hidden lg:flex lg:items-center lg:justify-center">
+                  <div className="relative">
+                    <div className={`h-48 w-48 rounded-full bg-gradient-to-br ${featured.accent} opacity-20 blur-3xl`} />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className={`h-32 w-32 rounded-2xl bg-gradient-to-br ${featured.accent} opacity-40`} />
                     </div>
                   </div>
                 </div>
-              </article>
-            </Reveal>
-          ) : null,
+              </div>
+            </div>
+          </Reveal>
         )}
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {services
-            .filter((s) => !s.featured)
-            .slice(0, 2)
-            .map((service, index) => (
-              <Reveal key={service.title} delay={index * 0.06}>
-                <article className="service-card-secondary group relative overflow-hidden rounded-[1.75rem] border border-white/8 p-6">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 transition duration-500 group-hover:opacity-100`} />
-                  <div className="relative flex h-full flex-col justify-between gap-6">
-                    <div className="icon-chip-accent" data-accent={service.accent}>
+        {/* Secondary services — clean 2-column grid, minimal cards */}
+        <div className="grid gap-px bg-white/[0.04] md:grid-cols-2">
+          {secondary.slice(0, 2).map((service) => (
+            <Reveal key={service.title}>
+              <div className="group bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                <div className="flex h-full flex-col justify-between gap-8">
+                  <div>
+                    <div className="icon-chip-accent mb-6">
                       <service.icon className="h-5 w-5" />
                     </div>
-                    <div>
-                      <h3 className="mb-2 text-lg font-medium text-white">{service.title}</h3>
-                      <p className="text-sm leading-7 text-white/58">{service.description}</p>
-                    </div>
+                    <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
+                    <p className="text-sm leading-7 text-white/55">{service.description}</p>
                   </div>
-                </article>
-              </Reveal>
-            ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {services
-            .filter((s) => !s.featured)
-            .slice(2)
-            .map((service, index) => (
-              <Reveal key={service.title} delay={index * 0.06}>
-                <article className="service-card-secondary group relative overflow-hidden rounded-[1.75rem] border border-white/8 p-6">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 transition duration-500 group-hover:opacity-100`} />
-                  <div className="relative flex h-full flex-col justify-between gap-6">
-                    <div className="icon-chip-accent" data-accent={service.accent}>
+        <div className="grid gap-px bg-white/[0.04] md:grid-cols-2 xl:grid-cols-3">
+          {secondary.slice(2).map((service) => (
+            <Reveal key={service.title}>
+              <div className="group bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                <div className="flex h-full flex-col justify-between gap-8">
+                  <div>
+                    <div className="icon-chip-accent mb-6">
                       <service.icon className="h-5 w-5" />
                     </div>
-                    <div>
-                      <h3 className="mb-2 text-lg font-medium text-white">{service.title}</h3>
-                      <p className="text-sm leading-7 text-white/58">{service.description}</p>
-                    </div>
+                    <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
+                    <p className="text-sm leading-7 text-white/55">{service.description}</p>
                   </div>
-                </article>
-              </Reveal>
-            ))}
+                </div>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>
@@ -254,23 +269,18 @@ export function WhyHireUsSection() {
       </Reveal>
       <div className="marquee-track mt-12">
         {[...differentiators, ...differentiators].map((item, index) => (
-          <article key={`${item}-${index}`} className="why-card">
-            <div className="mb-8 flex items-center justify-between">
-              <span className="text-xs uppercase tracking-[0.3em] text-cyan-300/70">
-                0{(index % differentiators.length) + 1}
-              </span>
-              <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-[11px] uppercase tracking-[0.24em] text-white/46">
-                Why us
-              </span>
-            </div>
-            <p className="font-display text-3xl leading-tight tracking-[-0.05em] text-white">
+          <div
+            key={`${item}-${index}`}
+            className="why-card-editorial"
+          >
+            <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-cyan-300/60">
+              0{(index % differentiators.length) + 1}
+            </span>
+            <p className="font-display text-2xl leading-snug tracking-[-0.04em] text-white/90 md:text-3xl">
               {item}
             </p>
-            <div className="mt-8 flex items-center justify-between border-t border-white/10 pt-5 text-sm text-white/48">
-              <span>Luxury strategy</span>
-              <span>Technical precision</span>
-            </div>
-          </article>
+            <div className="mt-8 h-px w-12 bg-cyan-300/20" />
+          </div>
         ))}
       </div>
     </section>
@@ -318,7 +328,7 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
     <Reveal>
       <Link
         to={`/work/${project.slug}`}
-        className={`project-card-featured group block border ${accent.border} ${accent.glow}`}
+        className={`project-card-showcase group block border ${accent.border} ${accent.glow}`}
       >
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="flex flex-col justify-center space-y-6 py-2">
@@ -331,11 +341,11 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
             <p className="max-w-xl text-lg leading-9 text-white/60">{project.summary}</p>
             <div className="grid grid-cols-3 gap-4">
               {project.metrics.map((metric) => (
-                <div key={metric.label} className={`rounded-2xl border p-5 ${accent.metric}`}>
+                <div key={metric.label}>
                   <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
                     {metric.value}
                   </p>
-                  <p className="mt-2 text-sm leading-5 text-white/50">{metric.label}</p>
+                  <p className="mt-2 text-sm leading-5 text-white/45">{metric.label}</p>
                 </div>
               ))}
             </div>
@@ -395,12 +405,12 @@ export function ProjectsSection() {
         </h2>
       </Reveal>
 
-      <div className="mt-12 space-y-6">
-        {/* Featured project — full-width showcase */}
+      <div className="mt-12 space-y-8">
+        {/* Featured project */}
         <Reveal>
           <Link
             to={`/work/${featured.slug}`}
-            className={`project-card-featured group block border ${projectAccents[featured.accent].border} ${projectAccents[featured.accent].glow}`}
+            className={`project-card-showcase group block border ${projectAccents[featured.accent].border} ${projectAccents[featured.accent].glow}`}
           >
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
               <div className="flex flex-col justify-center space-y-6 py-2">
@@ -413,11 +423,11 @@ export function ProjectsSection() {
                 <p className="max-w-xl text-lg leading-9 text-white/60">{featured.summary}</p>
                 <div className="grid grid-cols-3 gap-4">
                   {featured.metrics.map((metric) => (
-                    <div key={metric.label} className={`rounded-2xl border p-5 ${projectAccents[featured.accent].metric}`}>
+                    <div key={metric.label}>
                       <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
                         {metric.value}
                       </p>
-                      <p className="mt-2 text-sm leading-5 text-white/50">{metric.label}</p>
+                      <p className="mt-2 text-sm leading-5 text-white/45">{metric.label}</p>
                     </div>
                   ))}
                 </div>
@@ -430,7 +440,6 @@ export function ProjectsSection() {
               </div>
               <div className={`project-showcase bg-gradient-to-br ${projectAccents[featured.accent].visual}`}>
                 <div className="p-6 md:p-8">
-                  {/* Large desktop screenshot with video preview */}
                   <div className="project-mockup-screen">
                     <div className="mb-4 flex items-center gap-2">
                       {projectAccents[featured.accent].dot.map((dotClass: string, i: number) => (
@@ -448,11 +457,11 @@ export function ProjectsSection() {
                       />
                     </div>
                     <div className="mt-4 grid grid-cols-2 gap-3">
-                      <div className={`rounded-xl border border-white/6 bg-white/[0.03] p-4`}>
+                      <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
                         <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
                         <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{featured.challenge}</p>
                       </div>
-                      <div className={`rounded-xl border border-white/6 bg-white/[0.03] p-4`}>
+                      <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
                         <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
                         <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{featured.solution}</p>
                       </div>
@@ -482,29 +491,29 @@ export function ProcessSection() {
           A structured process that protects your time and delivers a premium outcome.
         </h2>
       </Reveal>
-      <div className="relative mt-14">
+      <div className="relative mt-16">
         {/* Vertical connecting line */}
-        <div className="absolute left-[1.55rem] top-0 hidden h-full w-px bg-gradient-to-b from-cyan-400/40 via-violet-400/20 to-transparent md:block" />
+        <div className="absolute left-[1.55rem] top-0 hidden h-full w-px bg-gradient-to-b from-cyan-400/30 via-violet-400/15 to-transparent md:block" />
 
-        <div className="space-y-6">
+        <div className="space-y-10">
           {processSteps.map((step, index) => (
             <Reveal key={step.title} delay={index * 0.08}>
-              <div className="group relative grid grid-cols-[auto_1fr] gap-5 md:gap-8">
+              <div className="group relative grid grid-cols-[auto_1fr] gap-6 md:gap-10">
                 {/* Timeline node */}
                 <div className="relative flex flex-col items-center">
-                  <div className="relative z-10 flex h-[3.1rem] w-[3.1rem] items-center justify-center rounded-2xl border border-white/10 bg-ink/80 shadow-[0_0_30px_rgba(103,232,249,0.08)] backdrop-blur-sm transition-all duration-500 group-hover:border-cyan-400/30 group-hover:shadow-[0_0_40px_rgba(103,232,249,0.15)]">
-                    <span className="font-display text-sm tracking-[-0.02em] text-white/50 transition-colors group-hover:text-cyan-300">
+                  <div className="relative z-10 flex h-[3.1rem] w-[3.1rem] items-center justify-center rounded-2xl border border-white/10 bg-ink/80 backdrop-blur-sm transition-all duration-500 group-hover:border-cyan-400/30">
+                    <span className="font-display text-sm tracking-[-0.02em] text-white/40 transition-colors group-hover:text-cyan-300">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </div>
                 </div>
 
-                {/* Content card */}
-                <div className="rounded-2xl border border-white/[0.06] bg-white/[0.02] px-6 py-6 transition-all duration-500 group-hover:border-white/[0.12] group-hover:bg-white/[0.04] md:px-8 md:py-7">
+                {/* Content — no card, just text on the page */}
+                <div className="pt-2 md:pt-3">
                   <h3 className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
                     {step.title}
                   </h3>
-                  <p className="mt-3 max-w-2xl text-base leading-8 text-white/58">{step.description}</p>
+                  <p className="mt-3 max-w-2xl text-base leading-8 text-white/55">{step.description}</p>
                 </div>
               </div>
             </Reveal>
@@ -526,18 +535,23 @@ export function TestimonialsSection() {
       </Reveal>
       <div className="marquee-track mt-12">
         {[...testimonials, ...testimonials].map((item, index) => (
-          <article key={`${item.name}-${index}`} className="testimonial-card">
-            <div className="mb-6 flex gap-1 text-cyan-300">
+          <div key={`${item.name}-${index}`} className="testimonial-editorial">
+            <div className="mb-6 flex gap-1 text-cyan-300/60">
               {Array.from({ length: 5 }).map((_, starIndex) => (
-                <Star key={starIndex} className="h-4 w-4 fill-current" />
+                <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
               ))}
             </div>
-            <p className="text-lg leading-8 text-white/72">“{item.quote}”</p>
-            <div className="mt-8">
-              <p className="text-sm font-medium text-white">{item.name}</p>
-              <p className="text-sm text-white/45">{item.role}</p>
+            <p className="text-xl leading-9 text-white/75 md:text-2xl">
+              &ldquo;{item.quote}&rdquo;
+            </p>
+            <div className="mt-8 flex items-center gap-4">
+              <div className="h-px flex-1 bg-white/[0.06]" />
+              <div className="text-right">
+                <p className="text-sm font-medium text-white/80">{item.name}</p>
+                <p className="text-xs text-white/40">{item.role}</p>
+              </div>
             </div>
-          </article>
+          </div>
         ))}
       </div>
     </section>
@@ -547,23 +561,33 @@ export function TestimonialsSection() {
 export function CTASection() {
   return (
     <section id="contact" className="section-shell pb-16 md:pb-20">
-      <div className="glass-panel relative overflow-hidden p-8 md:p-12">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(139,233,255,0.18),transparent_22%),radial-gradient(circle_at_80%_25%,rgba(143,131,255,0.18),transparent_28%)]" />
-        <div className="relative">
+      {/* Full-width editorial CTA — no card */}
+      <div className="relative overflow-hidden">
+        {/* Background accents */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,rgba(139,233,255,0.06),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_35%_at_70%_45%,rgba(143,131,255,0.05),transparent)]" />
+
+        {/* Subtle border top */}
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+
+        <div className="relative px-8 py-16 text-center md:px-16 md:py-24">
           <p className="section-kicker">Start your next move</p>
-          <h2 className="section-title max-w-3xl">
+          <h2 className="section-title mx-auto max-w-3xl">
             Your website should feel like your brand deserves attention.
           </h2>
-          <p className="mt-5 max-w-2xl text-base leading-8 text-white/58">
-            Let’s build a digital presence that sharpens authority, elevates trust, and makes your brand feel impossible to ignore.
+          <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-white/55">
+            Let&apos;s build a digital presence that sharpens authority, elevates trust, and makes your brand feel impossible to ignore.
           </p>
-          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <MagneticButton href={`mailto:${contact.email}`}>Start a Project</MagneticButton>
             <MagneticButton href={`mailto:${contact.email}?subject=Discovery Call`} variant="secondary">
               {contact.calendarLabel}
             </MagneticButton>
           </div>
         </div>
+
+        {/* Subtle border bottom */}
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
       </div>
     </section>
   )
@@ -615,35 +639,31 @@ export function CaseStudyLayout({
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/62">{summary}</p>
             </div>
-            <div className="glass-panel p-6">
-              <div className={`rounded-[2rem] border border-white/8 p-8 ${studyAccent.mockup}`}>
-                <div className="grid gap-4 sm:grid-cols-3">
-                  {metrics.map((metric) => (
-                    <div key={metric.label} className="rounded-[1.5rem] border border-white/10 bg-black/25 p-5">
-                      <p className={`font-display text-3xl tracking-[-0.04em] ${studyAccent.category}`}>{metric.value}</p>
-                      <p className="mt-2 text-sm leading-6 text-white/50">{metric.label}</p>
-                    </div>
-                  ))}
+            <div className="grid grid-cols-3 gap-4">
+              {metrics.map((metric) => (
+                <div key={metric.label}>
+                  <p className={`font-display text-3xl tracking-[-0.04em] ${studyAccent.category}`}>{metric.value}</p>
+                  <p className="mt-2 text-sm leading-6 text-white/50">{metric.label}</p>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>
       </section>
 
       <section className="section-shell pt-6 md:pt-8">
-        <div className="grid gap-6 lg:grid-cols-2">
-          <div className="glass-card p-8">
+        <div className="grid gap-px bg-white/[0.04] lg:grid-cols-2">
+          <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Problem statement</p>
             <p className="text-base leading-8 text-white/66">{challenge}</p>
           </div>
-          <div className="glass-card p-8">
+          <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Solution overview</p>
             <p className="text-base leading-8 text-white/66">{solution}</p>
           </div>
         </div>
-        <div className="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
-          <div className="glass-card p-8">
+        <div className="mt-px grid gap-px bg-white/[0.04] lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Process breakdown</p>
             <div className="space-y-4">
               {[
@@ -653,17 +673,17 @@ export function CaseStudyLayout({
                 'High-performance build and optimization',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 text-white/66">
-                  <Check className={`mt-1 h-4 w-4 ${studyAccent.category}`} />
+                  <Check className={`mt-1 h-4 w-4 flex-shrink-0 ${studyAccent.category}`} />
                   <span>{item}</span>
                 </div>
               ))}
             </div>
           </div>
-          <div className="glass-card p-8">
+          <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Stack</p>
             <div className="flex flex-wrap gap-3">
               {stack.map((item) => (
-                <span key={item} className={`rounded-full border px-4 py-2 text-sm ${studyAccent.metric}`}>
+                <span key={item} className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2 text-sm text-white/60">
                   {item}
                 </span>
               ))}
