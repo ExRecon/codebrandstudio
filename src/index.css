@@ -389,7 +389,9 @@ a {
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
     transition:
       border-color 500ms ease,
-      background 500ms ease;
+      background 500ms ease,
+      transform 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 500ms ease;
   }
 
   @media (min-width: 768px) {
@@ -400,6 +402,10 @@ a {
 
   .project-card:hover {
     background: rgba(255, 255, 255, 0.045);
+    transform: translateY(-4px);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
   }
 
   .project-visual {
@@ -431,7 +437,16 @@ a {
     transition:
       border-color 500ms ease,
       background 500ms ease,
-      box-shadow 500ms ease;
+      box-shadow 500ms ease,
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .project-card-featured:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 40px 100px rgba(0, 0, 0, 0.5),
+      0 0 60px rgba(103, 232, 249, 0.04),
+      inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   @media (min-width: 768px) {

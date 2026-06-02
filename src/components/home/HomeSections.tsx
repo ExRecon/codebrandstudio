@@ -15,6 +15,7 @@ import {
 import type { ProjectAccent } from '../../data/site'
 import { MagneticButton } from '../ui/MagneticButton'
 import { Reveal } from '../ui/Reveal'
+import { ProjectVideoPreview } from '../ui/ProjectVideoPreview'
 const HeroScene = lazy(() =>
   import('../three/HeroScene').then((module) => ({ default: module.HeroScene })),
 )
@@ -367,7 +368,11 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
               </p>
               <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
                 <div className="rounded-[2rem] border border-white/8 bg-gradient-to-br from-white/8 to-transparent p-5">
-                  <div className={`h-40 rounded-[1.5rem] ${accent.mockup}`} />
+                  <ProjectVideoPreview
+                    slug={project.slug}
+                    mockupClass={accent.mockup}
+                    heroLabel={project.heroLabel}
+                  />
                 </div>
                 <div className="space-y-4">
                   <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
@@ -439,17 +444,23 @@ export function ProjectsSection() {
               </div>
               <div className={`project-showcase bg-gradient-to-br ${projectAccents[featured.accent].visual}`}>
                 <div className="p-6 md:p-8">
-                  {/* Large desktop screenshot */}
+                  {/* Large desktop screenshot with video preview */}
                   <div className="project-mockup-screen">
                     <div className="mb-4 flex items-center gap-2">
-                      {projectAccents[featured.accent].dot.map((dotClass, i) => (
+                      {projectAccents[featured.accent].dot.map((dotClass: string, i: number) => (
                         <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
                       ))}
                     </div>
                     <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/35">
                       {featured.heroLabel}
                     </p>
-                    <div className={`aspect-[16/10] rounded-[1.5rem] border border-white/10 ${projectAccents[featured.accent].mockup} overflow-hidden`} />
+                    <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
+                      <ProjectVideoPreview
+                        slug={featured.slug}
+                        mockupClass={projectAccents[featured.accent].mockup}
+                        heroLabel={featured.heroLabel}
+                      />
+                    </div>
                     <div className="mt-4 grid grid-cols-2 gap-3">
                       <div className={`rounded-xl border border-white/6 bg-white/[0.03] p-4`}>
                         <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>

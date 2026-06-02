@@ -1,6 +1,7 @@
 import { Suspense, lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ScrollProgress } from './components/layout/ScrollProgress'
+import { CursorGlow } from './components/layout/CursorGlow'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
 const ProjectPage = lazy(() => import('./pages/ProjectPage'))
@@ -9,6 +10,7 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollProgress />
+      <CursorGlow />
       <Suspense
         fallback={
           <div className="grid min-h-screen place-items-center bg-ink text-frost">
