@@ -79,7 +79,7 @@ export function Footer() {
                 <p className="text-xs text-white/40">Premium Digital Experiences</p>
               </div>
             </div>
-            <p className="max-w-sm text-sm leading-7 text-white/50">
+            <p className="max-w-md text-base leading-8 text-white/50">
               We craft cinematic digital products for founders and brands that refuse to look like everyone else. Every pixel earns its place.
             </p>
             {/* Social icons */}

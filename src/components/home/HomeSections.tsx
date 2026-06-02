@@ -168,7 +168,7 @@ export function ServicesSection() {
           <h2 className="section-title max-w-2xl">
             A futuristic service system built around premium presentation, technical clarity, and tactile interaction.
           </h2>
-          <p className="max-w-md text-base leading-8 text-white/55">
+          <p className="max-w-xl text-base leading-8 text-white/55">
             Each service is delivered as a bespoke digital product, not a recycled agency package.
           </p>
         </div>
@@ -633,11 +633,11 @@ export function CaseStudyLayout({
         <div className="grid gap-px bg-white/[0.04] lg:grid-cols-2">
           <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Problem statement</p>
-            <p className="text-base leading-8 text-white/66">{challenge}</p>
+            <p className="max-w-2xl text-base leading-8 text-white/66">{challenge}</p>
           </div>
           <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Solution overview</p>
-            <p className="text-base leading-8 text-white/66">{solution}</p>
+            <p className="max-w-2xl text-base leading-8 text-white/66">{solution}</p>
           </div>
         </div>
         <div className="mt-px grid gap-px bg-white/[0.04] lg:grid-cols-[1.05fr_0.95fr]">
