@@ -126,7 +126,7 @@ export const projects: ProjectItem[] = [
     solution: 'We rebuilt the experience with a stronger narrative arc, motion-led proof moments, and a conversion path tailored for high-ticket inquiries.',
     metrics: [
       { value: '+41%', label: 'Higher-quality inquiries' },
-      { value: '2.4x', label: 'Longer engagement time' },
+      { value: '2.4×', label: 'Longer engagement time' },
       { value: '98', label: 'Performance score' },
     ],
     stack: ['React', 'GSAP', 'Framer Motion', 'Content Strategy'],

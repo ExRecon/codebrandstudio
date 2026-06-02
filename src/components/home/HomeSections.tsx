@@ -342,7 +342,7 @@ export function ProjectsSection() {
           return (
             <Reveal key={project.slug} delay={index * 0.08}>
               <Link
-                to={`/work/${project.slug`}
+                to={`/work/${project.slug}`}
                 className={`project-card group ${accent.border} ${accent.glow}`}
               >
                 <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
