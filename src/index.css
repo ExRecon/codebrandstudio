@@ -168,25 +168,48 @@ a {
   }
 
   .button-primary {
-    border: 1px solid rgba(103, 232, 249, 0.2);
+    border: 1px solid rgba(103, 232, 249, 0.3);
     border-radius: 999px;
-    background: linear-gradient(90deg, rgb(103, 232, 249), rgb(125, 211, 252), rgb(167, 139, 250));
-    padding: 0.75rem 1.5rem;
-    color: rgb(15, 23, 42);
-    font-size: 0.875rem;
-    font-weight: 500;
-    box-shadow: 0 15px 45px rgba(139, 233, 255, 0.18);
+    background: linear-gradient(90deg, rgb(56, 189, 248), rgb(103, 232, 249), rgb(129, 140, 248));
+    padding: 1rem 2rem;
+    color: rgb(7, 12, 28);
+    font-size: 1rem;
+    font-weight: 600;
+    box-shadow:
+      0 8px 32px rgba(103, 232, 249, 0.32),
+      0 15px 45px rgba(139, 233, 255, 0.18),
+      0 0 60px rgba(103, 232, 249, 0.12);
+    transition:
+      box-shadow 300ms ease,
+      transform 300ms ease;
+  }
+
+  .button-primary:hover {
+    box-shadow:
+      0 8px 40px rgba(103, 232, 249, 0.45),
+      0 15px 60px rgba(139, 233, 255, 0.28),
+      0 0 80px rgba(103, 232, 249, 0.18);
+    transform: translateY(-1px);
   }
 
   .button-secondary {
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.04);
-    padding: 0.75rem 1.5rem;
+    background: transparent;
+    padding: 1rem 2rem;
     color: white;
-    font-size: 0.875rem;
+    font-size: 1rem;
     font-weight: 500;
-    backdrop-filter: blur(24px);
+    transition:
+      border-color 300ms ease,
+      background 300ms ease,
+      color 300ms ease;
+  }
+
+  .button-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.06);
+    color: white;
   }
 
   .icon-chip {
