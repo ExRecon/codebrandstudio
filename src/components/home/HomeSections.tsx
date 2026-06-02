@@ -290,33 +290,21 @@ export function WhyHireUsSection() {
 const projectAccents = {
   blue: {
     category: 'text-cyan-300/80',
-    border: 'group-hover:border-cyan-300/25',
-    glow: 'group-hover:shadow-[0_0_40px_rgba(103,232,249,0.06)]',
-    metric: 'border-cyan-300/15 bg-cyan-300/[0.04] text-cyan-100/80',
     visual: 'from-cyan-300/8 to-cyan-500/3',
-    screen: 'border-cyan-300/10',
     mockup:
       'bg-[radial-gradient(circle_at_20%_30%,rgba(103,232,249,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(56,189,248,0.35),transparent_28%),linear-gradient(135deg,rgba(103,232,249,0.1),transparent)]',
     dot: ['bg-cyan-300/40', 'bg-cyan-300/25', 'bg-cyan-300/15'],
   },
   green: {
     category: 'text-emerald-300/80',
-    border: 'group-hover:border-emerald-300/25',
-    glow: 'group-hover:shadow-[0_0_40px_rgba(52,211,153,0.06)]',
-    metric: 'border-emerald-300/15 bg-emerald-300/[0.04] text-emerald-100/80',
     visual: 'from-emerald-300/8 to-emerald-500/3',
-    screen: 'border-emerald-300/10',
     mockup:
       'bg-[radial-gradient(circle_at_20%_30%,rgba(52,211,153,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(16,185,129,0.35),transparent_28%),linear-gradient(135deg,rgba(52,211,153,0.1),transparent)]',
     dot: ['bg-emerald-300/40', 'bg-emerald-300/25', 'bg-emerald-300/15'],
   },
   purple: {
     category: 'text-violet-300/80',
-    border: 'group-hover:border-violet-300/25',
-    glow: 'group-hover:shadow-[0_0_40px_rgba(167,139,250,0.06)]',
-    metric: 'border-violet-300/15 bg-violet-300/[0.04] text-violet-100/80',
     visual: 'from-violet-300/8 to-violet-500/3',
-    screen: 'border-violet-300/10',
     mockup:
       'bg-[radial-gradient(circle_at_20%_30%,rgba(167,139,250,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(139,92,246,0.35),transparent_28%),linear-gradient(135deg,rgba(167,139,250,0.1),transparent)]',
     dot: ['bg-violet-300/40', 'bg-violet-300/25', 'bg-violet-300/15'],
@@ -328,7 +316,7 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
     <Reveal>
       <Link
         to={`/work/${project.slug}`}
-        className={`project-card-showcase group block border ${accent.border} ${accent.glow}`}
+        className="project-card-showcase group block"
       >
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
           <div className="flex flex-col justify-center space-y-6 py-2">
@@ -367,21 +355,19 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
                 <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/35">
                   {project.heroLabel}
                 </p>
-                <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
-                  <ProjectVideoPreview
-                    slug={project.slug}
-                    mockupClass={accent.mockup}
-                    heroLabel={project.heroLabel}
-                  />
-                </div>
-                <div className="mt-4 grid grid-cols-2 gap-3">
-                  <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
+                <ProjectVideoPreview
+                  slug={project.slug}
+                  mockupClass={accent.mockup}
+                  heroLabel={project.heroLabel}
+                />
+                <div className="mt-4 grid grid-cols-2 gap-4">
+                  <div>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
-                    <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{project.challenge}</p>
+                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.challenge}</p>
                   </div>
-                  <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
+                  <div>
                     <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
-                    <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{project.solution}</p>
+                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.solution}</p>
                   </div>
                 </div>
               </div>
@@ -410,7 +396,7 @@ export function ProjectsSection() {
         <Reveal>
           <Link
             to={`/work/${featured.slug}`}
-            className={`project-card-showcase group block border ${projectAccents[featured.accent].border} ${projectAccents[featured.accent].glow}`}
+            className="project-card-showcase group block"
           >
             <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
               <div className="flex flex-col justify-center space-y-6 py-2">
@@ -449,21 +435,19 @@ export function ProjectsSection() {
                     <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/35">
                       {featured.heroLabel}
                     </p>
-                    <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
-                      <ProjectVideoPreview
-                        slug={featured.slug}
-                        mockupClass={projectAccents[featured.accent].mockup}
-                        heroLabel={featured.heroLabel}
-                      />
-                    </div>
-                    <div className="mt-4 grid grid-cols-2 gap-3">
-                      <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
+                    <ProjectVideoPreview
+                      slug={featured.slug}
+                      mockupClass={projectAccents[featured.accent].mockup}
+                      heroLabel={featured.heroLabel}
+                    />
+                    <div className="mt-4 grid grid-cols-2 gap-4">
+                      <div>
                         <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
-                        <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{featured.challenge}</p>
+                        <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.challenge}</p>
                       </div>
-                      <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
+                      <div>
                         <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
-                        <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{featured.solution}</p>
+                        <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.solution}</p>
                       </div>
                     </div>
                   </div>
@@ -501,7 +485,7 @@ export function ProcessSection() {
               <div className="group relative grid grid-cols-[auto_1fr] gap-6 md:gap-10">
                 {/* Timeline node */}
                 <div className="relative flex flex-col items-center">
-                  <div className="relative z-10 flex h-[3.1rem] w-[3.1rem] items-center justify-center rounded-2xl border border-white/10 bg-ink/80 backdrop-blur-sm transition-all duration-500 group-hover:border-cyan-400/30">
+                  <div className="relative z-10 flex h-[3rem] w-[3rem] items-center justify-center rounded-full bg-white/[0.06] transition-colors duration-500 group-hover:bg-cyan-300/10">
                     <span className="font-display text-sm tracking-[-0.02em] text-white/40 transition-colors group-hover:text-cyan-300">
                       {String(index + 1).padStart(2, '0')}
                     </span>
@@ -564,11 +548,8 @@ export function CTASection() {
       {/* Full-width editorial CTA — no card */}
       <div className="relative overflow-hidden">
         {/* Background accents */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,rgba(139,233,255,0.06),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_35%_at_70%_45%,rgba(143,131,255,0.05),transparent)]" />
-
-        {/* Subtle border top */}
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,rgba(139,233,255,0.04),transparent)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_35%_at_70%_45%,rgba(143,131,255,0.03),transparent)]" />
 
         <div className="relative px-8 py-16 text-center md:px-16 md:py-24">
           <p className="section-kicker">Start your next move</p>
@@ -585,9 +566,6 @@ export function CTASection() {
             </MagneticButton>
           </div>
         </div>
-
-        {/* Subtle border bottom */}
-        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/[0.08] to-transparent" />
       </div>
     </section>
   )
@@ -683,7 +661,7 @@ export function CaseStudyLayout({
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Stack</p>
             <div className="flex flex-wrap gap-3">
               {stack.map((item) => (
-                <span key={item} className="rounded-full border border-white/8 bg-white/[0.03] px-4 py-2 text-sm text-white/60">
+                <span key={item} className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/55">
                   {item}
                 </span>
               ))}
