@@ -346,7 +346,7 @@ export function ProjectsSection() {
                 className={`project-card group ${accent.border} ${accent.glow}`}
               >
                 <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-                  <div className="space-y-5">
+                  <div className="space-y-6">
                     <p className={`text-xs uppercase tracking-[0.28em] ${accent.category}`}>
                       {project.category}
                     </p>
@@ -354,11 +354,14 @@ export function ProjectsSection() {
                       {project.name}
                     </h3>
                     <p className="max-w-xl text-base leading-8 text-white/58">{project.summary}</p>
-                    <div className="flex flex-wrap gap-3">
+                    <div className="grid grid-cols-3 gap-4">
                       {project.metrics.map((metric) => (
-                        <span key={metric} className={`rounded-full border px-4 py-2 text-sm ${accent.metric}`}>
-                          {metric}
-                        </span>
+                        <div key={metric.label} className={`rounded-2xl border p-4 ${accent.metric}`}>
+                          <p className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
+                            {metric.value}
+                          </p>
+                          <p className="mt-1.5 text-xs leading-5 text-white/50">{metric.label}</p>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -505,7 +508,7 @@ export function CaseStudyLayout({
   summary: string
   challenge: string
   solution: string
-  metrics: string[]
+  metrics: { value: string; label: string }[]
   stack: string[]
   accent: string
 }) {
@@ -538,11 +541,11 @@ export function CaseStudyLayout({
             </div>
             <div className="glass-panel p-6">
               <div className={`rounded-[2rem] border border-white/8 p-8 ${studyAccent.mockup}`}>
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-3">
                   {metrics.map((metric) => (
-                    <div key={metric} className={`rounded-[1.5rem] border border-white/10 bg-black/25 p-4`}>
-                      <p className="text-sm uppercase tracking-[0.2em] text-white/38">Outcome</p>
-                      <p className={`mt-3 font-display text-2xl tracking-[-0.04em] ${studyAccent.category}`}>{metric}</p>
+                    <div key={metric.label} className="rounded-[1.5rem] border border-white/10 bg-black/25 p-5">
+                      <p className={`font-display text-3xl tracking-[-0.04em] ${studyAccent.category}`}>{metric.value}</p>
+                      <p className="mt-2 text-sm leading-6 text-white/50">{metric.label}</p>
                     </div>
                   ))}
                 </div>

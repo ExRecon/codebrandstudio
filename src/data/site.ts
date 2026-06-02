@@ -23,6 +23,11 @@ export type ServiceItem = {
 
 export type ProjectAccent = 'blue' | 'green' | 'purple'
 
+export type ProjectMetric = {
+  value: string
+  label: string
+}
+
 export type ProjectItem = {
   slug: string
   name: string
@@ -30,7 +35,7 @@ export type ProjectItem = {
   summary: string
   challenge: string
   solution: string
-  metrics: string[]
+  metrics: ProjectMetric[]
   stack: string[]
   heroLabel: string
   accent: ProjectAccent
@@ -119,7 +124,11 @@ export const projects: ProjectItem[] = [
     summary: 'A cinematic founder website combining editorial storytelling, product authority, and high-conversion lead capture.',
     challenge: 'The founder had expertise and proof, but the old website looked generic and failed to justify premium pricing.',
     solution: 'We rebuilt the experience with a stronger narrative arc, motion-led proof moments, and a conversion path tailored for high-ticket inquiries.',
-    metrics: ['+41% inquiry quality', '98 performance score', '2.4x longer engagement time'],
+    metrics: [
+      { value: '+41%', label: 'Higher-quality inquiries' },
+      { value: '2.4×', label: 'Longer engagement time' },
+      { value: '98', label: 'Performance score' },
+    ],
     stack: ['React', 'GSAP', 'Framer Motion', 'Content Strategy'],
     heroLabel: 'Editorial founder identity with cinematic product framing.',
     accent: 'blue',
@@ -131,7 +140,11 @@ export const projects: ProjectItem[] = [
     summary: 'A restrained, high-trust digital presence for a boutique capital firm needing modern authority without startup cliches.',
     challenge: 'The previous site communicated competence but not exclusivity, precision, or modern credibility.',
     solution: 'We paired sharp typography, disciplined motion, and data-led storytelling to create a digital presence that feels composed and expensive.',
-    metrics: ['+63% meeting bookings', '0.8s hero render', 'AA accessibility'],
+    metrics: [
+      { value: '+63%', label: 'More meeting bookings' },
+      { value: '0.8s', label: 'Hero render speed' },
+      { value: 'AA', label: 'Accessibility rating' },
+    ],
     stack: ['Tailwind', 'Three.js', 'Semantic SEO', 'Design Systems'],
     heroLabel: 'Private capital storytelling with calm confidence and technical precision.',
     accent: 'green',
@@ -143,7 +156,11 @@ export const projects: ProjectItem[] = [
     summary: 'An immersive portfolio for a multidisciplinary studio blending interactive visuals with frictionless storytelling.',
     challenge: 'The studio wanted a website that felt unforgettable without sacrificing load speed or clarity.',
     solution: 'We designed a progressive reveal system, ambient 3D motion, and modular project narratives that felt premium on every device.',
-    metrics: ['91+ Lighthouse', '34% more project views', 'Reduced bounce by 28%'],
+    metrics: [
+      { value: '34%', label: 'More project views' },
+      { value: '28%', label: 'Lower bounce rate' },
+      { value: '91+', label: 'Lighthouse score' },
+    ],
     stack: ['R3F', 'Lenis', 'Code Splitting', 'Mobile Optimization'],
     heroLabel: 'Immersive studio showcase with layered motion and premium pacing.',
     accent: 'purple',
