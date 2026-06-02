@@ -53,14 +53,8 @@ body {
     radial-gradient(circle at 80% 10%, rgba(143, 131, 255, 0.08), transparent 24%),
     #050505;
   color: #f5f7fb;
-  cursor: none;
 }
 
-@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
-  body {
-    cursor: auto;
-  }
-}
 
 a {
   color: inherit;
@@ -93,33 +87,6 @@ a {
   mask-image: radial-gradient(circle at center, black 25%, transparent 85%);
   opacity: 0.18;
   z-index: 1;
-}
-
-.custom-cursor {
-  position: fixed;
-  top: -20px;
-  left: -20px;
-  z-index: 100;
-  width: 22px;
-  height: 22px;
-  border-radius: 999px;
-  border: 1px solid rgba(139, 233, 255, 0.55);
-  background: rgba(139, 233, 255, 0.08);
-  backdrop-filter: blur(12px);
-  pointer-events: none;
-  transform: translate3d(0, 0, 0);
-  transition:
-    width 220ms ease,
-    height 220ms ease,
-    border-color 220ms ease,
-    background 220ms ease;
-}
-
-.custom-cursor.is-active {
-  width: 54px;
-  height: 54px;
-  border-color: rgba(255, 255, 255, 0.55);
-  background: rgba(255, 255, 255, 0.08);
 }
 
 @layer components {
@@ -388,10 +355,6 @@ a {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-
-  body {
-    cursor: auto;
   }
 
   .marquee-track {

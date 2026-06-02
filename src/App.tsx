@@ -1,6 +1,5 @@
 import { Suspense, lazy } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { CustomCursor } from './components/layout/CustomCursor'
 import { ScrollProgress } from './components/layout/ScrollProgress'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
@@ -10,7 +9,6 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollProgress />
-      <CustomCursor />
       <Suspense
         fallback={
           <div className="grid min-h-screen place-items-center bg-ink text-frost">
