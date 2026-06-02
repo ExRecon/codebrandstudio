@@ -331,63 +331,65 @@ const projectAccents = {
 
 function ProjectCard({ project, accent }: { project: (typeof projects)[number]; accent: (typeof projectAccents)[ProjectAccent] }) {
   return (
-    <Reveal key={project.slug}>
+    <Reveal>
       <Link
         to={`/work/${project.slug}`}
-        className={`project-card group block ${accent.border} ${accent.glow}`}
+        className={`project-card-featured group block border ${accent.border} ${accent.glow}`}
       >
-        <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-          <div className="space-y-6">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div className="flex flex-col justify-center space-y-6 py-2">
             <p className={`text-xs uppercase tracking-[0.28em] ${accent.category}`}>
               {project.category}
             </p>
-            <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-5xl">
+            <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-6xl">
               {project.name}
             </h3>
-            <p className="max-w-xl text-base leading-8 text-white/58">{project.summary}</p>
+            <p className="max-w-xl text-lg leading-9 text-white/60">{project.summary}</p>
             <div className="grid grid-cols-3 gap-4">
               {project.metrics.map((metric) => (
-                <div key={metric.label} className={`rounded-2xl border p-4 ${accent.metric}`}>
-                  <p className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
+                <div key={metric.label} className={`rounded-2xl border p-5 ${accent.metric}`}>
+                  <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
                     {metric.value}
                   </p>
-                  <p className="mt-1.5 text-xs leading-5 text-white/50">{metric.label}</p>
+                  <p className="mt-2 text-sm leading-5 text-white/50">{metric.label}</p>
                 </div>
               ))}
             </div>
+            <div className="pt-2">
+              <span className="inline-flex items-center gap-2 text-sm text-white/40 transition group-hover:text-white/70">
+                <span>View full case study</span>
+                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+              </span>
+            </div>
           </div>
-          <div className={`project-visual bg-gradient-to-b ${accent.visual}`}>
-            <div className={`project-screen ${accent.screen}`}>
-              <div className="mb-8 flex items-center gap-2">
-                {accent.dot.map((dotClass: string, i: number) => (
-                  <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
-                ))}
-              </div>
-              <p className="mb-3 text-sm uppercase tracking-[0.3em] text-white/35">
-                {project.heroLabel}
-              </p>
-              <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
-                <div className="rounded-[2rem] border border-white/8 bg-gradient-to-br from-white/8 to-transparent p-5">
+          <div className={`project-showcase bg-gradient-to-br ${accent.visual}`}>
+            <div className="p-6 md:p-8">
+              <div className="project-mockup-screen">
+                <div className="mb-4 flex items-center gap-2">
+                  {accent.dot.map((dotClass: string, i: number) => (
+                    <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
+                  ))}
+                </div>
+                <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/35">
+                  {project.heroLabel}
+                </p>
+                <div className="overflow-hidden rounded-[1.5rem] border border-white/10">
                   <ProjectVideoPreview
                     slug={project.slug}
                     mockupClass={accent.mockup}
                     heroLabel={project.heroLabel}
                   />
                 </div>
-                <div className="space-y-4">
-                  <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
-                    <p className="text-xs uppercase tracking-[0.24em] text-white/34">Challenge</p>
-                    <p className="mt-3 text-sm leading-7 text-white/58">{project.challenge}</p>
+                <div className="mt-4 grid grid-cols-2 gap-3">
+                  <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
+                    <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{project.challenge}</p>
                   </div>
-                  <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
-                    <p className="text-xs uppercase tracking-[0.24em] text-white/34">Solution</p>
-                    <p className="mt-3 text-sm leading-7 text-white/58">{project.solution}</p>
+                  <div className="rounded-xl border border-white/6 bg-white/[0.03] p-4">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
+                    <p className="mt-2 text-xs leading-6 text-white/55 line-clamp-3">{project.solution}</p>
                   </div>
                 </div>
-              </div>
-              <div className="mt-6 flex items-center gap-2 text-sm text-white/65">
-                <span>View case study</span>
-                <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </div>
             </div>
           </div>
