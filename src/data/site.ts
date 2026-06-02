@@ -43,6 +43,7 @@ export type ProjectItem = {
 
 export const navItems = [
   { label: 'Studio', href: '#about' },
+  { label: 'Founder', href: '#founder' },
   { label: 'Services', href: '#services' },
   { label: 'Why Us', href: '#why-us' },
   { label: 'Work', href: '#projects' },
@@ -224,6 +225,22 @@ export const socialLinks = [
 export const contact = {
   email: 'hello@codebrandstudio.com',
   calendarLabel: 'Book a Discovery Call',
+}
+
+export const founder = {
+  name: 'Ali',
+  role: 'Founder & Creative Developer',
+  headline: 'I build premium web experiences that make brands feel expensive from the first scroll.',
+  bio: [
+    'With 6+ years crafting digital products for founders and premium brands, I combine strategic visual direction with deep frontend engineering. Every project is an opportunity to shift how a market perceives value.',
+    'Code Brand Studio was born from a simple belief: your website should be your most persuasive salesperson — composed, intentional, and impossible to compare with competitors.',
+  ],
+  highlights: [
+    { value: '6+', label: 'Years of experience' },
+    { value: '38+', label: 'Brands elevated' },
+    { value: '100%', label: 'Tailor-made builds' },
+  ],
+  stack: ['React', 'TypeScript', 'Three.js', 'GSAP', 'Design Systems', 'Motion Design'],
 }
 
 export const getProjectBySlug = (slug?: string) =>

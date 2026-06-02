@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import {
   contact,
   differentiators,
+  founder,
   processSteps,
   projects,
   services,
@@ -148,6 +149,87 @@ export function AboutSection() {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  )
+}
+
+export function FounderSection() {
+  return (
+    <section id="founder" className="section-shell">
+      <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+        {/* Left — Avatar + highlights */}
+        <Reveal>
+          <div className="space-y-8">
+            {/* Avatar */}
+            <div className="relative inline-flex">
+              <div className="h-28 w-28 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-300/20 to-violet-400/10 md:h-32 md:w-32">
+                <div className="flex h-full w-full items-center justify-center font-display text-3xl font-semibold tracking-[-0.04em] text-white/70 md:text-4xl">
+                  A
+                </div>
+              </div>
+              <div className="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border-2 border-ink bg-emerald-400" />
+            </div>
+
+            <div>
+              <h3 className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
+                {founder.name}
+              </h3>
+              <p className="mt-1 text-sm text-white/40">{founder.role}</p>
+            </div>
+
+            {/* Highlights */}
+            <div className="grid grid-cols-3 gap-4">
+              {founder.highlights.map((item) => (
+                <div key={item.label}>
+                  <p className="font-display text-xl tracking-[-0.04em] text-cyan-300/80 md:text-2xl">
+                    {item.value}
+                  </p>
+                  <p className="mt-1 text-xs text-white/35">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+
+        {/* Right — Bio + stack */}
+        <Reveal delay={0.1}>
+          <div className="space-y-8">
+            <div>
+              <p className="section-kicker">Meet the founder</p>
+              <p className="mt-4 text-xl leading-10 text-white/70 md:text-2xl md:leading-10">
+                {founder.headline}
+              </p>
+            </div>
+
+            <div className="space-y-5">
+              {founder.bio.map((paragraph) => (
+                <p key={paragraph} className="text-base leading-8 text-white/55">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+
+            {/* Stack */}
+            <div>
+              <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/30">Core expertise</p>
+              <div className="flex flex-wrap gap-3">
+                {founder.stack.map((item) => (
+                  <span
+                    key={item}
+                    className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/55"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <MagneticButton href="#contact">Work with {founder.name}</MagneticButton>
             </div>
           </div>
         </Reveal>

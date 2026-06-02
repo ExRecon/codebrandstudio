@@ -4,6 +4,7 @@ import { Navbar } from '../components/layout/Navbar'
 import {
   AboutSection,
   CTASection,
+  FounderSection,
   HeroSection,
   ProcessSection,
   ProjectsSection,
@@ -32,6 +33,10 @@ export default function HomePage() {
         <SectionDivider variant="glow" />
         <section className="section-shift-a">
           <AboutSection />
+        </section>
+        <SectionDivider />
+        <section className="section-shift-b">
+          <FounderSection />
         </section>
         <SectionDivider />
         <section className="section-shift-b">
