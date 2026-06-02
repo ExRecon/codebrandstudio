@@ -18,6 +18,7 @@ export type ServiceItem = {
   description: string
   icon: LucideIcon
   accent: string
+  featured?: boolean
 }
 
 export type ProjectItem = {
@@ -54,6 +55,7 @@ export const services: ServiceItem[] = [
     description: 'Signature websites designed to amplify authority, craftsmanship, and trust at first scroll.',
     icon: Sparkles,
     accent: 'from-cyan-300/30 to-sky-500/10',
+    featured: true,
   },
   {
     title: 'Personal Brand Websites',

@@ -181,23 +181,77 @@ export function ServicesSection() {
           </p>
         </div>
       </Reveal>
-      <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        {services.map((service, index) => (
-          <Reveal key={service.title} delay={index * 0.05}>
-            <article className="service-card group h-full">
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 transition duration-500 group-hover:opacity-100`} />
-              <div className="relative flex h-full flex-col justify-between gap-8">
-                <div className="icon-chip">
-                  <service.icon className="h-5 w-5 text-cyan-300" />
+      <div className="mt-14 space-y-6">
+        {services.map((service) =>
+          service.featured ? (
+            <Reveal key={service.title}>
+              <article className="service-card-featured group relative overflow-hidden rounded-3xl border border-white/10 p-8 md:p-12">
+                <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-[0.08] transition duration-500 group-hover:opacity-[0.18]`} />
+                <div className="relative grid gap-8 lg:grid-cols-[1.3fr_0.7fr] lg:items-center">
+                  <div>
+                    <p className="mb-4 text-xs uppercase tracking-[0.3em] text-cyan-300/70">Featured Service</p>
+                    <h3 className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
+                      {service.title}
+                    </h3>
+                    <p className="mt-4 max-w-xl text-base leading-8 text-white/62">{service.description}</p>
+                    <div className="mt-8">
+                      <MagneticButton href="#contact">Start a Project</MagneticButton>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-center">
+                    <div className="icon-chip-featured">
+                      <service.icon className="h-8 w-8 text-cyan-300" />
+                    </div>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="mb-3 text-xl leading-tight text-white">{service.title}</h3>
-                  <p className="text-sm leading-7 text-white/58">{service.description}</p>
-                </div>
-              </div>
-            </article>
-          </Reveal>
-        ))}
+              </article>
+            </Reveal>
+          ) : null,
+        )}
+
+        <div className="grid gap-6 md:grid-cols-2">
+          {services
+            .filter((s) => !s.featured)
+            .slice(0, 2)
+            .map((service, index) => (
+              <Reveal key={service.title} delay={index * 0.06}>
+                <article className="service-card-secondary group relative overflow-hidden rounded-[1.75rem] border border-white/8 p-6">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 transition duration-500 group-hover:opacity-100`} />
+                  <div className="relative flex h-full flex-col justify-between gap-6">
+                    <div className="icon-chip-accent" data-accent={service.accent}>
+                      <service.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-lg font-medium text-white">{service.title}</h3>
+                      <p className="text-sm leading-7 text-white/58">{service.description}</p>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {services
+            .filter((s) => !s.featured)
+            .slice(2)
+            .map((service, index) => (
+              <Reveal key={service.title} delay={index * 0.06}>
+                <article className="service-card-secondary group relative overflow-hidden rounded-[1.75rem] border border-white/8 p-6">
+                  <div className={`absolute inset-0 bg-gradient-to-br ${service.accent} opacity-0 transition duration-500 group-hover:opacity-100`} />
+                  <div className="relative flex h-full flex-col justify-between gap-6">
+                    <div className="icon-chip-accent" data-accent={service.accent}>
+                      <service.icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <h3 className="mb-2 text-lg font-medium text-white">{service.title}</h3>
+                      <p className="text-sm leading-7 text-white/58">{service.description}</p>
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+        </div>
       </div>
     </section>
   )
