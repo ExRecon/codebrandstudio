@@ -164,11 +164,11 @@ export function ServicesSection() {
     <section id="services" className="section-shell">
       <Reveal>
         <p className="section-kicker">Services</p>
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="section-title max-w-2xl">
             A futuristic service system built around premium presentation, technical clarity, and tactile interaction.
           </h2>
-          <p className="max-w-xl text-base leading-8 text-white/55">
+          <p className="max-w-lg text-lg leading-9 text-white/60">
             Each service is delivered as a bespoke digital product, not a recycled agency package.
           </p>
         </div>
@@ -183,7 +183,7 @@ export function ServicesSection() {
               <span className="pointer-events-none absolute -top-6 -left-2 font-display text-[8rem] font-bold leading-none text-white/[0.02] select-none md:text-[12rem]">
                 01
               </span>
-              <div className="relative grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-center">
+              <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
                 <div className="space-y-6">
                   <div className="flex items-center gap-3">
                     <div className="icon-chip-featured">
@@ -203,12 +203,15 @@ export function ServicesSection() {
                     <MagneticButton href="#contact">Start a Project</MagneticButton>
                   </div>
                 </div>
-                {/* Large visual accent */}
+                {/* Visual accent — larger, more presence */}
                 <div className="hidden lg:flex lg:items-center lg:justify-center">
                   <div className="relative">
-                    <div className={`h-48 w-48 rounded-full bg-gradient-to-br ${featured.accent} opacity-20 blur-3xl`} />
+                    <div className={`h-64 w-64 rounded-full bg-gradient-to-br ${featured.accent} opacity-20 blur-3xl`} />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className={`h-32 w-32 rounded-2xl bg-gradient-to-br ${featured.accent} opacity-40`} />
+                      <div className={`h-40 w-40 rounded-3xl bg-gradient-to-br ${featured.accent} opacity-40`} />
+                    </div>
+                    <div className="absolute -bottom-4 -right-4 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
+                      <p className="text-xs text-white/40">01</p>
                     </div>
                   </div>
                 </div>
