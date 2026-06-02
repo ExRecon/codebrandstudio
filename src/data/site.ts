@@ -21,6 +21,8 @@ export type ServiceItem = {
   featured?: boolean
 }
 
+export type ProjectAccent = 'blue' | 'green' | 'purple'
+
 export type ProjectItem = {
   slug: string
   name: string
@@ -31,6 +33,7 @@ export type ProjectItem = {
   metrics: string[]
   stack: string[]
   heroLabel: string
+  accent: ProjectAccent
 }
 
 export const navItems = [
@@ -119,6 +122,7 @@ export const projects: ProjectItem[] = [
     metrics: ['+41% inquiry quality', '98 performance score', '2.4x longer engagement time'],
     stack: ['React', 'GSAP', 'Framer Motion', 'Content Strategy'],
     heroLabel: 'Editorial founder identity with cinematic product framing.',
+    accent: 'blue',
   },
   {
     slug: 'atlas-private-capital',
@@ -130,6 +134,7 @@ export const projects: ProjectItem[] = [
     metrics: ['+63% meeting bookings', '0.8s hero render', 'AA accessibility'],
     stack: ['Tailwind', 'Three.js', 'Semantic SEO', 'Design Systems'],
     heroLabel: 'Private capital storytelling with calm confidence and technical precision.',
+    accent: 'green',
   },
   {
     slug: 'orion-creative-suite',
@@ -141,6 +146,7 @@ export const projects: ProjectItem[] = [
     metrics: ['91+ Lighthouse', '34% more project views', 'Reduced bounce by 28%'],
     stack: ['R3F', 'Lenis', 'Code Splitting', 'Mobile Optimization'],
     heroLabel: 'Immersive studio showcase with layered motion and premium pacing.',
+    accent: 'purple',
   },
 ]
 

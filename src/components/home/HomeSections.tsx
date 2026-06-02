@@ -291,6 +291,42 @@ export function WhyHireUsSection() {
   )
 }
 
+const projectAccents = {
+  blue: {
+    category: 'text-cyan-300/80',
+    border: 'group-hover:border-cyan-300/25',
+    glow: 'group-hover:shadow-[0_0_40px_rgba(103,232,249,0.06)]',
+    metric: 'border-cyan-300/15 bg-cyan-300/[0.04] text-cyan-100/80',
+    visual: 'from-cyan-300/8 to-cyan-500/3',
+    screen: 'border-cyan-300/10',
+    mockup:
+      'bg-[radial-gradient(circle_at_20%_30%,rgba(103,232,249,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(56,189,248,0.35),transparent_28%),linear-gradient(135deg,rgba(103,232,249,0.1),transparent)]',
+    dot: ['bg-cyan-300/40', 'bg-cyan-300/25', 'bg-cyan-300/15'],
+  },
+  green: {
+    category: 'text-emerald-300/80',
+    border: 'group-hover:border-emerald-300/25',
+    glow: 'group-hover:shadow-[0_0_40px_rgba(52,211,153,0.06)]',
+    metric: 'border-emerald-300/15 bg-emerald-300/[0.04] text-emerald-100/80',
+    visual: 'from-emerald-300/8 to-emerald-500/3',
+    screen: 'border-emerald-300/10',
+    mockup:
+      'bg-[radial-gradient(circle_at_20%_30%,rgba(52,211,153,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(16,185,129,0.35),transparent_28%),linear-gradient(135deg,rgba(52,211,153,0.1),transparent)]',
+    dot: ['bg-emerald-300/40', 'bg-emerald-300/25', 'bg-emerald-300/15'],
+  },
+  purple: {
+    category: 'text-violet-300/80',
+    border: 'group-hover:border-violet-300/25',
+    glow: 'group-hover:shadow-[0_0_40px_rgba(167,139,250,0.06)]',
+    metric: 'border-violet-300/15 bg-violet-300/[0.04] text-violet-100/80',
+    visual: 'from-violet-300/8 to-violet-500/3',
+    screen: 'border-violet-300/10',
+    mockup:
+      'bg-[radial-gradient(circle_at_20%_30%,rgba(167,139,250,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(139,92,246,0.35),transparent_28%),linear-gradient(135deg,rgba(167,139,250,0.1),transparent)]',
+    dot: ['bg-violet-300/40', 'bg-violet-300/25', 'bg-violet-300/15'],
+  },
+} as const
+
 export function ProjectsSection() {
   return (
     <section id="projects" className="section-shell">
@@ -301,57 +337,67 @@ export function ProjectsSection() {
         </h2>
       </Reveal>
       <div className="mt-12 space-y-6">
-        {projects.map((project, index) => (
-          <Reveal key={project.slug} delay={index * 0.08}>
-            <Link to={`/work/${project.slug}`} className="project-card group">
-              <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
-                <div className="space-y-5">
-                  <p className="text-xs uppercase tracking-[0.28em] text-cyan-300/70">{project.category}</p>
-                  <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-5xl">
-                    {project.name}
-                  </h3>
-                  <p className="max-w-xl text-base leading-8 text-white/58">{project.summary}</p>
-                  <div className="flex flex-wrap gap-3">
-                    {project.metrics.map((metric) => (
-                      <span key={metric} className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-white/72">
-                        {metric}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-                <div className="project-visual">
-                  <div className="project-screen">
-                    <div className="mb-8 flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/25" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/15" />
-                      <span className="h-2.5 w-2.5 rounded-full bg-white/10" />
-                    </div>
-                    <p className="mb-3 text-sm uppercase tracking-[0.3em] text-white/35">{project.heroLabel}</p>
-                    <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
-                      <div className="rounded-[2rem] border border-white/8 bg-gradient-to-br from-white/8 to-transparent p-5">
-                        <div className="h-40 rounded-[1.5rem] bg-[radial-gradient(circle_at_20%_30%,rgba(139,233,255,0.45),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(143,131,255,0.35),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent)]" />
-                      </div>
-                      <div className="space-y-4">
-                        <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
-                          <p className="text-xs uppercase tracking-[0.24em] text-white/34">Challenge</p>
-                          <p className="mt-3 text-sm leading-7 text-white/58">{project.challenge}</p>
-                        </div>
-                        <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
-                          <p className="text-xs uppercase tracking-[0.24em] text-white/34">Solution</p>
-                          <p className="mt-3 text-sm leading-7 text-white/58">{project.solution}</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-6 flex items-center gap-2 text-sm text-white/65">
-                      <span>View case study</span>
-                      <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+        {projects.map((project, index) => {
+          const accent = projectAccents[project.accent]
+          return (
+            <Reveal key={project.slug} delay={index * 0.08}>
+              <Link
+                to={`/work/${project.slug`}
+                className={`project-card group ${accent.border} ${accent.glow}`}
+              >
+                <div className="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-end">
+                  <div className="space-y-5">
+                    <p className={`text-xs uppercase tracking-[0.28em] ${accent.category}`}>
+                      {project.category}
+                    </p>
+                    <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-5xl">
+                      {project.name}
+                    </h3>
+                    <p className="max-w-xl text-base leading-8 text-white/58">{project.summary}</p>
+                    <div className="flex flex-wrap gap-3">
+                      {project.metrics.map((metric) => (
+                        <span key={metric} className={`rounded-full border px-4 py-2 text-sm ${accent.metric}`}>
+                          {metric}
+                        </span>
+                      ))}
                     </div>
                   </div>
+                  <div className={`project-visual bg-gradient-to-b ${accent.visual}`}>
+                    <div className={`project-screen ${accent.screen}`}>
+                      <div className="mb-8 flex items-center gap-2">
+                        {accent.dot.map((dotClass, i) => (
+                          <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
+                        ))}
+                      </div>
+                      <p className="mb-3 text-sm uppercase tracking-[0.3em] text-white/35">
+                        {project.heroLabel}
+                      </p>
+                      <div className="grid gap-4 md:grid-cols-[1.15fr_0.85fr]">
+                        <div className="rounded-[2rem] border border-white/8 bg-gradient-to-br from-white/8 to-transparent p-5">
+                          <div className={`h-40 rounded-[1.5rem] ${accent.mockup}`} />
+                        </div>
+                        <div className="space-y-4">
+                          <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
+                            <p className="text-xs uppercase tracking-[0.24em] text-white/34">Challenge</p>
+                            <p className="mt-3 text-sm leading-7 text-white/58">{project.challenge}</p>
+                          </div>
+                          <div className="rounded-[1.5rem] border border-white/8 bg-white/[0.04] p-4">
+                            <p className="text-xs uppercase tracking-[0.24em] text-white/34">Solution</p>
+                            <p className="mt-3 text-sm leading-7 text-white/58">{project.solution}</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="mt-6 flex items-center gap-2 text-sm text-white/65">
+                        <span>View case study</span>
+                        <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          </Reveal>
-        ))}
+              </Link>
+            </Reveal>
+          )
+        })}
       </div>
     </section>
   )
@@ -452,6 +498,7 @@ export function CaseStudyLayout({
   solution,
   metrics,
   stack,
+  accent,
 }: {
   name: string
   category: string
@@ -460,11 +507,19 @@ export function CaseStudyLayout({
   solution: string
   metrics: string[]
   stack: string[]
+  accent: string
 }) {
+  const studyAccent = projectAccents[accent as keyof typeof projectAccents] ?? projectAccents.blue
+
   return (
     <main className="min-h-screen bg-ink text-frost">
       <section className="relative overflow-hidden px-4 pb-16 pt-32 md:px-8">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(139,233,255,0.14),transparent_25%),radial-gradient(circle_at_80%_10%,rgba(143,131,255,0.18),transparent_30%)]" />
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background: studyAccent.mockup.replace('bg-[', '').replace(']', ''),
+          }}
+        />
         <div className="relative z-10 mx-auto max-w-7xl">
           <Link
             to="/"
@@ -475,19 +530,19 @@ export function CaseStudyLayout({
           </Link>
           <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-end">
             <div>
-              <p className="section-kicker">{category}</p>
+              <p className={`section-kicker ${studyAccent.category}`}>{category}</p>
               <h1 className="font-display text-5xl leading-none tracking-[-0.06em] text-white md:text-7xl">
                 {name}
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-8 text-white/62">{summary}</p>
             </div>
             <div className="glass-panel p-6">
-              <div className="rounded-[2rem] border border-white/8 bg-[radial-gradient(circle_at_20%_30%,rgba(139,233,255,0.45),transparent_24%),radial-gradient(circle_at_80%_60%,rgba(143,131,255,0.38),transparent_28%),linear-gradient(135deg,rgba(255,255,255,0.08),transparent)] p-8">
+              <div className={`rounded-[2rem] border border-white/8 p-8 ${studyAccent.mockup}`}>
                 <div className="grid gap-4 sm:grid-cols-2">
                   {metrics.map((metric) => (
-                    <div key={metric} className="rounded-[1.5rem] border border-white/10 bg-black/25 p-4">
+                    <div key={metric} className={`rounded-[1.5rem] border border-white/10 bg-black/25 p-4`}>
                       <p className="text-sm uppercase tracking-[0.2em] text-white/38">Outcome</p>
-                      <p className="mt-3 font-display text-2xl tracking-[-0.04em] text-white">{metric}</p>
+                      <p className={`mt-3 font-display text-2xl tracking-[-0.04em] ${studyAccent.category}`}>{metric}</p>
                     </div>
                   ))}
                 </div>
@@ -500,17 +555,17 @@ export function CaseStudyLayout({
       <section className="section-shell pt-6 md:pt-8">
         <div className="grid gap-6 lg:grid-cols-2">
           <div className="glass-card p-8">
-            <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/34">Problem statement</p>
+            <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Problem statement</p>
             <p className="text-base leading-8 text-white/66">{challenge}</p>
           </div>
           <div className="glass-card p-8">
-            <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/34">Solution overview</p>
+            <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Solution overview</p>
             <p className="text-base leading-8 text-white/66">{solution}</p>
           </div>
         </div>
         <div className="mt-6 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="glass-card p-8">
-            <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/34">Process breakdown</p>
+            <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Process breakdown</p>
             <div className="space-y-4">
               {[
                 'Narrative positioning and content mapping',
@@ -519,17 +574,17 @@ export function CaseStudyLayout({
                 'High-performance build and optimization',
               ].map((item) => (
                 <div key={item} className="flex items-start gap-3 text-white/66">
-                  <Check className="mt-1 h-4 w-4 text-cyan-300" />
+                  <Check className={`mt-1 h-4 w-4 ${studyAccent.category}`} />
                   <span>{item}</span>
                 </div>
               ))}
             </div>
           </div>
           <div className="glass-card p-8">
-            <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/34">Stack</p>
+            <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Stack</p>
             <div className="flex flex-wrap gap-3">
               {stack.map((item) => (
-                <span key={item} className="rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-sm text-white/72">
+                <span key={item} className={`rounded-full border px-4 py-2 text-sm ${studyAccent.metric}`}>
                   {item}
                 </span>
               ))}

@@ -399,7 +399,6 @@ a {
   }
 
   .project-card:hover {
-    border-color: rgba(103, 232, 249, 0.18);
     background: rgba(255, 255, 255, 0.045);
   }
 
