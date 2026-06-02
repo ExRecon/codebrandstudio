@@ -15,7 +15,7 @@ export function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 py-4 md:px-8">
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between rounded-full border px-5 py-3 transition-all duration-500 ${
+        className={`mx-auto flex max-w-7xl items-center justify-between rounded-2xl border px-8 py-4 transition-all duration-500 ${
           scrolled
             ? 'border-white/12 bg-black/55 shadow-panel backdrop-blur-2xl'
             : 'border-white/8 bg-white/[0.03] backdrop-blur-md'
@@ -24,7 +24,7 @@ export function Navbar() {
         <a href="#hero" className="font-display text-sm uppercase tracking-[0.35em] text-white">
           Code Brand Studio
         </a>
-        <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary navigation">
+        <nav className="hidden items-center gap-10 lg:flex" aria-label="Primary navigation">
           {navItems.map((item) => (
             <a
               key={item.href}

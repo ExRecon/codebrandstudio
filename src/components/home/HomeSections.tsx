@@ -181,7 +181,7 @@ export function ServicesSection() {
           </p>
         </div>
       </Reveal>
-      <div className="mt-12 grid auto-rows-[minmax(220px,1fr)] gap-5 md:grid-cols-2 xl:grid-cols-4">
+      <div className="mt-14 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {services.map((service, index) => (
           <Reveal key={service.title} delay={index * 0.05}>
             <article className="service-card group h-full">
