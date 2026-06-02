@@ -48,14 +48,23 @@ export function HeroSection() {
             {headlineWords.map((line, index) => (
               <motion.h1
                 key={line.join('-')}
-                className="font-display text-5xl font-medium leading-[0.95] tracking-[-0.06em] text-white sm:text-6xl md:text-7xl lg:text-[6.2rem]"
+                className="font-display text-5xl font-semibold leading-[0.85] tracking-[-0.04em] text-white sm:text-6xl md:text-7xl lg:text-[6.2rem]"
                 initial={{ opacity: 0, y: 28, filter: 'blur(14px)' }}
                 animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                 transition={{ duration: 0.9, delay: index * 0.14 }}
               >
                 <span className="inline-flex flex-wrap gap-x-[0.18em]">
                   {line.map((word) => (
-                    <span key={word}>{word}</span>
+                    <span
+                      key={word}
+                      className={
+                        word === 'Premium'
+                          ? 'hero-premium-word'
+                          : undefined
+                      }
+                    >
+                      {word}
+                    </span>
                   ))}
                 </span>
               </motion.h1>

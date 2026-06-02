@@ -327,6 +327,14 @@ a {
   }
 }
 
+.hero-premium-word {
+  background: linear-gradient(135deg, #8be9ff 0%, #a78bfa 50%, #f0abfc 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 28px rgba(139, 233, 255, 0.45)) drop-shadow(0 0 56px rgba(167, 139, 250, 0.3));
+}
+
 .hero-gradient {
   background:
     radial-gradient(circle at 15% 20%, rgba(139, 233, 255, 0.16), transparent 20%),
