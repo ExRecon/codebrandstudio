@@ -174,84 +174,118 @@ export function AboutSection() {
 export function FounderSection() {
   return (
     <section id="founder" className="section-shell">
-      <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-        {/* Left — Avatar + highlights */}
-        <Reveal>
-          <div className="space-y-8">
-            {/* Avatar — parallax + tilt */}
-            <ParallaxLayer speed={-0.02}>
-              <TiltCard className="relative inline-flex" intensity={10}>
-                <img
-                  src={ceoFounderImg}
-                  alt={`${founder.name} — CEO & Founder of Code Brand Studio`}
-                  className="h-28 w-28 rounded-3xl border border-white/10 object-cover md:h-32 md:w-32"
-                  loading="eager"
-                  width={128}
-                  height={128}
-                />
-                <div className="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border-2 border-ink bg-emerald-400" />
-              </TiltCard>
+      {/* Header */}
+      <Reveal>
+        <p className="section-kicker">Meet the founder</p>
+        <h2 className="section-title max-w-2xl">
+          The person behind every pixel.
+        </h2>
+      </Reveal>
+
+      {/* Main founder card — editorial layout */}
+      <div className="relative mt-14 overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.02]">
+        {/* Ambient background glow */}
+        <div
+          className="pointer-events-none absolute -top-32 -right-32 h-[480px] w-[480px] rounded-full opacity-15 blur-[120px]"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(circle, rgba(103,232,249,0.6), transparent 70%)' }}
+        />
+        <div
+          className="pointer-events-none absolute -bottom-40 -left-40 h-[360px] w-[360px] rounded-full opacity-10 blur-[100px]"
+          aria-hidden="true"
+          style={{ background: 'radial-gradient(circle, rgba(167,139,250,0.6), transparent 70%)' }}
+        />
+
+        <div className="relative grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:p-12 p-6 md:p-10">
+          {/* Left — Large portrait */}
+          <Reveal delay={0.05}>
+            <ParallaxLayer speed={-0.015}>
+              <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+                {/* Outer glow ring */}
+                <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-cyan-300/10 via-transparent to-violet-400/10 blur-lg" />
+                <TiltCard className="relative" intensity={6}>
+                  <div className="relative overflow-hidden rounded-2xl border border-white/[0.08]">
+                    <img
+                      src={ceoFounderImg}
+                      alt={`${founder.name} — CEO & Founder of Code Brand Studio`}
+                      className="w-full object-cover aspect-[4/5]"
+                      loading="eager"
+                      width={512}
+                      height={640}
+                    />
+                    {/* Gradient overlay at bottom for text legibility */}
+                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent" />
+                    {/* Name overlay on image */}
+                    <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
+                      <p className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
+                        {founder.name}
+                      </p>
+                      <p className="mt-1 text-sm text-white/50">{founder.role}</p>
+                      <div className="mt-3 h-px w-12 bg-gradient-to-r from-cyan-300/60 to-transparent" />
+                    </div>
+                    {/* Online indicator */}
+                    <div className="absolute top-4 right-4 flex items-center gap-2 rounded-full bg-ink/60 px-3 py-1.5 backdrop-blur-sm border border-white/[0.06]">
+                      <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="text-[11px] text-white/50 tracking-wide">Available</span>
+                    </div>
+                  </div>
+                </TiltCard>
+              </div>
             </ParallaxLayer>
+          </Reveal>
 
-            <div>
-              <h3 className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
-                {founder.name}
-              </h3>
-              <p className="mt-1 text-sm text-white/40">{founder.role}</p>
-            </div>
-
-            {/* Highlights */}
-            <div className="grid grid-cols-3 gap-4">
-              {founder.highlights.map((item) => (
-                <div key={item.label}>
-                  <p className="font-display text-xl tracking-[-0.04em] text-cyan-300/80 md:text-2xl">
-                    {item.value}
-                  </p>
-                  <p className="mt-1 text-xs text-white/35">{item.label}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
-
-        {/* Right — Bio + stack */}
-        <Reveal delay={0.1}>
-          <div className="space-y-8">
-            <div>
-              <p className="section-kicker">Meet the founder</p>
-              <p className="mt-4 text-xl leading-10 text-white/70 md:text-2xl md:leading-10">
+          {/* Right — Info, bio, stats, CTA */}
+          <Reveal delay={0.12}>
+            <div className="flex flex-col justify-center space-y-8">
+              {/* Headline */}
+              <p className="text-xl leading-10 text-white/70 md:text-2xl md:leading-10">
                 {founder.headline}
               </p>
-            </div>
 
-            <div className="space-y-5">
-              {founder.bio.map((paragraph) => (
-                <p key={paragraph} className="text-base leading-8 text-white/55">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-
-            {/* Stack */}
-            <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/30">Core expertise</p>
-              <div className="flex flex-wrap gap-3">
-                {founder.stack.map((item) => (
-                  <span
-                    key={item}
-                    className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/55"
-                  >
-                    {item}
-                  </span>
+              {/* Bio */}
+              <div className="space-y-5">
+                {founder.bio.map((paragraph) => (
+                  <p key={paragraph} className="text-base leading-8 text-white/55">
+                    {paragraph}
+                  </p>
                 ))}
               </div>
-            </div>
 
-            <div>
-              <MagneticButton href="#contact">Work with {founder.name}</MagneticButton>
+              {/* Stats row */}
+              <div className="grid grid-cols-3 gap-6">
+                {founder.highlights.map((item) => (
+                  <div key={item.label}>
+                    <p className="font-display text-2xl tracking-[-0.04em] text-cyan-300/80 md:text-3xl">
+                      {item.value}
+                    </p>
+                    <p className="mt-2 text-xs text-white/35">{item.label}</p>
+                  </div>
+                ))}
+              </div>
+              <div className="h-px bg-gradient-to-r from-white/[0.06] to-transparent" />
+
+              {/* Stack */}
+              <div>
+                <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/30">Core expertise</p>
+                <div className="flex flex-wrap gap-3">
+                  {founder.stack.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/55"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div>
+                <MagneticButton href="#contact">Work with {founder.name}</MagneticButton>
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </div>
     </section>
   )
