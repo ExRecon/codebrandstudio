@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, Check, ChevronRight, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import {
+  comparison,
   contact,
   differentiators,
   founder,
@@ -367,6 +368,49 @@ export function WhyHireUsSection() {
             <div className="mt-8 h-px w-12 bg-cyan-300/20" />
           </div>
         ))}
+      </div>
+    </section>
+  )
+}
+
+export function WhyChooseUsSection() {
+  return (
+    <section id="why-choose" className="section-shell">
+      <Reveal>
+        <p className="section-kicker">Why choose us</p>
+        <h2 className="section-title max-w-2xl">
+          Not all websites are created equal. Here&apos;s the difference.
+        </h2>
+      </Reveal>
+
+      <div className="mt-14 overflow-hidden">
+        {/* Column headers */}
+        <div className="grid grid-cols-2 gap-4 border-b border-white/[0.06] pb-5">
+          <div>
+            <p className="text-xs uppercase tracking-[0.28em] text-white/30">
+              Typical Freelancer
+            </p>
+          </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan-300/70">
+              Code Brand Studio
+            </p>
+          </div>
+        </div>
+
+        {/* Comparison rows */}
+        <div className="divide-y divide-white/[0.04]">
+          {comparison.map((row) => (
+            <div key={row.typical} className="grid grid-cols-2 gap-4 py-5">
+              <p className="text-base leading-7 text-white/40 md:text-lg md:leading-8">
+                {row.typical}
+              </p>
+              <p className="text-base leading-7 text-white/80 md:text-lg md:leading-8">
+                {row.studio}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

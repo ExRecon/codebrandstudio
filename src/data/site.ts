@@ -246,6 +246,15 @@ export const founder = {
 export const getProjectBySlug = (slug?: string) =>
   projects.find((project) => project.slug === slug)
 
+export const comparison = [
+  { typical: 'Generic templates', studio: 'Custom strategy & design' },
+  { typical: 'Fast delivery', studio: 'Premium positioning' },
+  { typical: 'Basic design', studio: 'Brand-focused design' },
+  { typical: 'One-size-fits-all', studio: 'Tailored digital product' },
+  { typical: 'Add motion later', studio: 'Motion baked into strategy' },
+  { typical: 'Template support', studio: 'Dedicated partnership' },
+]
+
 export const studioPrinciples = [
   {
     title: 'Authority by design',

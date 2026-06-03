@@ -10,6 +10,7 @@ import {
   ProjectsSection,
   ServicesSection,
   TestimonialsSection,
+  WhyChooseUsSection,
   WhyHireUsSection,
 } from '../components/home/HomeSections'
 import { SectionDivider } from '../components/ui/SectionDivider'
@@ -45,6 +46,10 @@ export default function HomePage() {
         <SectionDivider variant="glow" />
         <section className="section-shift-a">
           <WhyHireUsSection />
+        </section>
+        <SectionDivider />
+        <section className="section-shift-a">
+          <WhyChooseUsSection />
         </section>
         <SectionDivider />
         <section className="section-shift-b">
