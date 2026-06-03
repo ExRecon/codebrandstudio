@@ -1,6 +1,8 @@
 import type { ReactNode } from 'react'
 import { contact, navItems, socialLinks } from '../../data/site'
 import { MagneticButton } from '../ui/MagneticButton'
+import { NavLink } from '../ui/NavLink'
+import { AnimatedSocialIcon } from '../ui/AnimatedSocialIcon'
 
 const techStack = [
   { name: 'React', icon: '⚛' },
@@ -85,16 +87,12 @@ export function Footer() {
             {/* Social icons */}
             <div className="flex gap-5">
               {socialLinks.map((item) => (
-                <a
+                <AnimatedSocialIcon
                   key={item.label}
                   href={item.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/35 transition-colors duration-300 hover:text-cyan-300"
-                  aria-label={item.label}
-                >
-                  <SocialIcon label={item.label} />
-                </a>
+                  label={item.label}
+                  icon={<SocialIcon label={item.label} />}
+                />
               ))}
             </div>
           </div>
@@ -104,13 +102,13 @@ export function Footer() {
             <p className="mb-5 text-xs uppercase tracking-[0.3em] text-white/30">Navigate</p>
             <div className="space-y-3">
               {navItems.map((item) => (
-                <a
+                <NavLink
                   key={item.href}
                   href={item.href}
-                  className="block text-sm text-white/55 transition-colors duration-300 hover:text-white"
+                  className="block text-sm"
                 >
                   {item.label}
-                </a>
+                </NavLink>
               ))}
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { Suspense, lazy, useMemo } from 'react'
+import { Suspense, lazy, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, Check, ChevronRight, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
@@ -18,6 +18,9 @@ import type { ProjectAccent } from '../../data/site'
 import { MagneticButton } from '../ui/MagneticButton'
 import { Reveal } from '../ui/Reveal'
 import { ProjectVideoPreview } from '../ui/ProjectVideoPreview'
+import { AnimatedCounter } from '../ui/AnimatedCounter'
+import { TiltCard } from '../ui/TiltCard'
+import { ParallaxLayer } from '../ui/ParallaxLayer'
 const HeroScene = lazy(() =>
   import('../three/HeroScene').then((module) => ({ default: module.HeroScene })),
 )
@@ -92,13 +95,22 @@ export function HeroSection() {
         </motion.div>
       </div>
 
-      <a
+      <motion.a
         href="#about"
         className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/40 transition-colors hover:text-white/60"
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+        whileHover={{ y: 3, transition: { duration: 0.3 } }}
       >
         <span>Scroll to explore</span>
-        <ArrowDown className="h-4 w-4 animate-bounce" />
-      </a>
+        <motion.span
+          animate={{ y: [0, 4, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        >
+          <ArrowDown className="h-4 w-4" />
+        </motion.span>
+      </motion.a>
     </section>
   )
 }
@@ -120,19 +132,19 @@ export function AboutSection() {
 
         <Reveal delay={0.12}>
           <div className="space-y-8">
-            {/* Stats — clean horizontal layout, no card */}
-            <div className="grid grid-cols-2 gap-x-8 gap-y-6">
-              {stats.map((stat) => (
-                <div key={stat.label}>
-                  <p className="font-display text-4xl tracking-[-0.06em] text-white md:text-5xl">
-                    {stat.value}
-                  </p>
-                  <p className="mt-2 text-xs uppercase tracking-[0.24em] text-white/40">
-                    {stat.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+            {/* Stats — animated counter with parallax */}
+            <ParallaxLayer speed={0.015}>
+              <div className="grid grid-cols-2 gap-x-8 gap-y-6">
+                {stats.map((stat, i) => (
+                  <div key={stat.label}>
+                    <AnimatedCounter value={stat.value} delay={0.12 + i * 0.1} />
+                    <p className="mt-2 text-xs uppercase tracking-[0.24em] text-white/40">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </ParallaxLayer>
 
             {/* Divider */}
             <div className="h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
@@ -165,15 +177,17 @@ export function FounderSection() {
         {/* Left — Avatar + highlights */}
         <Reveal>
           <div className="space-y-8">
-            {/* Avatar */}
-            <div className="relative inline-flex">
-              <div className="h-28 w-28 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-300/20 to-violet-400/10 md:h-32 md:w-32">
-                <div className="flex h-full w-full items-center justify-center font-display text-3xl font-semibold tracking-[-0.04em] text-white/70 md:text-4xl">
-                  A
+            {/* Avatar — parallax + tilt */}
+            <ParallaxLayer speed={-0.02}>
+              <TiltCard className="relative inline-flex" intensity={10}>
+                <div className="h-28 w-28 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-300/20 to-violet-400/10 md:h-32 md:w-32">
+                  <div className="flex h-full w-full items-center justify-center font-display text-3xl font-semibold tracking-[-0.04em] text-white/70 md:text-4xl">
+                    A
+                  </div>
                 </div>
-              </div>
-              <div className="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border-2 border-ink bg-emerald-400" />
-            </div>
+                <div className="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border-2 border-ink bg-emerald-400" />
+              </TiltCard>
+            </ParallaxLayer>
 
             <div>
               <h3 className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
@@ -286,38 +300,44 @@ export function ServicesSection() {
                     <MagneticButton href="#contact">Start a Project</MagneticButton>
                   </div>
                 </div>
-                {/* Visual accent — larger, more presence */}
-                <div className="hidden lg:flex lg:items-center lg:justify-center">
+                {/* Visual accent — parallax depth */}
+                <ParallaxLayer speed={-0.025} className="hidden lg:flex lg:items-center lg:justify-center">
                   <div className="relative">
                     <div className={`h-64 w-64 rounded-full bg-gradient-to-br ${featured.accent} opacity-20 blur-3xl`} />
                     <div className="absolute inset-0 flex items-center justify-center">
-                      <div className={`h-40 w-40 rounded-3xl bg-gradient-to-br ${featured.accent} opacity-40`} />
+                      <motion.div
+                        className={`h-40 w-40 rounded-3xl bg-gradient-to-br ${featured.accent} opacity-40`}
+                        animate={{ rotate: [0, 2, -2, 0] }}
+                        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+                      />
                     </div>
                     <div className="absolute -bottom-4 -right-4 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
                       <p className="text-xs text-white/40">01</p>
                     </div>
                   </div>
-                </div>
+                </ParallaxLayer>
               </div>
             </div>
           </Reveal>
         )}
 
-        {/* Secondary services — clean 2-column grid, minimal cards */}
+        {/* Secondary services — tilt cards */}
         <div className="grid gap-px bg-white/[0.04] md:grid-cols-2">
           {secondary.slice(0, 2).map((service) => (
             <Reveal key={service.title}>
-              <div className="group bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
-                <div className="flex h-full flex-col justify-between gap-8">
-                  <div>
-                    <div className="icon-chip-accent mb-6">
-                      <service.icon className="h-5 w-5" />
+              <TiltCard className="h-full" intensity={6}>
+                <div className="group h-full bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                  <div className="flex h-full flex-col justify-between gap-8">
+                    <div>
+                      <div className="icon-chip-accent mb-6">
+                        <service.icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
+                      <p className="text-base leading-8 text-white/55">{service.description}</p>
                     </div>
-                    <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
-                    <p className="text-base leading-8 text-white/55">{service.description}</p>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>
@@ -325,17 +345,19 @@ export function ServicesSection() {
         <div className="grid gap-px bg-white/[0.04] md:grid-cols-2 xl:grid-cols-3">
           {secondary.slice(2).map((service) => (
             <Reveal key={service.title}>
-              <div className="group bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
-                <div className="flex h-full flex-col justify-between gap-8">
-                  <div>
-                    <div className="icon-chip-accent mb-6">
-                      <service.icon className="h-5 w-5" />
+              <TiltCard className="h-full" intensity={6}>
+                <div className="group h-full bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                  <div className="flex h-full flex-col justify-between gap-8">
+                    <div>
+                      <div className="icon-chip-accent mb-6">
+                        <service.icon className="h-5 w-5" />
+                      </div>
+                      <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
+                      <p className="text-base leading-8 text-white/55">{service.description}</p>
                     </div>
-                    <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
-                    <p className="text-base leading-8 text-white/55">{service.description}</p>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>
@@ -354,22 +376,24 @@ export function WhyUsSection() {
         </h2>
       </Reveal>
 
-      {/* Differentiators — 2×2 editorial grid */}
+      {/* Differentiators — tilt cards */}
       <div className="mt-14 grid grid-cols-1 gap-px bg-white/[0.04] md:grid-cols-2">
         {differentiators.map((item, index) => (
           <Reveal key={item} delay={index * 0.08}>
-            <div className="group relative bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
-              {/* Large background number */}
-              <span className="pointer-events-none absolute -top-2 -left-1 font-display text-[6rem] font-bold leading-none text-white/[0.02] select-none md:text-[8rem]">
-                {String(index + 1).padStart(2, '0')}
-              </span>
-              <div className="relative">
-                <p className="font-display text-xl leading-snug tracking-[-0.04em] text-white/85 md:text-2xl">
-                  {item}
-                </p>
-                <div className="mt-6 h-px w-10 bg-gradient-to-r from-cyan-300/30 to-transparent transition-all duration-500 group-hover:w-16 group-hover:from-cyan-300/50" />
+            <TiltCard className="h-full" intensity={6}>
+              <div className="group relative h-full bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+                {/* Large background number */}
+                <span className="pointer-events-none absolute -top-2 -left-1 font-display text-[6rem] font-bold leading-none text-white/[0.02] select-none md:text-[8rem]">
+                  {String(index + 1).padStart(2, '0')}
+                </span>
+                <div className="relative">
+                  <p className="font-display text-xl leading-snug tracking-[-0.04em] text-white/85 md:text-2xl">
+                    {item}
+                  </p>
+                  <div className="mt-6 h-px w-10 bg-gradient-to-r from-cyan-300/30 to-transparent transition-all duration-500 group-hover:w-16 group-hover:from-cyan-300/50" />
+                </div>
               </div>
-            </div>
+            </TiltCard>
           </Reveal>
         ))}
       </div>
@@ -470,8 +494,9 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
             </div>
           </div>
 
-          {/* Right — large mockup showcase */}
-          <div className={`project-showcase bg-gradient-to-br ${accent.visual}`}>
+          {/* Right — tilt card showcase */}
+          <TiltCard intensity={4}>
+            <div className={`project-showcase bg-gradient-to-br ${accent.visual}`}>
             <div className="flex items-center gap-2 px-2 pt-3 md:px-4 md:pt-4">
               {accent.dot.map((dotClass: string, i: number) => (
                 <span key={i} className={`h-2 w-2 rounded-full md:h-2.5 md:w-2.5 ${dotClass}`} />
@@ -496,6 +521,7 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
               </div>
             </div>
           </div>
+          </TiltCard>
         </div>
       </Link>
     </Reveal>
@@ -550,32 +576,34 @@ export function ProjectsSection() {
                 </div>
               </div>
 
-              {/* Right — large mockup showcase */}
-              <div className={`project-showcase bg-gradient-to-br ${featuredAccent.visual}`}>
-                <div className="flex items-center gap-2 px-3 pt-4 md:px-5 md:pt-5">
-                  {featuredAccent.dot.map((dotClass: string, i: number) => (
-                    <span key={i} className={`h-2 w-2 rounded-full md:h-2.5 md:w-2.5 ${dotClass}`} />
-                  ))}
-                </div>
-                <p className="mt-3 px-3 text-[10px] uppercase tracking-[0.3em] text-white/30 md:px-5 md:mt-4 md:text-xs">
-                  {featured.heroLabel}
-                </p>
-                <ProjectVideoPreview
-                  slug={featured.slug}
-                  mockupClass={featuredAccent.mockup}
-                  heroLabel={featured.heroLabel}
-                />
-                <div className="mt-3 grid grid-cols-2 gap-4 px-3 pb-4 md:px-5 md:pb-5">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
-                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.challenge}</p>
+              {/* Right — parallax showcase with tilt */}
+              <TiltCard intensity={4}>
+                <div className={`project-showcase bg-gradient-to-br ${featuredAccent.visual}`}>
+                  <div className="flex items-center gap-2 px-3 pt-4 md:px-5 md:pt-5">
+                    {featuredAccent.dot.map((dotClass: string, i: number) => (
+                      <span key={i} className={`h-2 w-2 rounded-full md:h-2.5 md:w-2.5 ${dotClass}`} />
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
-                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.solution}</p>
+                  <p className="mt-3 px-3 text-[10px] uppercase tracking-[0.3em] text-white/30 md:px-5 md:mt-4 md:text-xs">
+                    {featured.heroLabel}
+                  </p>
+                  <ProjectVideoPreview
+                    slug={featured.slug}
+                    mockupClass={featuredAccent.mockup}
+                    heroLabel={featured.heroLabel}
+                  />
+                  <div className="mt-3 grid grid-cols-2 gap-4 px-3 pb-4 md:px-5 md:pb-5">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
+                      <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.challenge}</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
+                      <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.solution}</p>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </TiltCard>
             </div>
           </Link>
         </Reveal>
@@ -599,20 +627,33 @@ export function ProcessSection() {
         </h2>
       </Reveal>
       <div className="relative mt-16">
-        {/* Vertical connecting line */}
-        <div className="absolute left-[1.55rem] top-0 hidden h-full w-px bg-gradient-to-b from-cyan-400/30 via-violet-400/15 to-transparent md:block" />
+        {/* Vertical connecting line — draws on scroll */}
+        <motion.div
+          className="absolute left-[1.55rem] top-0 hidden w-px origin-top bg-gradient-to-b from-cyan-400/30 via-violet-400/15 to-transparent md:block"
+          initial={{ scaleY: 0 }}
+          whileInView={{ scaleY: 1 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+          style={{ height: '100%' }}
+        />
 
         <div className="space-y-10">
           {processSteps.map((step, index) => (
             <Reveal key={step.title} delay={index * 0.08}>
               <div className="group relative grid grid-cols-[auto_1fr] gap-6 md:gap-10">
-                {/* Timeline node */}
+                {/* Timeline node — scale up + glow on reveal */}
                 <div className="relative flex flex-col items-center">
-                  <div className="relative z-10 flex h-[3rem] w-[3rem] items-center justify-center rounded-full bg-white/[0.06] transition-colors duration-500 group-hover:bg-cyan-300/10">
+                  <motion.div
+                    className="relative z-10 flex h-[3rem] w-[3rem] items-center justify-center rounded-full bg-white/[0.06] transition-colors duration-500 group-hover:bg-cyan-300/10"
+                    initial={{ scale: 0.5, opacity: 0 }}
+                    whileInView={{ scale: 1, opacity: 1 }}
+                    viewport={{ once: true, amount: 0.5 }}
+                    transition={{ duration: 0.5, delay: 0.1 + index * 0.06, ease: [0.22, 1, 0.36, 1] }}
+                  >
                     <span className="font-display text-sm tracking-[-0.02em] text-white/40 transition-colors group-hover:text-cyan-300">
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                  </div>
+                  </motion.div>
                 </div>
 
                 {/* Content — no card, just text on the page */}
@@ -632,6 +673,8 @@ export function ProcessSection() {
 }
 
 export function TestimonialsSection() {
+  const [marqueePaused, setMarqueePaused] = useState(false)
+
   return (
     <section className="section-shell overflow-hidden">
       <Reveal>
@@ -640,9 +683,22 @@ export function TestimonialsSection() {
           Trust built through premium execution, strategic clarity, and the feeling that every pixel has been considered.
         </h2>
       </Reveal>
-      <div className="marquee-track mt-12">
+      <motion.div
+        className="marquee-track mt-12"
+        style={{ animationPlayState: marqueePaused ? 'paused' : 'running' }}
+        onHoverStart={() => setMarqueePaused(true)}
+        onHoverEnd={() => setMarqueePaused(false)}
+      >
         {[...testimonials, ...testimonials].map((item, index) => (
-          <div key={`${item.name}-${index}`} className="testimonial-editorial">
+          <motion.div
+            key={`${item.name}-${index}`}
+            className="testimonial-editorial"
+            whileHover={{
+              borderColor: 'rgba(103, 232, 249, 0.25)',
+              backgroundColor: 'rgba(255, 255, 255, 0.01)',
+            }}
+            transition={{ duration: 0.3 }}
+          >
             <div className="mb-6 flex gap-1 text-cyan-300/60">
               {Array.from({ length: 5 }).map((_, starIndex) => (
                 <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
@@ -658,9 +714,9 @@ export function TestimonialsSection() {
                 <p className="text-xs text-white/40">{item.role}</p>
               </div>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   )
 }
@@ -670,9 +726,13 @@ export function CTASection() {
     <section id="contact" className="section-shell pb-16 md:pb-20">
       {/* Full-width editorial CTA — no card */}
       <div className="relative overflow-hidden">
-        {/* Background accents */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,rgba(139,233,255,0.04),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_35%_at_70%_45%,rgba(143,131,255,0.03),transparent)]" />
+        {/* Background accents — parallax depth */}
+        <ParallaxLayer speed={0.01} className="absolute inset-0">
+          <div className="h-full w-full bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,rgba(139,233,255,0.04),transparent)]" />
+        </ParallaxLayer>
+        <ParallaxLayer speed={-0.015} className="absolute inset-0">
+          <div className="h-full w-full bg-[radial-gradient(ellipse_40%_35%_at_70%_45%,rgba(143,131,255,0.03),transparent)]" />
+        </ParallaxLayer>
 
         <div className="relative px-8 py-16 text-center md:px-16 md:py-24">
           <p className="section-kicker">Start your next move</p>

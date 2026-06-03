@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { navItems } from '../../data/site'
 import { MagneticButton } from '../ui/MagneticButton'
+import { NavLink } from '../ui/NavLink'
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -26,13 +27,9 @@ export function Navbar() {
         </a>
         <nav className="hidden items-center gap-10 lg:flex" aria-label="Primary navigation">
           {navItems.map((item) => (
-            <a
-              key={item.href}
-              href={item.href}
-              className="text-sm text-white/55 transition-colors duration-300 hover:text-white"
-            >
+            <NavLink key={item.href} href={item.href}>
               {item.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
         <div className="hidden sm:block">
