@@ -28,7 +28,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-ink text-frost">
       <Navbar />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <SectionDivider variant="glow" />
         <section className="section-shift-a">

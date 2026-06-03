@@ -217,9 +217,9 @@ export const processSteps = [
 ]
 
 export const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com' },
-  { label: 'Behance', href: 'https://behance.net' },
-  { label: 'LinkedIn', href: 'https://linkedin.com' },
+  { label: 'Instagram', href: 'https://instagram.com/codebrandstudio' },
+  { label: 'Behance', href: 'https://behance.net/codebrandstudio' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/company/codebrandstudio' },
 ]
 
 export const contact = {

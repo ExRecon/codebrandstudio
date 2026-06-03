@@ -61,13 +61,13 @@ export function Footer() {
           ══════════════════════════════════════════════════════════════ */}
       <div className="relative border-t border-white/[0.06]">
         {/* Background ambient glow */}
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_40%,rgba(139,233,255,0.04),transparent)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_70%_50%_at_50%_40%,rgba(139,233,255,0.04),transparent)]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-20 md:px-8 md:py-28">
           <Reveal>
             <div className="text-center">
               {/* Kicker */}
-              <p className="section-kicker mx-auto mb-6">Ready toelevate your brand?</p>
+              <p className="section-kicker mx-auto mb-6">Ready to elevate your brand?</p>
 
               {/* Main headline */}
               <h2 className="font-display text-4xl leading-[0.95] tracking-[-0.05em] text-white md:text-6xl lg:text-7xl">
@@ -77,7 +77,7 @@ export function Footer() {
               </h2>
 
               {/* Supporting copy */}
-              <p className="mx-auto mt-6 max-w-xl text-lg leading-9 text-white/55">
+              <p className="mx-auto mt-6 max-w-xl text-lg leading-9 text-white/65">
                 Your next project deserves more than a template. A strategic digital product engineered for authority, trust, and conversion.
               </p>
 
@@ -86,7 +86,7 @@ export function Footer() {
                 <MagneticButton href={`mailto:${contact.email}`}>
                   Start a Project
                 </MagneticButton>
-                <MagneticButton href={`mailto:${contact.email}?subject=Discovery Call`} variant="secondary">
+                <MagneticButton href={`mailto:${contact.email}?subject=${encodeURIComponent('Discovery Call')}`} variant="secondary">
                   {contact.calendarLabel}
                 </MagneticButton>
               </div>
@@ -94,10 +94,10 @@ export function Footer() {
               {/* Quick trust snippet — inline, under the CTA */}
               <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
                 {trustSignals.map((badge) => (
-                  <span key={badge.label} className="flex items-center gap-1.5 text-xs text-white/35">
-                    <Star className="h-3 w-3 fill-cyan-300/50 text-cyan-300/50" />
+                  <span key={badge.label} className="flex items-center gap-1.5 text-xs text-white/55">
+                    <Star className="h-3 w-3 fill-cyan-300/60 text-cyan-300/60" />
                     <span>{badge.label}</span>
-                    <span className="text-white/20">— {badge.detail}</span>
+                    <span className="text-white/40">— {badge.detail}</span>
                   </span>
                 ))}
               </div>
@@ -110,7 +110,7 @@ export function Footer() {
           FOUNDER SIGNATURE BLOCK — Personal brand + social proof
           ══════════════════════════════════════════════════════════════ */}
       <div className="relative border-t border-white/[0.04]">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,rgba(143,131,255,0.02),transparent)]" />
+        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_30%_50%,rgba(143,131,255,0.02),transparent)]" aria-hidden="true" />
 
         <div className="relative mx-auto max-w-7xl px-4 py-16 md:px-8 md:py-20">
           <Reveal>
@@ -126,26 +126,26 @@ export function Footer() {
                       whileHover={{ scale: 1.04, borderColor: 'rgba(103, 232, 249, 0.25)' }}
                       transition={{ duration: 0.3 }}
                     >
-                      <div className="flex h-full w-full items-center justify-center font-display text-3xl font-semibold tracking-[-0.04em] text-white/70 md:text-4xl">
+                      <div className="flex h-full w-full items-center justify-center font-display text-3xl font-semibold tracking-[-0.04em] text-white/80 md:text-4xl">
                         A
                       </div>
                     </motion.div>
-                    <div className="absolute -right-0.5 -bottom-0.5 h-4 w-4 rounded-full border-2 border-[#050505] bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.4)]" />
+                    <div className="absolute -right-0.5 -bottom-0.5 h-4 w-4 rounded-full border-2 border-[#050505] bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.4)]" aria-hidden="true" />
                   </div>
 
                   <div>
                     <p className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
                       {founder.name}
                     </p>
-                    <p className="mt-1 text-sm text-white/40">{founder.role}</p>
+                    <p className="mt-1 text-sm text-white/60">{founder.role}</p>
                     {/* Live stats row — pulled from data */}
                     <div className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
                       {founder.highlights.map((h) => (
                         <div key={h.label} className="flex items-baseline gap-1.5">
-                          <span className="font-display text-sm tracking-[-0.02em] text-cyan-300/80">
+                          <span className="font-display text-sm tracking-[-0.02em] text-cyan-300/90">
                             {h.value}
                           </span>
-                          <span className="text-[11px] text-white/30">{h.label}</span>
+                          <span className="text-[11px] text-white/50">{h.label}</span>
                         </div>
                       ))}
                     </div>
@@ -154,12 +154,12 @@ export function Footer() {
 
                 {/* Founder quote — the personal closing */}
                 <blockquote className="relative border-l-2 border-cyan-300/15 pl-5">
-                  <p className="text-base leading-8 text-white/55">
+                  <p className="text-base leading-8 text-white/65">
                     {founder.bio[0]}
                   </p>
-                  <footer className="mt-3 flex items-center gap-2 text-xs text-white/30">
-                    <span className="font-medium text-white/45">— {founder.name}</span>
-                    <span>·</span>
+                  <footer className="mt-3 flex items-center gap-2 text-xs text-white/50">
+                    <span className="font-medium text-white/60">— {founder.name}</span>
+                    <span aria-hidden="true">·</span>
                     <span>Founder</span>
                   </footer>
                 </blockquote>
@@ -172,7 +172,7 @@ export function Footer() {
                       href={item.href}
                       label={item.label}
                       icon={
-                        <span className="flex items-center gap-2 text-sm text-white/40">
+                        <span className="flex items-center gap-2 text-sm text-white/55">
                           <SocialIcon label={item.label} />
                           <span className="hidden sm:inline">{item.label}</span>
                         </span>
@@ -186,14 +186,14 @@ export function Footer() {
               <div className="space-y-10">
                 {/* Impact stats — using same data as About section */}
                 <div>
-                  <p className="mb-5 text-xs uppercase tracking-[0.3em] text-white/30">Track Record</p>
+                  <p className="mb-5 text-xs uppercase tracking-[0.3em] text-white/50">Track Record</p>
                   <div className="grid grid-cols-2 gap-5">
                     {stats.map((stat) => (
                       <div key={stat.label}>
                         <p className="font-display text-3xl tracking-[-0.06em] text-white md:text-4xl">
                           {stat.value}
                         </p>
-                        <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/35">
+                        <p className="mt-1 text-xs uppercase tracking-[0.2em] text-white/55">
                           {stat.label}
                         </p>
                       </div>
@@ -202,16 +202,16 @@ export function Footer() {
                 </div>
 
                 {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-white/[0.06] to-transparent" />
+                <div className="h-px bg-gradient-to-r from-white/[0.06] to-transparent" aria-hidden="true" />
 
                 {/* Tech stack */}
                 <div>
-                  <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/30">Core Technology</p>
+                  <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/50">Core Technology</p>
                   <div className="flex flex-wrap gap-2">
                     {techStack.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-1.5 text-xs text-white/45 transition-colors duration-300 hover:border-white/10 hover:text-white/60"
+                        className="rounded-lg border border-white/[0.06] bg-white/[0.02] px-3 py-1.5 text-xs text-white/60 transition-colors duration-300 hover:border-white/10 hover:text-white/75"
                       >
                         {tech}
                       </span>
@@ -221,7 +221,7 @@ export function Footer() {
 
                 {/* Quick links — minimal, editorial style */}
                 <div>
-                  <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/30">Explore</p>
+                  <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/50">Explore</p>
                   <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-1">
                     {[
                       { label: 'Studio', href: '#about' },
@@ -232,7 +232,7 @@ export function Footer() {
                       <NavLink
                         key={item.href}
                         href={item.href}
-                        className="group flex items-center gap-2 text-sm text-white/45"
+                        className="group flex items-center gap-2 text-sm text-white/60"
                       >
                         <span>{item.label}</span>
                         <ArrowRight className="h-3 w-3 opacity-0 transition-all duration-300 group-hover:translate-x-0.5 group-hover:opacity-60" />
@@ -252,18 +252,18 @@ export function Footer() {
       <div className="relative border-t border-white/[0.04]">
         <div className="mx-auto max-w-7xl px-4 py-6 md:px-8">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <p className="text-xs text-white/25">
+            <p className="text-xs text-white/45">
               © {new Date().getFullYear()} Code Brand Studio. All rights reserved.
             </p>
 
             {/* Centered craft tagline */}
-            <p className="flex items-center gap-2 text-xs text-white/20">
-              <span className="inline-block h-1 w-1 rounded-full bg-cyan-300/30" />
+            <p className="flex items-center gap-2 text-xs text-white/40">
+              <span className="inline-block h-1 w-1 rounded-full bg-cyan-300/40" aria-hidden="true" />
               <span>Designed & engineered with obsession</span>
-              <span className="inline-block h-1 w-1 rounded-full bg-violet-400/30" />
+              <span className="inline-block h-1 w-1 rounded-full bg-violet-400/40" aria-hidden="true" />
             </p>
 
-            <p className="text-xs text-white/25">
+            <p className="text-xs text-white/45">
               {founder.name} — {founder.role}
             </p>
           </div>

@@ -41,7 +41,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-screen items-center overflow-hidden px-4 pt-28 md:px-8"
+      className="relative flex min-h-[100dvh] items-center overflow-hidden px-4 pt-28 md:px-8"
     >
       <div className="absolute inset-0 opacity-25 blur-[10px]" aria-hidden="true">
         <Suspense fallback={null}>
@@ -49,7 +49,7 @@ export function HeroSection() {
         </Suspense>
       </div>
       <div className="hero-gradient-subtle absolute inset-0" aria-hidden="true" />
-      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-ink" />
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-ink" aria-hidden="true" />
 
       <div className="relative mx-auto w-full max-w-4xl text-center">
         <div className="space-y-5">
@@ -76,7 +76,7 @@ export function HeroSection() {
         </div>
 
         <motion.p
-          className="mx-auto mt-8 max-w-lg text-base leading-8 text-white/60 md:text-lg md:leading-9"
+          className="mx-auto mt-8 max-w-lg text-base leading-8 text-white/65 md:text-lg md:leading-9"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -98,16 +98,16 @@ export function HeroSection() {
 
         <motion.a
           href="#about"
-          className="mt-10 flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/40 transition-colors hover:text-white/60"
+          className="mt-10 inline-flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/55 transition-colors hover:text-white/70"
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
-          whileHover={{ y: 3, transition: { duration: 0.3 } }}
         >
           <span>Scroll to explore</span>
           <motion.span
             animate={{ y: [0, 4, 0] }}
             transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+            aria-hidden="true"
           >
             <ArrowDown className="h-4 w-4" />
           </motion.span>
@@ -140,7 +140,7 @@ export function AboutSection() {
                 {stats.map((stat, i) => (
                   <div key={stat.label}>
                     <AnimatedCounter value={stat.value} delay={0.12 + i * 0.1} />
-                    <p className="mt-2 text-xs uppercase tracking-[0.24em] text-white/40">
+                    <p className="mt-2 text-xs uppercase tracking-[0.24em] text-white/55">
                       {stat.label}
                     </p>
                   </div>
@@ -149,18 +149,18 @@ export function AboutSection() {
             </ParallaxLayer>
 
             {/* Divider */}
-            <div className="h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+            <div className="h-px bg-gradient-to-r from-white/10 via-white/5 to-transparent" aria-hidden="true" />
 
             {/* Principles — horizontal icon + text rows */}
             <div className="space-y-5">
               {studioPrinciples.map((item) => (
                 <div key={item.title} className="flex items-start gap-4">
                   <div className="mt-0.5 flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg border border-white/8 bg-white/[0.03]">
-                    <item.icon className="h-4 w-4 text-cyan-300/70" />
+                    <item.icon className="h-4 w-4 text-cyan-300/80" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium text-white/90">{item.title}</h3>
-                    <p className="mt-1 text-base leading-7 text-white/50">{item.body}</p>
+                    <p className="text-sm font-medium text-white/95">{item.title}</p>
+                    <p className="mt-1 text-base leading-7 text-white/65">{item.body}</p>
                   </div>
                 </div>
               ))}
@@ -203,7 +203,7 @@ export function FounderSection() {
             <ParallaxLayer speed={-0.015}>
               <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
                 {/* Outer glow ring */}
-                <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-cyan-300/10 via-transparent to-violet-400/10 blur-lg" />
+                <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-cyan-300/10 via-transparent to-violet-400/10 blur-lg" aria-hidden="true" />
                 <TiltCard className="relative" intensity={6}>
                   <div className="relative overflow-hidden rounded-2xl border border-white/[0.08]">
                     <picture>
@@ -219,19 +219,19 @@ export function FounderSection() {
                       />
                     </picture>
                     {/* Gradient overlay at bottom for text legibility */}
-                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent" aria-hidden="true" />
                     {/* Name overlay on image */}
                     <div className="absolute inset-x-0 bottom-0 p-5 md:p-6">
                       <p className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
                         {founder.name}
                       </p>
-                      <p className="mt-1 text-sm text-white/50">{founder.role}</p>
-                      <div className="mt-3 h-px w-12 bg-gradient-to-r from-cyan-300/60 to-transparent" />
+                      <p className="mt-1 text-sm text-white/65">{founder.role}</p>
+                      <div className="mt-3 h-px w-12 bg-gradient-to-r from-cyan-300/60 to-transparent" aria-hidden="true" />
                     </div>
                     {/* Online indicator */}
                     <div className="absolute top-4 right-4 flex items-center gap-2 rounded-full bg-ink/60 px-3 py-1.5 backdrop-blur-sm border border-white/[0.06]">
-                      <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-[11px] text-white/50 tracking-wide">Available</span>
+                      <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+                      <span className="text-[11px] text-white/65 tracking-wide">Available</span>
                     </div>
                   </div>
                 </TiltCard>
@@ -243,14 +243,14 @@ export function FounderSection() {
           <Reveal delay={0.12}>
             <div className="flex flex-col justify-center space-y-8">
               {/* Headline */}
-              <p className="text-xl leading-10 text-white/70 md:text-2xl md:leading-10">
+              <p className="text-xl leading-10 text-white/80 md:text-2xl md:leading-10">
                 {founder.headline}
               </p>
 
               {/* Bio */}
               <div className="space-y-5">
                 {founder.bio.map((paragraph) => (
-                  <p key={paragraph} className="text-base leading-8 text-white/55">
+                  <p key={paragraph} className="text-base leading-8 text-white/65">
                     {paragraph}
                   </p>
                 ))}
@@ -260,23 +260,23 @@ export function FounderSection() {
               <div className="grid grid-cols-3 gap-6">
                 {founder.highlights.map((item) => (
                   <div key={item.label}>
-                    <p className="font-display text-2xl tracking-[-0.04em] text-cyan-300/80 md:text-3xl">
+                    <p className="font-display text-2xl tracking-[-0.04em] text-cyan-300/90 md:text-3xl">
                       {item.value}
                     </p>
-                    <p className="mt-2 text-xs text-white/35">{item.label}</p>
+                    <p className="mt-2 text-xs text-white/55">{item.label}</p>
                   </div>
                 ))}
               </div>
-              <div className="h-px bg-gradient-to-r from-white/[0.06] to-transparent" />
+              <div className="h-px bg-gradient-to-r from-white/[0.06] to-transparent" aria-hidden="true" />
 
               {/* Stack */}
               <div>
-                <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/30">Core expertise</p>
+                <p className="mb-3 text-xs uppercase tracking-[0.3em] text-white/55">Core expertise</p>
                 <div className="flex flex-wrap gap-3">
                   {founder.stack.map((item) => (
                     <span
                       key={item}
-                      className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/55"
+                      className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/65"
                     >
                       {item}
                     </span>
@@ -308,7 +308,7 @@ export function ServicesSection() {
           <h2 className="section-title max-w-2xl">
             A futuristic service system built around premium presentation, technical clarity, and tactile interaction.
           </h2>
-          <p className="max-w-lg text-lg leading-9 text-white/60">
+          <p className="max-w-lg text-lg leading-9 text-white/65">
             Each service is delivered as a bespoke digital product, not a recycled agency package.
           </p>
         </div>
@@ -320,7 +320,7 @@ export function ServicesSection() {
           <Reveal>
             <div className="relative">
               {/* Large background number */}
-              <span className="pointer-events-none absolute -top-6 -left-2 font-display text-[8rem] font-bold leading-none text-white/[0.02] select-none md:text-[12rem]">
+              <span className="pointer-events-none absolute -top-6 -left-2 font-display text-[8rem] font-bold leading-none text-white/[0.02] select-none md:text-[12rem]" aria-hidden="true">
                 01
               </span>
               <div className="relative grid gap-10 lg:grid-cols-[1fr_1fr] lg:items-center">
@@ -329,14 +329,14 @@ export function ServicesSection() {
                     <div className="icon-chip-featured">
                       <featured.icon className="h-8 w-8 text-cyan-300" />
                     </div>
-                    <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/70">
+                    <p className="text-xs uppercase tracking-[0.3em] text-cyan-300/80">
                       Featured Service
                     </p>
                   </div>
                   <h3 className="font-display text-3xl tracking-[-0.04em] text-white md:text-5xl">
                     {featured.title}
                   </h3>
-                  <p className="max-w-xl text-lg leading-9 text-white/60">
+                  <p className="max-w-xl text-lg leading-9 text-white/65">
                     {featured.description}
                   </p>
                   <div>
@@ -346,7 +346,7 @@ export function ServicesSection() {
                 {/* Visual accent — parallax depth */}
                 <ParallaxLayer speed={-0.025} className="hidden lg:flex lg:items-center lg:justify-center">
                   <div className="relative">
-                    <div className={`h-64 w-64 rounded-full bg-gradient-to-br ${featured.accent} opacity-20 blur-3xl`} />
+                    <div className={`h-64 w-64 rounded-full bg-gradient-to-br ${featured.accent} opacity-20 blur-3xl`} aria-hidden="true" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <motion.div
                         className={`h-40 w-40 rounded-3xl bg-gradient-to-br ${featured.accent} opacity-40`}
@@ -355,7 +355,7 @@ export function ServicesSection() {
                       />
                     </div>
                     <div className="absolute -bottom-4 -right-4 rounded-2xl border border-white/[0.06] bg-white/[0.03] px-4 py-2 backdrop-blur-sm">
-                      <p className="text-xs text-white/40">01</p>
+                      <p className="text-xs text-white/55">01</p>
                     </div>
                   </div>
                 </ParallaxLayer>
@@ -375,8 +375,8 @@ export function ServicesSection() {
                       <div className="icon-chip-accent mb-6">
                         <service.icon className="h-5 w-5" />
                       </div>
-                      <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
-                      <p className="text-base leading-8 text-white/55">{service.description}</p>
+                      <h4 className="mb-3 text-xl font-medium text-white">{service.title}</h4>
+                      <p className="text-base leading-8 text-white/65">{service.description}</p>
                     </div>
                   </div>
                 </div>
@@ -395,8 +395,8 @@ export function ServicesSection() {
                       <div className="icon-chip-accent mb-6">
                         <service.icon className="h-5 w-5" />
                       </div>
-                      <h3 className="mb-3 text-xl font-medium text-white">{service.title}</h3>
-                      <p className="text-base leading-8 text-white/55">{service.description}</p>
+                      <h4 className="mb-3 text-xl font-medium text-white">{service.title}</h4>
+                      <p className="text-base leading-8 text-white/65">{service.description}</p>
                     </div>
                   </div>
                 </div>
@@ -426,14 +426,14 @@ export function WhyUsSection() {
             <TiltCard className="h-full" intensity={6}>
               <div className="group relative h-full bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
                 {/* Large background number */}
-                <span className="pointer-events-none absolute -top-2 -left-1 font-display text-[6rem] font-bold leading-none text-white/[0.02] select-none md:text-[8rem]">
+                <span className="pointer-events-none absolute -top-2 -left-1 font-display text-[6rem] font-bold leading-none text-white/[0.02] select-none md:text-[8rem]" aria-hidden="true">
                   {String(index + 1).padStart(2, '0')}
                 </span>
                 <div className="relative">
-                  <p className="font-display text-xl leading-snug tracking-[-0.04em] text-white/85 md:text-2xl">
+                  <p className="font-display text-xl leading-snug tracking-[-0.04em] text-white/90 md:text-2xl">
                     {item}
                   </p>
-                  <div className="mt-6 h-px w-10 bg-gradient-to-r from-cyan-300/30 to-transparent transition-all duration-500 group-hover:w-16 group-hover:from-cyan-300/50" />
+                  <div className="mt-6 h-px w-10 bg-gradient-to-r from-cyan-300/30 to-transparent transition-all duration-500 group-hover:w-16 group-hover:from-cyan-300/50" aria-hidden="true" />
                 </div>
               </div>
             </TiltCard>
@@ -442,19 +442,19 @@ export function WhyUsSection() {
       </div>
 
       {/* Divider between blocks */}
-      <div className="mx-auto mt-16 mb-12 h-px w-full max-w-xs bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
+      <div className="mx-auto mt-16 mb-12 h-px w-full max-w-xs bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" aria-hidden="true" />
 
       {/* Comparison table */}
       <div className="overflow-hidden">
         {/* Column headers */}
         <div className="grid grid-cols-2 gap-6 border-b border-white/[0.06] pb-5">
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-white/25">
+            <p className="text-xs uppercase tracking-[0.28em] text-white/55">
               Typical Freelancer
             </p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-300/60">
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan-300/70">
               Code Brand Studio
             </p>
           </div>
@@ -464,10 +464,10 @@ export function WhyUsSection() {
         <div className="divide-y divide-white/[0.03]">
           {comparison.map((row) => (
             <div key={row.typical} className="grid grid-cols-2 gap-6 py-5">
-              <p className="text-base leading-7 text-white/35 md:text-lg md:leading-8">
+              <p className="text-base leading-7 text-white/55 md:text-lg md:leading-8">
                 {row.typical}
               </p>
-              <p className="text-base leading-7 text-white/75 md:text-lg md:leading-8">
+              <p className="text-base leading-7 text-white/80 md:text-lg md:leading-8">
                 {row.studio}
               </p>
             </div>
@@ -480,21 +480,21 @@ export function WhyUsSection() {
 
 const projectAccents = {
   blue: {
-    category: 'text-cyan-300/80',
+    category: 'text-cyan-300/90',
     visual: 'from-cyan-300/8 to-cyan-500/3',
     mockup:
       'bg-[radial-gradient(circle_at_20%_30%,rgba(103,232,249,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(56,189,248,0.35),transparent_28%),linear-gradient(135deg,rgba(103,232,249,0.1),transparent)]',
     dot: ['bg-cyan-300/40', 'bg-cyan-300/25', 'bg-cyan-300/15'],
   },
   green: {
-    category: 'text-emerald-300/80',
+    category: 'text-emerald-300/90',
     visual: 'from-emerald-300/8 to-emerald-500/3',
     mockup:
       'bg-[radial-gradient(circle_at_20%_30%,rgba(52,211,153,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(16,185,129,0.35),transparent_28%),linear-gradient(135deg,rgba(52,211,153,0.1),transparent)]',
     dot: ['bg-emerald-300/40', 'bg-emerald-300/25', 'bg-emerald-300/15'],
   },
   purple: {
-    category: 'text-violet-300/80',
+    category: 'text-violet-300/90',
     visual: 'from-violet-300/8 to-violet-500/3',
     mockup:
       'bg-[radial-gradient(circle_at_20%_30%,rgba(167,139,250,0.5),transparent_22%),radial-gradient(circle_at_70%_60%,rgba(139,92,246,0.35),transparent_28%),linear-gradient(135deg,rgba(167,139,250,0.1),transparent)]',
@@ -515,22 +515,22 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
             <p className={`text-xs uppercase tracking-[0.28em] ${accent.category}`}>
               {project.category}
             </p>
-            <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-6xl">
+            <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-5xl lg:text-6xl">
               {project.name}
             </h3>
-            <p className="max-w-lg text-lg leading-9 text-white/60">{project.summary}</p>
+            <p className="max-w-lg text-lg leading-9 text-white/65">{project.summary}</p>
             <div className="grid grid-cols-3 gap-4">
               {project.metrics.map((metric) => (
                 <div key={metric.label}>
                   <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
                     {metric.value}
                   </p>
-                  <p className="mt-2 text-sm leading-6 text-white/45">{metric.label}</p>
+                  <p className="mt-2 text-sm leading-6 text-white/55">{metric.label}</p>
                 </div>
               ))}
             </div>
             <div className="pt-2">
-              <span className="inline-flex items-center gap-2 text-base text-white/40 transition group-hover:text-white/70">
+              <span className="inline-flex items-center gap-2 text-base text-white/55 transition group-hover:text-white/80">
                 <span>View full case study</span>
                 <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
               </span>
@@ -545,7 +545,7 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
                 <span key={i} className={`h-2 w-2 rounded-full md:h-2.5 md:w-2.5 ${dotClass}`} />
               ))}
             </div>
-            <p className="mt-3 px-2 text-[10px] uppercase tracking-[0.3em] text-white/30 md:px-4 md:mt-4 md:text-xs">
+            <p className="mt-3 px-2 text-[10px] uppercase tracking-[0.3em] text-white/50 md:px-4 md:mt-4 md:text-xs">
               {project.heroLabel}
             </p>
             <ProjectVideoPreview
@@ -555,12 +555,12 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
             />
             <div className="mt-3 grid grid-cols-2 gap-4 px-2 pb-3 md:px-4 md:pb-4">
               <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
-                <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.challenge}</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Challenge</p>
+                <p className="mt-2 text-xs leading-6 text-white/60 line-clamp-3">{project.challenge}</p>
               </div>
               <div>
-                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
-                <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.solution}</p>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Solution</p>
+                <p className="mt-2 text-xs leading-6 text-white/60 line-clamp-3">{project.solution}</p>
               </div>
             </div>
           </div>
@@ -597,22 +597,22 @@ export function ProjectsSection() {
                 <p className={`text-xs uppercase tracking-[0.28em] ${featuredAccent.category}`}>
                   {featured.category}
                 </p>
-                <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-6xl">
+                <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-5xl lg:text-6xl">
                   {featured.name}
                 </h3>
-                <p className="max-w-lg text-lg leading-9 text-white/60">{featured.summary}</p>
+                <p className="max-w-lg text-lg leading-9 text-white/65">{featured.summary}</p>
                 <div className="grid grid-cols-3 gap-4">
                   {featured.metrics.map((metric) => (
                     <div key={metric.label}>
                       <p className="font-display text-3xl tracking-[-0.04em] text-white md:text-4xl">
                         {metric.value}
                       </p>
-                      <p className="mt-2 text-sm leading-6 text-white/45">{metric.label}</p>
+                      <p className="mt-2 text-sm leading-6 text-white/55">{metric.label}</p>
                     </div>
                   ))}
                 </div>
                 <div className="pt-2">
-                  <span className="inline-flex items-center gap-2 text-base text-white/40 transition group-hover:text-white/70">
+                  <span className="inline-flex items-center gap-2 text-base text-white/55 transition group-hover:text-white/80">
                     <span>View full case study</span>
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
                   </span>
@@ -627,7 +627,7 @@ export function ProjectsSection() {
                       <span key={i} className={`h-2 w-2 rounded-full md:h-2.5 md:w-2.5 ${dotClass}`} />
                     ))}
                   </div>
-                  <p className="mt-3 px-3 text-[10px] uppercase tracking-[0.3em] text-white/30 md:px-5 md:mt-4 md:text-xs">
+                  <p className="mt-3 px-3 text-[10px] uppercase tracking-[0.3em] text-white/50 md:px-5 md:mt-4 md:text-xs">
                     {featured.heroLabel}
                   </p>
                   <ProjectVideoPreview
@@ -637,12 +637,12 @@ export function ProjectsSection() {
                   />
                   <div className="mt-3 grid grid-cols-2 gap-4 px-3 pb-4 md:px-5 md:pb-5">
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
-                      <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.challenge}</p>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Challenge</p>
+                      <p className="mt-2 text-xs leading-6 text-white/60 line-clamp-3">{featured.challenge}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
-                      <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.solution}</p>
+                      <p className="text-[10px] uppercase tracking-[0.2em] text-white/50">Solution</p>
+                      <p className="mt-2 text-xs leading-6 text-white/60 line-clamp-3">{featured.solution}</p>
                     </div>
                   </div>
                 </div>
@@ -678,6 +678,7 @@ export function ProcessSection() {
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
           style={{ height: '100%' }}
+          aria-hidden="true"
         />
 
         <div className="space-y-10">
@@ -693,7 +694,7 @@ export function ProcessSection() {
                     viewport={{ once: true, amount: 0.5 }}
                     transition={{ duration: 0.5, delay: 0.1 + index * 0.06, ease: [0.22, 1, 0.36, 1] }}
                   >
-                    <span className="font-display text-sm tracking-[-0.02em] text-white/40 transition-colors group-hover:text-cyan-300">
+                    <span className="font-display text-sm tracking-[-0.02em] text-white/55 transition-colors group-hover:text-cyan-300">
                       {String(index + 1).padStart(2, '0')}
                     </span>
                   </motion.div>
@@ -704,7 +705,7 @@ export function ProcessSection() {
                   <h3 className="font-display text-2xl tracking-[-0.04em] text-white md:text-3xl">
                     {step.title}
                   </h3>
-                  <p className="mt-3 max-w-2xl text-base leading-8 text-white/55">{step.description}</p>
+                  <p className="mt-3 max-w-2xl text-base leading-8 text-white/65">{step.description}</p>
                 </div>
               </div>
             </Reveal>
@@ -731,6 +732,8 @@ export function TestimonialsSection() {
         style={{ animationPlayState: marqueePaused ? 'paused' : 'running' }}
         onHoverStart={() => setMarqueePaused(true)}
         onHoverEnd={() => setMarqueePaused(false)}
+        role="list"
+        aria-label="Client testimonials"
       >
         {[...testimonials, ...testimonials].map((item, index) => (
           <motion.div
@@ -741,20 +744,21 @@ export function TestimonialsSection() {
               backgroundColor: 'rgba(255, 255, 255, 0.01)',
             }}
             transition={{ duration: 0.3 }}
+            role="listitem"
           >
-            <div className="mb-6 flex gap-1 text-cyan-300/60">
+            <div className="mb-6 flex gap-1 text-cyan-300/70" aria-label="5 out of 5 stars">
               {Array.from({ length: 5 }).map((_, starIndex) => (
                 <Star key={starIndex} className="h-3.5 w-3.5 fill-current" />
               ))}
             </div>
-            <p className="text-xl leading-9 text-white/75 md:text-2xl">
+            <p className="text-xl leading-9 text-white/80 md:text-2xl">
               &ldquo;{item.quote}&rdquo;
             </p>
             <div className="mt-8 flex items-center gap-4">
-              <div className="h-px flex-1 bg-white/[0.06]" />
+              <div className="h-px flex-1 bg-white/[0.06]" aria-hidden="true" />
               <div className="text-right">
-                <p className="text-base font-medium text-white/80">{item.name}</p>
-                <p className="text-xs text-white/40">{item.role}</p>
+                <p className="text-base font-medium text-white/90">{item.name}</p>
+                <p className="text-xs text-white/55">{item.role}</p>
               </div>
             </div>
           </motion.div>
@@ -782,12 +786,12 @@ export function CTASection() {
           <h2 className="section-title mx-auto max-w-3xl">
             Your website should feel like your brand deserves attention.
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-white/55">
+          <p className="mx-auto mt-6 max-w-xl text-base leading-8 text-white/65">
             Let&apos;s build a digital presence that sharpens authority, elevates trust, and makes your brand feel impossible to ignore.
           </p>
           <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
             <MagneticButton href={`mailto:${contact.email}`}>Start a Project</MagneticButton>
-            <MagneticButton href={`mailto:${contact.email}?subject=Discovery Call`} variant="secondary">
+            <MagneticButton href={`mailto:${contact.email}?subject=${encodeURIComponent('Discovery Call')}`} variant="secondary">
               {contact.calendarLabel}
             </MagneticButton>
           </div>
@@ -826,11 +830,12 @@ export function CaseStudyLayout({
           style={{
             background: studyAccent.mockup.replace('bg-[', '').replace(']', ''),
           }}
+          aria-hidden="true"
         />
         <div className="relative z-10 mx-auto max-w-[1440px]">
           <Link
             to="/"
-            className="mb-8 inline-flex items-center gap-2 text-base text-white/56 transition hover:text-white"
+            className="mb-8 inline-flex items-center gap-2 text-base text-white/65 transition hover:text-white"
           >
             <ChevronRight className="h-4 w-4 rotate-180" />
             Back to home
@@ -838,16 +843,16 @@ export function CaseStudyLayout({
           <div className="grid gap-10 lg:grid-cols-[1fr_0.9fr] lg:items-end">
             <div>
               <p className={`section-kicker ${studyAccent.category}`}>{category}</p>
-              <h1 className="font-display text-5xl leading-none tracking-[-0.06em] text-white md:text-7xl">
+              <h1 className="font-display text-5xl leading-none tracking-[-0.06em] text-white md:text-6xl lg:text-7xl">
                 {name}
               </h1>
-              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/62">{summary}</p>
+              <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">{summary}</p>
             </div>
             <div className="grid grid-cols-3 gap-4">
               {metrics.map((metric) => (
                 <div key={metric.label}>
                   <p className={`font-display text-3xl tracking-[-0.04em] ${studyAccent.category}`}>{metric.value}</p>
-                  <p className="mt-2 text-base leading-6 text-white/50">{metric.label}</p>
+                  <p className="mt-2 text-base leading-6 text-white/60">{metric.label}</p>
                 </div>
               ))}
             </div>
@@ -859,11 +864,11 @@ export function CaseStudyLayout({
         <div className="grid gap-px bg-white/[0.04] lg:grid-cols-2">
           <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Problem statement</p>
-            <p className="max-w-2xl text-base leading-8 text-white/66">{challenge}</p>
+            <p className="max-w-2xl text-base leading-8 text-white/70">{challenge}</p>
           </div>
           <div className="bg-ink p-8">
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Solution overview</p>
-            <p className="max-w-2xl text-base leading-8 text-white/66">{solution}</p>
+            <p className="max-w-2xl text-base leading-8 text-white/70">{solution}</p>
           </div>
         </div>
         <div className="mt-px grid gap-px bg-white/[0.04] lg:grid-cols-[1.05fr_0.95fr]">
@@ -876,7 +881,7 @@ export function CaseStudyLayout({
                 'Motion prototyping and interaction tuning',
                 'High-performance build and optimization',
               ].map((item) => (
-                <div key={item} className="flex items-start gap-3 text-white/66">
+                <div key={item} className="flex items-start gap-3 text-white/70">
                   <Check className={`mt-1 h-4 w-4 flex-shrink-0 ${studyAccent.category}`} />
                   <span>{item}</span>
                 </div>
@@ -887,7 +892,7 @@ export function CaseStudyLayout({
             <p className={`mb-4 text-xs uppercase tracking-[0.3em] ${studyAccent.category}`}>Stack</p>
             <div className="flex flex-wrap gap-3">
               {stack.map((item) => (
-                <span key={item} className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/60">
+                <span key={item} className="rounded-full bg-white/[0.04] px-4 py-2 text-sm text-white/70">
                   {item}
                 </span>
               ))}

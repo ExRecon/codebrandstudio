@@ -433,23 +433,71 @@ function OrionMockup({ playing }: { playing: boolean }) {
 export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewProps) {
   const [hovering, setHovering] = useState(false)
   const [playing, setPlaying] = useState(false)
+  const [touched, setTouched] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
 
-  const handleMouseEnter = useCallback(() => {
+  const startPlaying = useCallback(() => {
+    if (playing) return
     setHovering(true)
     if (prefersReducedMotion) {
       setPlaying(true)
       return
     }
     timeoutRef.current = setTimeout(() => setPlaying(true), 300)
-  }, [prefersReducedMotion])
+  }, [prefersReducedMotion, playing])
 
-  const handleMouseLeave = useCallback(() => {
+  const stopPlaying = useCallback(() => {
     setHovering(false)
     setPlaying(false)
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
   }, [])
+
+  const handleMouseEnter = useCallback(() => {
+    startPlaying()
+  }, [startPlaying])
+
+  const handleMouseLeave = useCallback(() => {
+    if (!touched) stopPlaying()
+  }, [touched, stopPlaying])
+
+  // Touch support: tap to toggle play state
+  const handleTouchStart = useCallback(() => {
+    setTouched(true)
+    if (playing) {
+      stopPlaying()
+    } else {
+      startPlaying()
+      // Auto-stop after 8 seconds on touch to avoid "stuck" playing state
+      timeoutRef.current = setTimeout(() => {
+        setPlaying(false)
+        setHovering(false)
+        setTouched(false)
+      }, 8000)
+    }
+  }, [playing, startPlaying, stopPlaying])
+
+  // Stop touch state when scrolling away
+  useEffect(() => {
+    if (!touched) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (!entries[0].isIntersecting && playing) {
+          stopPlaying()
+          setTouched(false)
+        }
+      },
+      { threshold: 0.3 }
+    )
+
+    if (containerRef.current) {
+      observer.observe(containerRef.current)
+    }
+
+    return () => observer.disconnect()
+  }, [touched, playing, stopPlaying])
 
   useEffect(() => {
     return () => {
@@ -463,11 +511,25 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
     'orion-creative-suite': <OrionMockup playing={playing} />,
   }
 
+  // Determine if the play indicator should show (hover on desktop OR touch on mobile)
+  const showIndicator = hovering || touched
+
   return (
     <div
+      ref={containerRef}
       className="relative cursor-pointer"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      role="button"
+      aria-label={`${playing ? 'Pause' : 'Play'} project preview animation`}
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          handleTouchStart()
+        }
+      }}
     >
       {/* Background gradient layer */}
       <div
@@ -492,7 +554,7 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
 
         {/* Play/Pause indicator */}
         <AnimatePresence>
-          {hovering && (
+          {showIndicator && (
             <motion.div
               className="absolute inset-0 flex items-center justify-center"
               initial={{ opacity: 0 }}
@@ -513,7 +575,7 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
 
         {/* Duration badge */}
         <AnimatePresence>
-          {hovering && (
+          {showIndicator && (
             <motion.div
               className="absolute bottom-3 right-3 flex items-center gap-1.5 rounded-lg bg-black/50 px-2 py-1 backdrop-blur-sm"
               initial={{ opacity: 0, y: 4 }}
