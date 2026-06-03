@@ -20,9 +20,9 @@ export function NavLink({ href, children, className = '', active = false, onClic
         className={`inline-block text-sm tracking-wide transition-colors duration-300 ${
           active ? 'text-white' : 'text-white/55 group-hover:text-white'
         }`}
-        whileHover={{ letterSpacing: '0.08em' }}
+        whileHover={{ letterSpacing: '0.10em' }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        style={{ marginRight: '-0.08em' }}
+        style={{ marginRight: '-0.10em' }}
       >
         {children}
       </motion.span>
