@@ -93,24 +93,24 @@ export function HeroSection() {
             View Our Work
           </MagneticButton>
         </motion.div>
-      </div>
 
-      <motion.a
-        href="#about"
-        className="absolute bottom-8 left-1/2 flex -translate-x-1/2 items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/40 transition-colors hover:text-white/60"
-        initial={{ opacity: 0, y: 12 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        whileHover={{ y: 3, transition: { duration: 0.3 } }}
-      >
-        <span>Scroll to explore</span>
-        <motion.span
-          animate={{ y: [0, 4, 0] }}
-          transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+        <motion.a
+          href="#about"
+          className="mt-10 flex items-center gap-3 text-xs uppercase tracking-[0.28em] text-white/40 transition-colors hover:text-white/60"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 1.1, ease: [0.22, 1, 0.36, 1] }}
+          whileHover={{ y: 3, transition: { duration: 0.3 } }}
         >
-          <ArrowDown className="h-4 w-4" />
-        </motion.span>
-      </motion.a>
+          <span>Scroll to explore</span>
+          <motion.span
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
+          >
+            <ArrowDown className="h-4 w-4" />
+          </motion.span>
+        </motion.a>
+      </div>
     </section>
   )
 }
