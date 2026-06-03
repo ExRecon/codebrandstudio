@@ -22,7 +22,6 @@ export function NavLink({ href, children, className = '', active = false, onClic
       <motion.span
         className="inline-block text-sm tracking-wide transition-colors duration-300"
         animate={{
-          letterSpacing: hovered ? '0.10em' : 'normal',
           color: active
             ? 'rgba(255,255,255,1)'
             : hovered
@@ -30,7 +29,6 @@ export function NavLink({ href, children, className = '', active = false, onClic
               : 'rgba(255,255,255,0.55)',
         }}
         transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] as const }}
-        style={{ marginRight: '-0.10em' }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
       >
