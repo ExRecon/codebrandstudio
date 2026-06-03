@@ -2,7 +2,8 @@ import { Suspense, lazy, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, Check, ChevronRight, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import ceoFounderImg from '../../assets/ceo-founder.webp'
+import ceoFounderWebp from '../../assets/ceo-founder.webp'
+import ceoFounderPng from '../../assets/ceo-founder.png'
 import {
   comparison,
   contact,
@@ -205,14 +206,18 @@ export function FounderSection() {
                 <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-cyan-300/10 via-transparent to-violet-400/10 blur-lg" />
                 <TiltCard className="relative" intensity={6}>
                   <div className="relative overflow-hidden rounded-2xl border border-white/[0.08]">
-                    <img
-                      src={ceoFounderImg}
-                      alt={`${founder.name} — CEO & Founder of Code Brand Studio`}
-                      className="w-full object-cover aspect-[4/5]"
-                      loading="eager"
-                      width={512}
-                      height={640}
-                    />
+                    <picture>
+                      <source srcSet={ceoFounderWebp} type="image/webp" />
+                      <source srcSet={ceoFounderPng} type="image/png" />
+                      <img
+                        src={ceoFounderPng}
+                        alt={`${founder.name} — CEO & Founder of Code Brand Studio`}
+                        className="w-full object-cover aspect-[4/5]"
+                        loading="eager"
+                        width={1086}
+                        height={1448}
+                      />
+                    </picture>
                     {/* Gradient overlay at bottom for text legibility */}
                     <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink/90 via-ink/40 to-transparent" />
                     {/* Name overlay on image */}
