@@ -22,3 +22,23 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Vite / TypeScript build outputs
+*.tsbuildinfo
+node_modules/.tmp
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Claude Code
+.claude/
+
+# Vite dev/preview logs (project-specific)
+vite-*.log
