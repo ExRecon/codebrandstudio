@@ -2,6 +2,7 @@ import { Suspense, lazy, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, Check, ChevronRight, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import ceoFounderImg from '../../assets/ceo-founder.png'
 import {
   comparison,
   contact,
@@ -180,11 +181,14 @@ export function FounderSection() {
             {/* Avatar — parallax + tilt */}
             <ParallaxLayer speed={-0.02}>
               <TiltCard className="relative inline-flex" intensity={10}>
-                <div className="h-28 w-28 overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-300/20 to-violet-400/10 md:h-32 md:w-32">
-                  <div className="flex h-full w-full items-center justify-center font-display text-3xl font-semibold tracking-[-0.04em] text-white/70 md:text-4xl">
-                    A
-                  </div>
-                </div>
+                <img
+                  src={ceoFounderImg}
+                  alt={`${founder.name} — CEO & Founder of Code Brand Studio`}
+                  className="h-28 w-28 rounded-3xl border border-white/10 object-cover md:h-32 md:w-32"
+                  loading="eager"
+                  width={128}
+                  height={128}
+                />
                 <div className="absolute -right-1 -bottom-1 h-5 w-5 rounded-full border-2 border-ink bg-emerald-400" />
               </TiltCard>
             </ParallaxLayer>
