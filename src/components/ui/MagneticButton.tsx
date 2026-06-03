@@ -8,6 +8,7 @@ type MagneticButtonProps = {
   href?: string
   to?: string
   variant?: 'primary' | 'secondary'
+  onClick?: () => void
 }
 
 export function MagneticButton({
@@ -15,6 +16,7 @@ export function MagneticButton({
   href,
   to,
   variant = 'primary',
+  onClick,
 }: MagneticButtonProps) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -60,7 +62,7 @@ export function MagneticButton({
   }
 
   return (
-    <a href={href} aria-label={String(children)}>
+    <a href={href} aria-label={String(children)} onClick={onClick}>
       {content}
     </a>
   )
