@@ -2,7 +2,7 @@ import { Suspense, lazy, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowDown, ArrowRight, Check, ChevronRight, Star } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import ceoFounderImg from '../../assets/ceo-founder.png'
+import ceoFounderImg from '../../assets/ceo-founder.webp'
 import {
   comparison,
   contact,
