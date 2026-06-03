@@ -344,68 +344,63 @@ export function ServicesSection() {
   )
 }
 
-export function WhyHireUsSection() {
+export function WhyUsSection() {
   return (
-    <section id="why-us" className="section-shell overflow-hidden">
+    <section id="why-us" className="section-shell">
       <Reveal>
-        <p className="section-kicker">Why hire us</p>
+        <p className="section-kicker">Why us</p>
         <h2 className="section-title max-w-2xl">
           Premium brands choose Code Brand Studio for clarity, craft, and digital execution that feels different immediately.
         </h2>
       </Reveal>
-      <div className="marquee-track mt-12">
-        {[...differentiators, ...differentiators].map((item, index) => (
-          <div
-            key={`${item}-${index}`}
-            className="why-card-editorial"
-          >
-            <span className="mb-6 inline-block text-xs uppercase tracking-[0.3em] text-cyan-300/60">
-              0{(index % differentiators.length) + 1}
-            </span>
-            <p className="font-display text-2xl leading-snug tracking-[-0.04em] text-white/90 md:text-3xl">
-              {item}
-            </p>
-            <div className="mt-8 h-px w-12 bg-cyan-300/20" />
-          </div>
+
+      {/* Differentiators — 2×2 editorial grid */}
+      <div className="mt-14 grid grid-cols-1 gap-px bg-white/[0.04] md:grid-cols-2">
+        {differentiators.map((item, index) => (
+          <Reveal key={item} delay={index * 0.08}>
+            <div className="group relative bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
+              {/* Large background number */}
+              <span className="pointer-events-none absolute -top-2 -left-1 font-display text-[6rem] font-bold leading-none text-white/[0.02] select-none md:text-[8rem]">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <div className="relative">
+                <p className="font-display text-xl leading-snug tracking-[-0.04em] text-white/85 md:text-2xl">
+                  {item}
+                </p>
+                <div className="mt-6 h-px w-10 bg-gradient-to-r from-cyan-300/30 to-transparent transition-all duration-500 group-hover:w-16 group-hover:from-cyan-300/50" />
+              </div>
+            </div>
+          </Reveal>
         ))}
       </div>
-    </section>
-  )
-}
 
-export function WhyChooseUsSection() {
-  return (
-    <section id="why-choose" className="section-shell">
-      <Reveal>
-        <p className="section-kicker">Why choose us</p>
-        <h2 className="section-title max-w-2xl">
-          Not all websites are created equal. Here&apos;s the difference.
-        </h2>
-      </Reveal>
+      {/* Divider between blocks */}
+      <div className="mx-auto mt-16 mb-12 h-px w-full max-w-xs bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" />
 
-      <div className="mt-14 overflow-hidden">
+      {/* Comparison table */}
+      <div className="overflow-hidden">
         {/* Column headers */}
-        <div className="grid grid-cols-2 gap-4 border-b border-white/[0.06] pb-5">
+        <div className="grid grid-cols-2 gap-6 border-b border-white/[0.06] pb-5">
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-white/30">
+            <p className="text-xs uppercase tracking-[0.28em] text-white/25">
               Typical Freelancer
             </p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-300/70">
+            <p className="text-xs uppercase tracking-[0.28em] text-cyan-300/60">
               Code Brand Studio
             </p>
           </div>
         </div>
 
         {/* Comparison rows */}
-        <div className="divide-y divide-white/[0.04]">
+        <div className="divide-y divide-white/[0.03]">
           {comparison.map((row) => (
-            <div key={row.typical} className="grid grid-cols-2 gap-4 py-5">
-              <p className="text-base leading-7 text-white/40 md:text-lg md:leading-8">
+            <div key={row.typical} className="grid grid-cols-2 gap-6 py-5">
+              <p className="text-base leading-7 text-white/35 md:text-lg md:leading-8">
                 {row.typical}
               </p>
-              <p className="text-base leading-7 text-white/80 md:text-lg md:leading-8">
+              <p className="text-base leading-7 text-white/75 md:text-lg md:leading-8">
                 {row.studio}
               </p>
             </div>

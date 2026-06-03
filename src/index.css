@@ -324,14 +324,6 @@ a {
     margin-left: 1.5rem;
   }
 
-  .why-card-editorial {
-    min-height: 280px;
-    width: 420px;
-    flex-shrink: 0;
-    padding: 2rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.04);
-  }
-
   .marquee-track {
     @apply flex gap-5;
     width: max-content;

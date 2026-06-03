@@ -10,8 +10,7 @@ import {
   ProjectsSection,
   ServicesSection,
   TestimonialsSection,
-  WhyChooseUsSection,
-  WhyHireUsSection,
+  WhyUsSection,
 } from '../components/home/HomeSections'
 import { SectionDivider } from '../components/ui/SectionDivider'
 import { useLenis } from '../hooks/useLenis'
@@ -45,11 +44,7 @@ export default function HomePage() {
         </section>
         <SectionDivider variant="glow" />
         <section className="section-shift-a">
-          <WhyHireUsSection />
-        </section>
-        <SectionDivider />
-        <section className="section-shift-a">
-          <WhyChooseUsSection />
+          <WhyUsSection />
         </section>
         <SectionDivider />
         <section className="section-shift-b">
