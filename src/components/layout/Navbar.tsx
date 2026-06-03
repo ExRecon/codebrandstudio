@@ -92,9 +92,11 @@ export function Navbar() {
       >
         <div
           className={`mx-auto flex max-w-7xl items-center justify-between rounded-2xl border px-6 py-3 transition-all duration-500 md:px-8 md:py-3.5 ${
-            scrolled
-              ? 'border-white/[0.08] bg-black/70 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl'
-              : 'border-white/[0.05] bg-black/30 backdrop-blur-lg'
+            mobileOpen
+              ? 'pointer-events-none border-transparent bg-transparent opacity-0'
+              : scrolled
+                ? 'border-white/[0.08] bg-black/70 shadow-[0_4px_30px_rgba(0,0,0,0.4)] backdrop-blur-xl'
+                : 'border-white/[0.05] bg-black/30 backdrop-blur-lg'
           }`}
         >
           {/* Logo */}
@@ -176,7 +178,7 @@ export function Navbar() {
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
-            className="fixed inset-0 z-40 flex flex-col lg:hidden"
+            className="fixed inset-0 z-[60] flex flex-col lg:hidden"
             initial="hidden"
             animate="visible"
             exit="exit"
