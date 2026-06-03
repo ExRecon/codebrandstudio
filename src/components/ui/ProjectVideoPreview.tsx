@@ -69,7 +69,7 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
 
       {/* Animated mockup that simulates video content */}
       <div
-        className={`relative h-40 overflow-hidden rounded-[1.5rem] transition-all duration-700 ${mockupClass} ${playing ? 'scale-[1.02]' : ''}`}
+        className={`relative h-64 overflow-hidden rounded-2xl transition-all duration-700 md:h-[28rem] ${mockupClass} ${playing ? 'scale-[1.02]' : ''}`}
       >
         {/* Animated scan line to simulate video playback */}
         <div
@@ -87,23 +87,23 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
         />
 
         {/* Floating UI elements that animate on hover */}
-        <div className="absolute inset-4 flex flex-col justify-between">
-          <div className="flex items-center gap-2">
-            <div className="h-2 w-2 rounded-full bg-white/30" />
-            <div className="h-1.5 w-16 rounded-full bg-white/15" />
-            <div className="h-1.5 w-10 rounded-full bg-white/10" />
+        <div className="absolute inset-6 flex flex-col justify-between md:inset-10">
+          <div className="flex items-center gap-3">
+            <div className="h-2.5 w-2.5 rounded-full bg-white/30" />
+            <div className="h-2 w-20 rounded-full bg-white/15 md:h-2.5 md:w-28" />
+            <div className="h-2 w-14 rounded-full bg-white/10 md:h-2.5 md:w-20" />
           </div>
-          <div className="space-y-2">
+          <div className="space-y-3">
             <div
-              className="h-2 w-3/4 rounded-full bg-white/20 transition-all duration-700"
+              className="h-2.5 w-3/4 rounded-full bg-white/20 transition-all duration-700 md:h-3"
               style={{ width: playing ? '75%' : '50%' }}
             />
             <div
-              className="h-2 w-1/2 rounded-full bg-white/15 transition-all duration-700 delay-100"
+              className="h-2.5 w-1/2 rounded-full bg-white/15 transition-all duration-700 delay-100 md:h-3"
               style={{ width: playing ? '50%' : '35%' }}
             />
             <div
-              className="h-8 w-24 rounded-lg bg-white/10 transition-all duration-500"
+              className="h-10 w-28 rounded-lg bg-white/10 transition-all duration-500 md:h-12 md:w-36"
               style={{
                 opacity: playing ? 1 : 0.5,
                 transform: playing ? 'translateY(0)' : 'translateY(4px)',

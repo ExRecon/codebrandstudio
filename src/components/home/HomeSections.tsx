@@ -442,15 +442,16 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
         to={`/work/${project.slug}`}
         className="project-card-showcase group block"
       >
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex flex-col justify-center space-y-6 py-2">
+        <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-12">
+          {/* Left — text info */}
+          <div className="flex flex-col justify-center space-y-6">
             <p className={`text-xs uppercase tracking-[0.28em] ${accent.category}`}>
               {project.category}
             </p>
             <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-6xl">
               {project.name}
             </h3>
-            <p className="max-w-xl text-lg leading-9 text-white/60">{project.summary}</p>
+            <p className="max-w-lg text-lg leading-9 text-white/60">{project.summary}</p>
             <div className="grid grid-cols-3 gap-4">
               {project.metrics.map((metric) => (
                 <div key={metric.label}>
@@ -468,32 +469,30 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
               </span>
             </div>
           </div>
+
+          {/* Right — large mockup showcase */}
           <div className={`project-showcase bg-gradient-to-br ${accent.visual}`}>
-            <div className="p-6 md:p-8">
-              <div className="project-mockup-screen">
-                <div className="mb-4 flex items-center gap-2">
-                  {accent.dot.map((dotClass: string, i: number) => (
-                    <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
-                  ))}
-                </div>
-                <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/35">
-                  {project.heroLabel}
-                </p>
-                <ProjectVideoPreview
-                  slug={project.slug}
-                  mockupClass={accent.mockup}
-                  heroLabel={project.heroLabel}
-                />
-                <div className="mt-4 grid grid-cols-2 gap-4">
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
-                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.challenge}</p>
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
-                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.solution}</p>
-                  </div>
-                </div>
+            <div className="flex items-center gap-2 px-2 pt-3 md:px-4 md:pt-4">
+              {accent.dot.map((dotClass: string, i: number) => (
+                <span key={i} className={`h-2 w-2 rounded-full md:h-2.5 md:w-2.5 ${dotClass}`} />
+              ))}
+            </div>
+            <p className="mt-3 px-2 text-[10px] uppercase tracking-[0.3em] text-white/30 md:px-4 md:mt-4 md:text-xs">
+              {project.heroLabel}
+            </p>
+            <ProjectVideoPreview
+              slug={project.slug}
+              mockupClass={accent.mockup}
+              heroLabel={project.heroLabel}
+            />
+            <div className="mt-3 grid grid-cols-2 gap-4 px-2 pb-3 md:px-4 md:pb-4">
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
+                <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.challenge}</p>
+              </div>
+              <div>
+                <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
+                <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{project.solution}</p>
               </div>
             </div>
           </div>
@@ -505,9 +504,10 @@ function ProjectCard({ project, accent }: { project: (typeof projects)[number]; 
 
 export function ProjectsSection() {
   const [featured, ...rest] = projects
+  const featuredAccent = projectAccents[featured.accent]
 
   return (
-    <section id="projects" className="section-shell">
+    <section id="projects" className="section-shell-wide">
       <Reveal>
         <p className="section-kicker">Featured projects</p>
         <h2 className="section-title max-w-2xl">
@@ -515,22 +515,23 @@ export function ProjectsSection() {
         </h2>
       </Reveal>
 
-      <div className="mt-12 space-y-8">
-        {/* Featured project */}
+      <div className="mt-16 space-y-16">
+        {/* Featured project — full bleed, no card wrapper */}
         <Reveal>
           <Link
             to={`/work/${featured.slug}`}
             className="project-card-showcase group block"
           >
-            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="flex flex-col justify-center space-y-6 py-2">
-                <p className={`text-xs uppercase tracking-[0.28em] ${projectAccents[featured.accent].category}`}>
+            <div className="grid gap-8 lg:grid-cols-[0.7fr_1.3fr] lg:gap-12">
+              {/* Left — text info */}
+              <div className="flex flex-col justify-center space-y-6">
+                <p className={`text-xs uppercase tracking-[0.28em] ${featuredAccent.category}`}>
                   {featured.category}
                 </p>
                 <h3 className="font-display text-4xl tracking-[-0.05em] text-white md:text-6xl">
                   {featured.name}
                 </h3>
-                <p className="max-w-xl text-lg leading-9 text-white/60">{featured.summary}</p>
+                <p className="max-w-lg text-lg leading-9 text-white/60">{featured.summary}</p>
                 <div className="grid grid-cols-3 gap-4">
                   {featured.metrics.map((metric) => (
                     <div key={metric.label}>
@@ -548,32 +549,30 @@ export function ProjectsSection() {
                   </span>
                 </div>
               </div>
-              <div className={`project-showcase bg-gradient-to-br ${projectAccents[featured.accent].visual}`}>
-                <div className="p-6 md:p-8">
-                  <div className="project-mockup-screen">
-                    <div className="mb-4 flex items-center gap-2">
-                      {projectAccents[featured.accent].dot.map((dotClass: string, i: number) => (
-                        <span key={i} className={`h-2.5 w-2.5 rounded-full ${dotClass}`} />
-                      ))}
-                    </div>
-                    <p className="mb-4 text-xs uppercase tracking-[0.3em] text-white/35">
-                      {featured.heroLabel}
-                    </p>
-                    <ProjectVideoPreview
-                      slug={featured.slug}
-                      mockupClass={projectAccents[featured.accent].mockup}
-                      heroLabel={featured.heroLabel}
-                    />
-                    <div className="mt-4 grid grid-cols-2 gap-4">
-                      <div>
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
-                        <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.challenge}</p>
-                      </div>
-                      <div>
-                        <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
-                        <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.solution}</p>
-                      </div>
-                    </div>
+
+              {/* Right — large mockup showcase */}
+              <div className={`project-showcase bg-gradient-to-br ${featuredAccent.visual}`}>
+                <div className="flex items-center gap-2 px-3 pt-4 md:px-5 md:pt-5">
+                  {featuredAccent.dot.map((dotClass: string, i: number) => (
+                    <span key={i} className={`h-2 w-2 rounded-full md:h-2.5 md:w-2.5 ${dotClass}`} />
+                  ))}
+                </div>
+                <p className="mt-3 px-3 text-[10px] uppercase tracking-[0.3em] text-white/30 md:px-5 md:mt-4 md:text-xs">
+                  {featured.heroLabel}
+                </p>
+                <ProjectVideoPreview
+                  slug={featured.slug}
+                  mockupClass={featuredAccent.mockup}
+                  heroLabel={featured.heroLabel}
+                />
+                <div className="mt-3 grid grid-cols-2 gap-4 px-3 pb-4 md:px-5 md:pb-5">
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Challenge</p>
+                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.challenge}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-white/30">Solution</p>
+                    <p className="mt-2 text-xs leading-6 text-white/50 line-clamp-3">{featured.solution}</p>
                   </div>
                 </div>
               </div>
@@ -725,7 +724,7 @@ export function CaseStudyLayout({
             background: studyAccent.mockup.replace('bg-[', '').replace(']', ''),
           }}
         />
-        <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="relative z-10 mx-auto max-w-[1440px]">
           <Link
             to="/"
             className="mb-8 inline-flex items-center gap-2 text-base text-white/56 transition hover:text-white"
