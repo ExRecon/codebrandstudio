@@ -1,8 +1,9 @@
 import { motion } from 'framer-motion'
+import type { ReactNode } from 'react'
 
 type NavLinkProps = {
   href: string
-  children: string
+  children: ReactNode
   className?: string
 }
 
