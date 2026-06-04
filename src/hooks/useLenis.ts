@@ -1,6 +1,13 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 
+let lenisInstance: Lenis | null = null
+
+/** Access the global Lenis instance for programmatic scrolling. */
+export function getLenis(): Lenis | null {
+  return lenisInstance
+}
+
 export function useLenis(enabled: boolean) {
   useEffect(() => {
     if (!enabled) {
@@ -12,6 +19,8 @@ export function useLenis(enabled: boolean) {
       smoothWheel: true,
       touchMultiplier: 1.2,
     })
+
+    lenisInstance = lenis
 
     let frame = 0
 
@@ -25,6 +34,7 @@ export function useLenis(enabled: boolean) {
     return () => {
       cancelAnimationFrame(frame)
       lenis.destroy()
+      lenisInstance = null
     }
   }, [enabled])
 }

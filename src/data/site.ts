@@ -21,7 +21,8 @@ export type ServiceItem = {
   featured?: boolean
 }
 
-export type ProjectAccent = 'blue' | 'green' | 'purple'
+import type { ProjectAccent } from './accents'
+export type { ProjectAccent }
 
 export type ProjectMetric = {
   value: string

@@ -55,7 +55,7 @@ const techStack = [
 /* ── Main Footer ────────────────────────────────────────────────── */
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden">
+    <footer className="relative overflow-hidden" aria-label="Site footer">
       {/* ══════════════════════════════════════════════════════════════
           TOP CTA BAND — The big closing argument
           ══════════════════════════════════════════════════════════════ */}
@@ -117,7 +117,7 @@ export function Footer() {
             <div className="grid gap-12 lg:grid-cols-[1fr_1fr] lg:items-start">
 
               {/* Left — Founder identity */}
-              <div className="space-y-8">
+              <div className="space-y-8" aria-label="Founder information">
                 <div className="flex items-start gap-5">
                   {/* Larger, more premium avatar */}
                   <div className="relative flex-shrink-0">
@@ -183,7 +183,7 @@ export function Footer() {
               </div>
 
               {/* Right — Selected stats + tech stack + quick links */}
-              <div className="space-y-10">
+              <div className="space-y-10" aria-label="Track record and technology stack">
                 {/* Impact stats — using same data as About section */}
                 <div>
                   <p className="mb-5 text-xs uppercase tracking-[0.3em] text-white/50">Track Record</p>

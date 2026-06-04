@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
+import { getLenis } from '../../hooks/useLenis'
 
 type NavLinkProps = {
   href: string
@@ -13,10 +14,31 @@ type NavLinkProps = {
 export function NavLink({ href, children, className = '', active = false, onClick }: NavLinkProps) {
   const [hovered, setHovered] = useState(false)
 
+  const handleClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      // For hash links, use Lenis smooth scroll
+      if (href.startsWith('#')) {
+        e.preventDefault()
+        const lenis = getLenis()
+        const targetId = href.slice(1)
+        const target = document.getElementById(targetId)
+        if (target) {
+          if (lenis) {
+            lenis.scrollTo(target, { offset: 0, duration: 1.2 })
+          } else {
+            target.scrollIntoView({ behavior: 'smooth' })
+          }
+        }
+      }
+      onClick?.()
+    },
+    [href, onClick],
+  )
+
   return (
     <a
       href={href}
-      onClick={onClick}
+      onClick={handleClick}
       className={`relative inline-block ${className}`}
     >
       <motion.span

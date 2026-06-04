@@ -2,6 +2,7 @@ import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
+import { getLenis } from '../../hooks/useLenis'
 
 type MagneticButtonProps = {
   children: ReactNode
@@ -41,6 +42,23 @@ export function MagneticButton({
       ? 'button-primary'
       : 'button-secondary'
 
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+    if (href?.startsWith('#')) {
+      e.preventDefault()
+      const lenis = getLenis()
+      const targetId = href.slice(1)
+      const target = document.getElementById(targetId)
+      if (target) {
+        if (lenis) {
+          lenis.scrollTo(target, { offset: 0, duration: 1.2 })
+        } else {
+          target.scrollIntoView({ behavior: 'smooth' })
+        }
+      }
+    }
+    onClick?.()
+  }
+
   const content = (
     <motion.span
       style={{ x: springX, y: springY }}
@@ -62,7 +80,7 @@ export function MagneticButton({
   }
 
   return (
-    <a href={href} aria-label={String(children)} onClick={onClick}>
+    <a href={href} aria-label={String(children)} onClick={handleClick}>
       {content}
     </a>
   )

@@ -1,7 +1,8 @@
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Float, MeshDistortMaterial } from '@react-three/drei'
-import { Suspense, useRef } from 'react'
+import { Suspense, useRef, useCallback } from 'react'
 import type { Mesh } from 'three'
+import { usePrefersReducedMotion } from '../../hooks/usePrefersReducedMotion'
 
 function HeroOrb() {
   const mesh = useRef<Mesh>(null)
@@ -33,9 +34,41 @@ function HeroOrb() {
 }
 
 export function HeroScene() {
+  const prefersReducedMotion = usePrefersReducedMotion()
+
+  const handleCreated = useCallback(
+    ({ gl }: { gl: { domElement: HTMLCanvasElement } }) => {
+      // Pause rendering when the canvas is not visible in the viewport
+      const observer = new IntersectionObserver(
+        (entries) => {
+          const canvas = gl.domElement
+          const wasPlaying = canvas.dataset.playing === 'true'
+          const isVisible = entries[0].isIntersecting
+
+          if (isVisible && !wasPlaying) {
+            canvas.dataset.playing = 'true'
+          } else if (!isVisible && wasPlaying) {
+            canvas.dataset.playing = 'false'
+          }
+        },
+        { threshold: 0 },
+      )
+
+      observer.observe(gl.domElement)
+    },
+    [],
+  )
+
+  if (prefersReducedMotion) return null
+
   return (
     <div className="absolute inset-0">
-      <Canvas dpr={[1, 1.5]} camera={{ position: [0, 0, 5], fov: 45 }}>
+      <Canvas
+        dpr={[1, 1.5]}
+        camera={{ position: [0, 0, 5], fov: 45 }}
+        frameloop="demand"
+        onCreated={handleCreated}
+      >
         <color attach="background" args={['#050505']} />
         <fog attach="fog" args={['#050505', 6, 15]} />
         <ambientLight intensity={0.4} />

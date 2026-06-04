@@ -21,6 +21,7 @@
       content="Premium custom websites with cinematic motion, performance engineering, and luxury digital storytelling."
     />
     <meta property="og:type" content="website" />
+    <!-- TODO: Create and deploy og-image.png (1200x630) to public/ for social sharing -->
     <meta property="og:image" content="https://codebrandstudio.com/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -28,7 +29,25 @@
     <link rel="canonical" href="https://codebrandstudio.com/" />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preload" as="image" href="/ceo-founder.webp" type="image/webp" />
     <title>Code Brand Studio | Premium Digital Experiences</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Code Brand Studio",
+      "description": "Premium custom websites with cinematic motion, performance engineering, and luxury digital storytelling.",
+      "url": "https://codebrandstudio.com",
+      "email": "hello@codebrandstudio.com",
+      "serviceType": ["Web Design", "Web Development", "UI/UX Design", "Motion Design"],
+      "areaServed": "Worldwide",
+      "sameAs": [
+        "https://instagram.com/codebrandstudio",
+        "https://behance.net/codebrandstudio",
+        "https://linkedin.com/company/codebrandstudio"
+      ]
+    }
+    </script>
   </head>
   <body>
     <div id="root"></div>

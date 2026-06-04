@@ -436,7 +436,7 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
   const [touched, setTouched] = useState(false)
   const prefersReducedMotion = useReducedMotion()
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLButtonElement>(null)
 
   const startPlaying = useCallback(() => {
     if (playing) return
@@ -515,21 +515,15 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
   const showIndicator = hovering || touched
 
   return (
-    <div
+    <button
       ref={containerRef}
-      className="relative cursor-pointer"
+      type="button"
+      className="relative cursor-pointer w-full text-left bg-transparent border-none p-0"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
-      role="button"
+      aria-pressed={playing}
       aria-label={`${playing ? 'Pause' : 'Play'} project preview animation`}
-      tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault()
-          handleTouchStart()
-        }
-      }}
     >
       {/* Background gradient layer */}
       <div
@@ -589,6 +583,6 @@ export function ProjectVideoPreview({ slug, mockupClass }: ProjectVideoPreviewPr
           )}
         </AnimatePresence>
       </div>
-    </div>
+    </button>
   )
 }

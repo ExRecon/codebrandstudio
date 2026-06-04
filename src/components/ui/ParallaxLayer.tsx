@@ -42,8 +42,17 @@ export function ParallaxLayer({ children, speed = 0.02, className = '' }: Parall
     })
 
     return () => {
-      tween.scrollTrigger?.kill()
+      // Kill the tween and its associated ScrollTrigger
+      if (tween.scrollTrigger) {
+        tween.scrollTrigger.kill()
+      }
       tween.kill()
+      // Remove any orphaned ScrollTrigger for this element
+      ScrollTrigger.getAll().forEach((st) => {
+        if (st.trigger === element) {
+          st.kill()
+        }
+      })
     }
   }, [speed, prefersReducedMotion])
 
