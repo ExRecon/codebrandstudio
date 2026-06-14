@@ -21,15 +21,16 @@ export function MagneticButton({
 }: MagneticButtonProps) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
-  const springX = useSpring(x, { damping: 18, stiffness: 160, mass: 0.4 })
-  const springY = useSpring(y, { damping: 18, stiffness: 160, mass: 0.4 })
+  const springX = useSpring(x, { damping: 15, stiffness: 150, mass: 0.5 })
+  const springY = useSpring(y, { damping: 15, stiffness: 150, mass: 0.5 })
 
   const onMove = (event: React.MouseEvent<HTMLElement>) => {
     const target = event.currentTarget.getBoundingClientRect()
     const relativeX = event.clientX - target.left - target.width / 2
     const relativeY = event.clientY - target.top - target.height / 2
-    x.set(relativeX * 0.15)
-    y.set(relativeY * 0.15)
+    // 40px magnetic pull radius — stronger pull
+    x.set(relativeX * 0.25)
+    y.set(relativeY * 0.25)
   }
 
   const onLeave = () => {

@@ -1,7 +1,25 @@
 import { motion } from 'framer-motion'
 import { ArrowDown, ArrowUpRight } from 'lucide-react'
 import { MagneticButton } from '../../ui/MagneticButton'
+import { RollingCounter } from '../../ui/RollingCounter'
+import { NodeNetworkCanvas } from '../NodeNetworkCanvas'
 import { stats } from '../../../data/site'
+
+const headlineWords = ['We', 'build', 'AI-native', 'systems', 'that', 'scale.']
+
+const wordVariants = {
+  hidden: { opacity: 0, y: 30, filter: 'blur(8px)' },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: {
+      duration: 0.6,
+      delay: 0.3 + i * 0.08,
+      ease: [0.22, 1, 0.36, 1] as const,
+    },
+  }),
+}
 
 export function HeroSection() {
   return (
@@ -10,11 +28,13 @@ export function HeroSection() {
       className="relative flex min-h-[100dvh] flex-col justify-center overflow-hidden px-5 pt-28 pb-16 sm:px-6 md:px-8"
       aria-label="Hero"
     >
-      {/* Subtle ambient background */}
+      {/* Interactive node-network canvas */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/2 h-[600px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan/[0.03] blur-[150px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-[400px] w-[400px] rounded-full bg-violet/[0.03] blur-[120px]" />
+        <NodeNetworkCanvas />
       </div>
+
+      {/* Subtle ambient overlay to ensure text readability */}
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink/60" aria-hidden="true" />
 
       <div className="relative mx-auto w-full max-w-5xl">
         {/* Terminal-style kicker */}
@@ -32,25 +52,32 @@ export function HeroSection() {
           <span className="font-mono text-xs text-white/40">codebrandstudio.io</span>
         </motion.div>
 
-        {/* Headline */}
-        <motion.h1
-          className="text-display-xl font-bold tracking-[-0.04em] text-white"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        >
-          We build{' '}
-          <span className="accent-gradient">AI-native systems</span>
-          <br />
-          that scale.
-        </motion.h1>
+        {/* Split-text headline reveal */}
+        <h1 className="text-display-xl font-bold tracking-[-0.04em] text-white">
+          {headlineWords.map((word, i) => (
+            <motion.span
+              key={word}
+              className="inline-block mr-[0.3em]"
+              custom={i}
+              initial="hidden"
+              animate="visible"
+              variants={wordVariants}
+            >
+              {word === 'AI-native' ? (
+                <span className="accent-gradient">{word}</span>
+              ) : (
+                word
+              )}
+            </motion.span>
+          ))}
+        </h1>
 
         {/* Subheadline */}
         <motion.p
           className="mt-6 max-w-[65ch] text-lg leading-7 text-white/60 md:text-xl md:leading-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, delay: 0.9, ease: [0.22, 1, 0.36, 1] as const }}
         >
           Multi-agent architectures, SaaS platforms, developer infrastructure, and intelligent automation — engineered for production from day one.
         </motion.p>
@@ -60,7 +87,7 @@ export function HeroSection() {
           className="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, delay: 1.1, ease: [0.22, 1, 0.36, 1] as const }}
         >
           <MagneticButton href="#contact">
             Start a Project <ArrowUpRight className="h-4 w-4" />
@@ -70,17 +97,17 @@ export function HeroSection() {
           </MagneticButton>
         </motion.div>
 
-        {/* Trust stats bar */}
+        {/* Trust stats bar with rolling counters */}
         <motion.div
           className="mt-16 grid grid-cols-2 gap-6 border-t border-white/[0.06] pt-8 md:grid-cols-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
+          transition={{ duration: 0.8, delay: 1.3 }}
         >
-          {stats.map((stat) => (
+          {stats.map((stat, i) => (
             <div key={stat.label}>
               <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">
-                {stat.value}
+                <RollingCounter target={stat.value} delay={1400 + i * 150} />
               </p>
               <p className="mt-1 text-xs text-white/40">{stat.label}</p>
             </div>
@@ -93,7 +120,7 @@ export function HeroSection() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
+        transition={{ delay: 2, duration: 0.8 }}
       >
         <a
           href="#about"

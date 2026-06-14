@@ -12,28 +12,57 @@ const clientLogos = [
   'Supabase',
 ]
 
+/* ── Infinite marquee row ───────────────────────────────────────── */
+function LogoRow({ logos, reverse = false }: { logos: string[]; reverse?: boolean }) {
+  const doubled = [...logos, ...logos]
+
+  return (
+    <div
+      className="flex w-max gap-12"
+      style={{
+        animation: reverse
+          ? 'marquee-reverse 35s linear infinite'
+          : 'marquee 35s linear infinite',
+      }}
+    >
+      {doubled.map((name, i) => (
+        <span
+          key={`${name}-${i}`}
+          className="shrink-0 text-lg font-semibold tracking-tight text-white/20 transition-colors duration-300 hover:text-white/50 md:text-xl"
+        >
+          {name}
+        </span>
+      ))}
+    </div>
+  )
+}
+
 export function SocialProofSection() {
   return (
-    <section className="border-t border-white/[0.06] py-16 md:py-20" aria-label="Trusted by">
+    <section className="relative border-t border-white/[0.06] py-16 md:py-20" aria-label="Trusted by">
+      {/* Bilateral gradient mask */}
+      <div
+        className="pointer-events-none absolute inset-0 z-10"
+        aria-hidden="true"
+        style={{
+          maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+          WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
+        }}
+      />
+
       <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
         <p className="mb-10 text-center text-xs uppercase tracking-[0.25em] text-white/40">
           Trusted by engineering teams at
         </p>
 
-        {/* Logo grid */}
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 md:gap-x-16">
-          {clientLogos.map((name, i) => (
-            <motion.span
-              key={name}
-              className="text-lg font-semibold tracking-tight text-white/20 transition-colors duration-300 hover:text-white/40 md:text-xl"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05, duration: 0.4 }}
-            >
-              {name}
-            </motion.span>
-          ))}
+        {/* First row — left to right */}
+        <div className="overflow-hidden">
+          <LogoRow logos={clientLogos} />
+        </div>
+
+        {/* Second row — right to left, offset */}
+        <div className="mt-6 overflow-hidden">
+          <LogoRow logos={[...clientLogos].reverse()} reverse />
         </div>
 
         {/* Single powerful testimonial */}

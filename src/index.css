@@ -152,6 +152,16 @@ html.lenis, html.lenis body {
 }
 
 /* ── Marquee ───────────────────────────────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes marquee-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
 .marquee-track {
   @apply flex gap-6;
   width: max-content;

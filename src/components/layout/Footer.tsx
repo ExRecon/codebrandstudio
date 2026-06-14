@@ -1,16 +1,111 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { contact, founder, socialLinks } from '../../data/site'
 import { AnimatedSocialIcon } from '../ui/AnimatedSocialIcon'
+
+/* ── Reactive Grid Canvas ───────────────────────────────────────── */
+function ReactiveGrid() {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const ripplesRef = useRef<Array<{ x: number; y: number; time: number }>>([])
+  const frameRef = useRef<number>(0)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const resize = () => {
+      const dpr = Math.min(window.devicePixelRatio, 2)
+      const rect = canvas.getBoundingClientRect()
+      canvas.width = rect.width * dpr
+      canvas.height = rect.height * dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    resize()
+    window.addEventListener('resize', resize)
+
+    const draw = () => {
+      const rect = canvas.getBoundingClientRect()
+      ctx.clearRect(0, 0, rect.width, rect.height)
+
+      // Faint grid
+      ctx.strokeStyle = 'rgba(255,255,255,0.015)'
+      ctx.lineWidth = 0.5
+      const spacing = 40
+      for (let gx = 0; gx <= rect.width; gx += spacing) {
+        ctx.beginPath()
+        ctx.moveTo(gx, 0)
+        ctx.lineTo(gx, rect.height)
+        ctx.stroke()
+      }
+      for (let gy = 0; gy <= rect.height; gy += spacing) {
+        ctx.beginPath()
+        ctx.moveTo(0, gy)
+        ctx.lineTo(rect.width, gy)
+        ctx.stroke()
+      }
+
+      // Animate ripples
+      const now = performance.now()
+      ripplesRef.current = ripplesRef.current.filter((r) => now - r.time < 2000)
+
+      for (const ripple of ripplesRef.current) {
+        const age = (now - ripple.time) / 2000
+        const radius = age * 120
+        const opacity = (1 - age) * 0.12
+
+        ctx.beginPath()
+        ctx.arc(ripple.x, ripple.y, radius, 0, Math.PI * 2)
+        ctx.strokeStyle = `rgba(139, 233, 253, ${opacity})`
+        ctx.lineWidth = 1
+        ctx.stroke()
+      }
+
+      frameRef.current = requestAnimationFrame(draw)
+    }
+
+    frameRef.current = requestAnimationFrame(draw)
+
+    return () => {
+      cancelAnimationFrame(frameRef.current)
+      window.removeEventListener('resize', resize)
+    }
+  }, [])
+
+  const onClick = (e: React.MouseEvent) => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const rect = canvas.getBoundingClientRect()
+    ripplesRef.current.push({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top,
+      time: performance.now(),
+    })
+  }
+
+  return (
+    <canvas
+      ref={canvasRef}
+      className="pointer-events-auto absolute inset-0 h-full w-full"
+      onClick={onClick}
+      aria-hidden="true"
+    />
+  )
+}
 
 export function Footer() {
   return (
     <footer className="relative border-t border-white/[0.06]" aria-label="Site footer">
-      <div className="mx-auto max-w-6xl px-5 py-16 sm:px-6 md:px-8">
+      {/* Reactive grid background */}
+      <ReactiveGrid />
+
+      <div className="relative z-10 mx-auto max-w-6xl px-5 py-16 sm:px-6 md:px-8">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
           {/* Left — Brand + founder */}
           <div>
             <a href="#hero" className="group inline-flex items-center gap-2" aria-label="Code Brand Studio — Home">
-              <div className="flex h-8 w-8 items-center justify-center">
+              <div className="relative flex h-8 w-8 items-center justify-center">
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan/20 to-violet/10" />
                 <span className="relative text-sm font-semibold tracking-tight text-white">C</span>
               </div>
@@ -31,7 +126,7 @@ export function Footer() {
           {/* Right — Links */}
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3">
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Navigate</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-white/55">Navigate</p>
               <ul className="mt-4 space-y-3">
                 {[
                   { label: 'About', href: '#about' },
@@ -48,7 +143,7 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-[0.25em] text-white/40">Contact</p>
+              <p className="text-xs uppercase tracking-[0.25em] text-white/55">Contact</p>
               <ul className="mt-4 space-y-3">
                 <li>
                   <a href={`mailto:${contact.email}`} className="text-sm text-white/55 transition-colors hover:text-white">
