@@ -143,7 +143,7 @@ export function Navbar() {
           </nav>
 
           {/* Right side */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div className="hidden sm:block">
               <MagneticButton href="#contact" variant="primary">
                 Start a Project

@@ -14,12 +14,12 @@ export function AboutSection() {
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="section-subtitle">
+            <p className="section-subtitle max-w-[65ch]">
               We&apos;re a focused engineering studio that builds production-grade AI systems, SaaS platforms, and developer infrastructure. No agencies, no handoffs — just senior engineers who ship.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
-            <p className="mt-4 max-w-xl text-base leading-7 text-white/50">
+            <p className="mt-4 max-w-[60ch] text-base leading-7 text-white/50">
               Every engagement is led by our founder, Ali Ihtsham, with 6+ years of experience shipping systems that handle real workloads. We work with startups, scale-ups, and engineering teams that need to move fast without sacrificing quality.
             </p>
           </Reveal>

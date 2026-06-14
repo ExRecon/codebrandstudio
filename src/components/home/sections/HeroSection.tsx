@@ -47,7 +47,7 @@ export function HeroSection() {
 
         {/* Subheadline */}
         <motion.p
-          className="mt-6 max-w-xl text-lg leading-7 text-white/60 md:text-xl md:leading-8"
+          className="mt-6 max-w-[65ch] text-lg leading-7 text-white/60 md:text-xl md:leading-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}

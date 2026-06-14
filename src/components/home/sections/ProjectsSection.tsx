@@ -53,7 +53,7 @@ export function ProjectsSection() {
                     {project.stack.map((tech) => (
                       <span
                         key={tech}
-                        className="rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1 text-xs text-white/50"
+                        className="rounded-full border border-white/[0.14] bg-white/[0.05] px-3.5 py-1.5 text-xs font-medium text-white/75"
                       >
                         {tech}
                       </span>
@@ -69,11 +69,11 @@ export function ProjectsSection() {
                 {/* Right — Challenge/Solution */}
                 <div className="flex flex-col justify-center gap-6 border-t border-white/[0.06] pt-6 lg:border-t-0 lg:border-l lg:pl-10 lg:pt-0">
                   <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/40">Challenge</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/55">Challenge</p>
                     <p className="mt-2 text-sm leading-6 text-white/60">{project.challenge}</p>
                   </div>
                   <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-white/40">Solution</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-white/55">Solution</p>
                     <p className="mt-2 text-sm leading-6 text-white/60">{project.solution}</p>
                   </div>
                 </div>

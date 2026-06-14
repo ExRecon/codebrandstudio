@@ -36,7 +36,7 @@ export function FounderSection() {
         <Reveal delay={0.1}>
           <div className="flex flex-col justify-center space-y-6">
             {founder.bio.map((paragraph) => (
-              <p key={paragraph} className="text-base leading-7 text-white/60">
+              <p key={paragraph} className="max-w-[65ch] text-base leading-7 text-white/60">
                 {paragraph}
               </p>
             ))}
@@ -52,15 +52,15 @@ export function FounderSection() {
               ))}
             </div>
 
-            <div>
-              <p className="mb-3 text-xs uppercase tracking-[0.25em] text-white/40">
+            <div className="pt-4">
+              <p className="mb-3 text-xs uppercase tracking-[0.25em] text-white/55">
                 Core Expertise
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2.5">
                 {founder.stack.map((item) => (
                   <span
                     key={item}
-                    className="rounded-full border border-white/[0.06] bg-white/[0.02] px-3 py-1.5 text-xs text-white/55"
+                    className="rounded-full border border-white/[0.14] bg-white/[0.05] px-3.5 py-1.5 text-xs font-medium text-white/75"
                   >
                     {item}
                   </span>
@@ -69,7 +69,7 @@ export function FounderSection() {
             </div>
 
             <div>
-              <MagneticButton href="#contact">
+              <MagneticButton href="#contact" variant="secondary">
                 Work with {founder.name.split(' ')[0]}
               </MagneticButton>
             </div>
