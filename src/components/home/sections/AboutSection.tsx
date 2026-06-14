@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { motion, useScroll, useTransform, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform, useInView, type MotionValue } from 'framer-motion'
 import { differentiators } from '../../../data/site'
 import { Reveal } from '../../ui/Reveal'
 
@@ -7,7 +7,7 @@ const introText = "We're a focused engineering studio that builds production-gra
 
 const words = introText.split(' ')
 
-function WordSpan({ word, index, scrollProgress }: { word: string; index: number; scrollProgress: ReturnType<typeof useTransform> }) {
+function WordSpan({ word, index, scrollProgress }: { word: string; index: number; scrollProgress: MotionValue<number> }) {
   const start = index / words.length
   const end = (index + 1) / words.length
   const opacity = useTransform(scrollProgress, [0, start, end, 1], [0.3, 0.3, 1, 1])
