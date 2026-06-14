@@ -1,3 +1,12 @@
+# Dependencies
+node_modules
+node_modules/.tmp
+
+# Build output
+dist
+dist-ssr
+*.local
+
 # Logs
 logs
 *.log
@@ -6,33 +15,28 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-.idea
-.DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
-
-# Vite / TypeScript build outputs
-*.tsbuildinfo
-node_modules/.tmp
+vite-*.log
 
 # Environment files
 .env
 .env.local
 .env.*.local
 
+# Vite / TypeScript build outputs
+*.tsbuildinfo
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
 # OS files
+.DS_Store
 Thumbs.db
 ehthumbs.db
 Desktop.ini
@@ -41,5 +45,13 @@ Desktop.ini
 .claude/
 CLAUDE.md
 
-# Vite dev/preview logs (project-specific)
-vite-*.log
+# Project-specific files (not part of website source)
+.mcp.json
+skill.md
+Redesign Code Brand Studio.md
+vscode error logs.txt
+accent-reference.html
+
+# Misc
+*.tgz
+*.tar.gz
