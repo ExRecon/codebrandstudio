@@ -1,14 +1,14 @@
-// Barrel re-export — individual sections live in ./sections/
-// for better maintainability and code splitting.
 export {
   HeroSection,
+  SocialProofSection,
   AboutSection,
-  FounderSection,
   ServicesSection,
   WhyUsSection,
   ProjectsSection,
   ProcessSection,
   TestimonialsSection,
+  FounderSection,
+  FAQSection,
   CTASection,
   CaseStudyLayout,
 } from './sections'

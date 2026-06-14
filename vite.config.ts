@@ -10,10 +10,7 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('three') || id.includes('@react-three')) {
-              return 'three'
-            }
-            if (id.includes('framer-motion') || id.includes('gsap')) {
+            if (id.includes('framer-motion')) {
               return 'motion'
             }
             if (id.includes('react-router-dom')) {

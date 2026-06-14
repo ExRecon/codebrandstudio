@@ -3,11 +3,12 @@ import { useEffect, useState } from 'react'
 const SECTION_IDS = [
   'hero',
   'about',
-  'founder',
   'services',
   'why-us',
-  'projects',
+  'work',
   'process',
+  'faq',
+  'founder',
   'contact',
 ]
 

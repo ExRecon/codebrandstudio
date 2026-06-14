@@ -1,7 +1,5 @@
 import { Suspense, lazy } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { ScrollProgress } from './components/layout/ScrollProgress'
-import { CursorGlow } from './components/layout/CursorGlow'
+import { HashRouter, Route, Routes } from 'react-router-dom'
 import { ErrorBoundary } from './components/ui/ErrorBoundary'
 
 const HomePage = lazy(() => import('./pages/HomePage'))
@@ -9,17 +7,15 @@ const ProjectPage = lazy(() => import('./pages/ProjectPage'))
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollProgress />
-      <CursorGlow />
+    <HashRouter>
       <ErrorBoundary>
         <Suspense
           fallback={
             <div className="grid min-h-screen place-items-center bg-ink text-frost">
               <div className="space-y-3 text-center">
-                <div className="mx-auto h-12 w-12 animate-spin rounded-full border border-white/20 border-t-cyan-300" />
-                <p className="text-sm uppercase tracking-[0.32em] text-white/55">
-                  Loading experience
+                <div className="mx-auto h-10 w-10 animate-spin rounded-full border border-white/20 border-t-cyan" />
+                <p className="text-xs uppercase tracking-[0.3em] text-white/50">
+                  Loading
                 </p>
               </div>
             </div>
@@ -31,7 +27,7 @@ function App() {
           </Routes>
         </Suspense>
       </ErrorBoundary>
-    </BrowserRouter>
+    </HashRouter>
   )
 }
 

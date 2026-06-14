@@ -1,6 +1,4 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
-import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { getLenis } from '../../hooks/useLenis'
 
@@ -10,6 +8,7 @@ type MagneticButtonProps = {
   to?: string
   variant?: 'primary' | 'secondary'
   onClick?: () => void
+  className?: string
 }
 
 export function MagneticButton({
@@ -18,6 +17,7 @@ export function MagneticButton({
   to,
   variant = 'primary',
   onClick,
+  className = '',
 }: MagneticButtonProps) {
   const x = useMotionValue(0)
   const y = useMotionValue(0)
@@ -28,8 +28,8 @@ export function MagneticButton({
     const target = event.currentTarget.getBoundingClientRect()
     const relativeX = event.clientX - target.left - target.width / 2
     const relativeY = event.clientY - target.top - target.height / 2
-    x.set(relativeX * 0.18)
-    y.set(relativeY * 0.18)
+    x.set(relativeX * 0.15)
+    y.set(relativeY * 0.15)
   }
 
   const onLeave = () => {
@@ -37,10 +37,7 @@ export function MagneticButton({
     y.set(0)
   }
 
-  const className =
-    variant === 'primary'
-      ? 'button-primary'
-      : 'button-secondary'
+  const baseClass = variant === 'primary' ? 'button-primary' : 'button-secondary'
 
   const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (href?.startsWith('#')) {
@@ -62,25 +59,20 @@ export function MagneticButton({
   const content = (
     <motion.span
       style={{ x: springX, y: springY }}
-      className={`${className} group inline-flex items-center gap-2`}
+      className={`${baseClass} ${className}`}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
     >
-      <span>{children}</span>
-      <ArrowUpRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      {children}
     </motion.span>
   )
 
   if (to) {
-    return (
-      <Link to={to} aria-label={`${children} page`}>
-        {content}
-      </Link>
-    )
+    return <a href={to}>{content}</a>
   }
 
   return (
-    <a href={href} aria-label={String(children)} onClick={handleClick}>
+    <a href={href} onClick={handleClick}>
       {content}
     </a>
   )

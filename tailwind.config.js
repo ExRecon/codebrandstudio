@@ -5,24 +5,47 @@ export default {
     extend: {
       colors: {
         ink: '#050505',
-        graphite: '#111111',
-        charcoal: '#171717',
+        surface: '#0a0a0a',
+        elevated: '#111111',
         frost: '#f5f7fb',
-        glow: '#53c3f5',
-        cyan: '#8be9ff',
-        violet: '#8f83ff',
+        cyan: '#8be9fd',
+        violet: '#bd93f9',
+        green: '#50fa7b',
+        orange: '#ffb86c',
+        pink: '#ff79c6',
       },
       fontFamily: {
-        sans: ['"General Sans"', '"Inter Variable"', 'sans-serif'],
-        display: ['"Clash Display"', '"Satoshi"', '"Inter Variable"', 'sans-serif'],
+        sans: ['"Inter Variable"', 'system-ui', 'sans-serif'],
+        display: ['"Inter Variable"', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', '"Fira Code"', 'monospace'],
+      },
+      fontSize: {
+        'display-xl': ['clamp(2.5rem, 6vw, 5.5rem)', { lineHeight: '0.95', letterSpacing: '-0.04em' }],
+        'display-lg': ['clamp(2rem, 4.5vw, 4rem)', { lineHeight: '1', letterSpacing: '-0.04em' }],
+        'display-md': ['clamp(1.5rem, 3vw, 2.5rem)', { lineHeight: '1.1', letterSpacing: '-0.03em' }],
       },
       boxShadow: {
-        panel:
-          '0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.08)',
+        glow: '0 0 40px rgba(139, 233, 255, 0.12)',
+        panel: '0 20px 60px rgba(0, 0, 0, 0.4)',
       },
-      backgroundImage: {
-        noise:
-          'radial-gradient(circle at top, rgba(139, 233, 255, 0.16), transparent 30%), radial-gradient(circle at 70% 10%, rgba(143, 131, 255, 0.14), transparent 28%)',
+      animation: {
+        'fade-in': 'fadeIn 0.6s ease-out forwards',
+        'slide-up': 'slideUp 0.6s ease-out forwards',
+        marquee: 'marquee 30s linear infinite',
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: '0' },
+          to: { opacity: '1' },
+        },
+        slideUp: {
+          from: { opacity: '0', transform: 'translateY(20px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
+        },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(calc(-50% - 10px))' },
+        },
       },
     },
   },

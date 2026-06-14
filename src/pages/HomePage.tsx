@@ -4,15 +4,16 @@ import { Navbar } from '../components/layout/Navbar'
 import {
   AboutSection,
   CTASection,
+  FAQSection,
   FounderSection,
   HeroSection,
   ProcessSection,
   ProjectsSection,
   ServicesSection,
+  SocialProofSection,
   TestimonialsSection,
   WhyUsSection,
 } from '../components/home/HomeSections'
-import { SectionDivider } from '../components/ui/SectionDivider'
 import { useLenis } from '../hooks/useLenis'
 import { usePrefersReducedMotion } from '../hooks/usePrefersReducedMotion'
 
@@ -22,7 +23,7 @@ export default function HomePage() {
   useLenis(!prefersReducedMotion)
 
   useEffect(() => {
-    document.title = 'Code Brand Studio | Premium Digital Experiences'
+    document.title = 'Code Brand Studio — AI-Native Engineering Studio'
   }, [])
 
   return (
@@ -30,35 +31,23 @@ export default function HomePage() {
       <Navbar />
       <main id="main-content">
         <HeroSection />
-        <SectionDivider variant="glow" />
-        <section className="section-shift-a">
-          <AboutSection />
-        </section>
-        <SectionDivider />
-        <section className="section-shift-b">
-          <FounderSection />
-        </section>
-        <SectionDivider />
-        <section className="section-shift-b">
-          <ServicesSection />
-        </section>
-        <SectionDivider variant="glow" />
-        <section className="section-shift-a">
-          <WhyUsSection />
-        </section>
-        <SectionDivider />
-        <section className="section-shift-b">
-          <ProjectsSection />
-        </section>
-        <SectionDivider variant="thin" />
-        <section className="section-shift-a">
-          <ProcessSection />
-        </section>
-        <SectionDivider />
-        <section className="section-shift-b">
-          <TestimonialsSection />
-        </section>
-        <SectionDivider variant="glow" />
+        <SocialProofSection />
+        <div className="divider-line" aria-hidden="true" />
+        <AboutSection />
+        <div className="divider-line" aria-hidden="true" />
+        <ServicesSection />
+        <div className="divider-line" aria-hidden="true" />
+        <WhyUsSection />
+        <div className="divider-line" aria-hidden="true" />
+        <ProjectsSection />
+        <div className="divider-line" aria-hidden="true" />
+        <ProcessSection />
+        <div className="divider-line" aria-hidden="true" />
+        <TestimonialsSection />
+        <div className="divider-line" aria-hidden="true" />
+        <FounderSection />
+        <div className="divider-line" aria-hidden="true" />
+        <FAQSection />
         <CTASection />
       </main>
       <Footer />

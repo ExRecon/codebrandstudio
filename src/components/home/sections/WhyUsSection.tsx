@@ -1,6 +1,5 @@
-import { comparison, differentiators } from '../../../data/site'
+import { differentiators } from '../../../data/site'
 import { Reveal } from '../../ui/Reveal'
-import { TiltCard } from '../../ui/TiltCard'
 
 export function WhyUsSection() {
   return (
@@ -8,55 +7,48 @@ export function WhyUsSection() {
       <Reveal>
         <p className="section-kicker">Why us</p>
         <h2 className="section-title max-w-2xl">
-          Premium brands choose Code Brand Studio for clarity, craft, and digital execution that feels different immediately.
+          Built different. Engineered to last.
         </h2>
       </Reveal>
 
-      <div className="mt-14 grid grid-cols-1 gap-px bg-white/[0.04] md:grid-cols-2">
+      <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {differentiators.map((item, index) => (
-          <Reveal key={item} delay={index * 0.08}>
-            <TiltCard className="h-full" intensity={6}>
-              <div className="group relative h-full bg-ink p-8 transition-colors duration-500 hover:bg-white/[0.02]">
-                <span className="pointer-events-none absolute -top-2 -left-1 font-display text-[6rem] font-bold leading-none text-white/[0.04] select-none md:text-[8rem]" aria-hidden="true">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <div className="relative">
-                  <p className="font-display text-xl leading-snug tracking-[-0.04em] text-white/90 md:text-2xl">
-                    {item}
-                  </p>
-                  <div className="mt-6 h-px w-10 bg-gradient-to-r from-cyan-300/30 to-transparent transition-all duration-500 group-hover:w-16 group-hover:from-cyan-300/50" aria-hidden="true" />
-                </div>
-              </div>
-            </TiltCard>
+          <Reveal key={index} delay={index * 0.06}>
+            <div className="card-surface relative overflow-hidden">
+              <span className="pointer-events-none absolute -top-2 -right-1 text-[4rem] font-bold leading-none text-white/[0.04] select-none" aria-hidden="true">
+                {String(index + 1).padStart(2, '0')}
+              </span>
+              <p className="relative text-sm leading-6 text-white/70">{item}</p>
+            </div>
           </Reveal>
         ))}
       </div>
 
-      <div className="mx-auto mt-16 mb-12 h-px w-full max-w-xs bg-gradient-to-r from-transparent via-white/[0.06] to-transparent" aria-hidden="true" />
-
-      <div className="overflow-hidden">
+      <div className="mx-auto mt-16 max-w-xl">
         <div className="grid grid-cols-2 gap-6 border-b border-white/[0.06] pb-5">
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-white/55">
+            <p className="text-xs uppercase tracking-[0.25em] text-white/40">
               Typical Freelancer
             </p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.28em] text-cyan-300/70">
+            <p className="text-xs uppercase tracking-[0.25em] text-cyan">
               Code Brand Studio
             </p>
           </div>
         </div>
-
-        <div className="divide-y divide-white/[0.03]">
-          {comparison.map((row) => (
-            <div key={row.typical} className="grid grid-cols-2 gap-6 py-5">
-              <p className="text-base leading-7 text-white/55 md:text-lg md:leading-8">
-                {row.typical}
-              </p>
-              <p className="text-base leading-7 text-white/80 md:text-lg md:leading-8">
-                {row.studio}
-              </p>
+        <div className="divide-y divide-white/[0.04]">
+          {[
+            { typical: 'Generic templates', studio: 'Custom architecture & design' },
+            { typical: 'Fast delivery', studio: 'Production-grade engineering' },
+            { typical: 'Basic design', studio: 'Systems-level thinking' },
+            { typical: 'One-size-fits-all', studio: 'Tailored to your requirements' },
+            { typical: 'Add AI later', studio: 'AI-native from day one' },
+            { typical: 'Freelancer handoff', studio: 'Dedicated partnership' },
+          ].map((row) => (
+            <div key={row.typical} className="grid grid-cols-2 gap-6 py-4">
+              <p className="text-sm leading-6 text-white/45">{row.typical}</p>
+              <p className="text-sm leading-6 text-white/70">{row.studio}</p>
             </div>
           ))}
         </div>

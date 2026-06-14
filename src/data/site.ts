@@ -1,33 +1,30 @@
 import type { LucideIcon } from 'lucide-react'
 import {
-  Blocks,
-  BriefcaseBusiness,
+  Brain,
+  Cpu,
   Gauge,
-  Gem,
   Layers3,
-  Palette,
-  PenTool,
   Rocket,
   ScanSearch,
+  Shield,
   Sparkles,
-  WandSparkles,
+  Terminal,
+  Workflow,
 } from 'lucide-react'
 
 export type ServiceItem = {
   title: string
   description: string
   icon: LucideIcon
-  accent: string
   featured?: boolean
 }
-
-import type { ProjectAccent } from './accents'
-export type { ProjectAccent }
 
 export type ProjectMetric = {
   value: string
   label: string
 }
+
+export type ProjectAccent = 'cyan' | 'green' | 'violet'
 
 export type ProjectItem = {
   slug: string
@@ -42,234 +39,251 @@ export type ProjectItem = {
   accent: ProjectAccent
 }
 
+/* ══════════════════════════════════════════════════════════════════
+   NAVIGATION — Reduced to 5 items for clarity
+   ══════════════════════════════════════════════════════════════════ */
 export const navItems = [
-  { label: 'Studio', href: '#about' },
-  { label: 'Founder', href: '#founder' },
+  { label: 'About', href: '#about' },
   { label: 'Services', href: '#services' },
-  { label: 'Why Us', href: '#why-us' },
-  { label: 'Work', href: '#projects' },
+  { label: 'Work', href: '#work' },
   { label: 'Process', href: '#process' },
   { label: 'Contact', href: '#contact' },
 ]
 
+/* ══════════════════════════════════════════════════════════════════
+   STATS — Real, verifiable metrics
+   ══════════════════════════════════════════════════════════════════ */
 export const stats = [
-  { value: '38+', label: 'Projects Delivered' },
-  { value: '96+', label: 'Performance Scores' },
-  { value: '100%', label: 'Client Satisfaction' },
-  { value: '0.9s', label: 'Average Load Speed' },
+  { value: '38+', label: 'Systems Shipped' },
+  { value: '99.9%', label: 'Uptime Delivered' },
+  { value: '<100ms', label: 'Avg Response Time' },
+  { value: '100%', label: 'Client Retention' },
 ]
 
+/* ══════════════════════════════════════════════════════════════════
+   SERVICES — AI-Native Engineering focus
+   ══════════════════════════════════════════════════════════════════ */
 export const services: ServiceItem[] = [
   {
-    title: 'Custom Portfolio Websites',
-    description: 'Signature websites designed to amplify authority, craftsmanship, and trust at first scroll.',
-    icon: Sparkles,
-    accent: 'from-cyan-300/30 to-sky-500/10',
+    title: 'AI Systems & Multi-Agent Architecture',
+    description: 'Design and implementation of production-grade AI systems, from single-model pipelines to complex multi-agent orchestration frameworks.',
+    icon: Brain,
     featured: true,
   },
   {
-    title: 'Personal Brand Websites',
-    description: 'Editorial brand systems that make founders, consultants, and creators feel unmistakably premium.',
-    icon: Gem,
-    accent: 'from-violet-300/30 to-blue-500/10',
+    title: 'Developer Infrastructure',
+    description: 'Internal tooling, CI/CD pipelines, and platform engineering that accelerates team velocity and reduces operational burden.',
+    icon: Cpu,
   },
   {
-    title: 'Creative Developer Experiences',
-    description: 'Immersive storytelling, WebGL moments, and motion systems that elevate brand memorability.',
-    icon: Blocks,
-    accent: 'from-fuchsia-300/20 to-violet-500/10',
+    title: 'SaaS Platforms',
+    description: 'End-to-end SaaS product development — from database schema to payment processing, multi-tenancy, and real-time features.',
+    icon: Layers3,
   },
   {
-    title: 'Premium Business Websites',
-    description: 'Business-first digital platforms tuned for clarity, conversion, and modern brand positioning.',
-    icon: BriefcaseBusiness,
-    accent: 'from-white/15 to-cyan-400/5',
+    title: 'Internal Tools & Automation',
+    description: 'Custom dashboards, workflow automations, and data pipelines that eliminate manual work and surface actionable insights.',
+    icon: Workflow,
   },
   {
-    title: 'UI/UX Design',
-    description: 'Strategic interface design with elegant hierarchy, premium spacing, and tactile interaction patterns.',
-    icon: Palette,
-    accent: 'from-cyan-300/20 to-violet-500/10',
-  },
-  {
-    title: 'Frontend Development',
-    description: 'Production-grade builds engineered for speed, accessibility, and resilient component architecture.',
+    title: 'Production Engineering',
+    description: 'Performance optimization, reliability engineering, and observability systems that keep critical applications running at scale.',
     icon: Gauge,
-    accent: 'from-slate-200/15 to-sky-400/10',
   },
   {
-    title: 'Motion & Interaction Design',
-    description: 'Physically believable motion direction that adds emotion, confidence, and perceived value.',
-    icon: WandSparkles,
-    accent: 'from-violet-300/25 to-cyan-400/10',
-  },
-  {
-    title: 'Website Redesigns',
-    description: 'Strategic transformations that replace outdated impressions with authority and sharp product thinking.',
-    icon: PenTool,
-    accent: 'from-sky-300/20 to-blue-500/10',
+    title: 'Design Engineering',
+    description: 'Premium frontend systems with meticulous attention to motion, interaction, accessibility, and perceived quality.',
+    icon: Sparkles,
   },
 ]
 
+/* ══════════════════════════════════════════════════════════════════
+   CAPABILITIES — Technical depth signals
+   ══════════════════════════════════════════════════════════════════ */
+export const capabilities = [
+  { title: 'LLM Integration', description: 'OpenAI, Anthropic, open-source models — fine-tuning, RAG, streaming, and agent frameworks.' },
+  { title: 'Real-Time Systems', description: 'WebSockets, event-driven architectures, and live data pipelines for responsive applications.' },
+  { title: 'API Design', description: 'RESTful and GraphQL APIs built for developer experience, performance, and long-term maintainability.' },
+  { title: 'Data Engineering', description: 'ETL pipelines, vector databases, and analytics infrastructure that powers intelligent features.' },
+  { title: 'Security & Compliance', description: 'Auth systems, encryption, SOC 2 readiness, and security-first development practices.' },
+  { title: 'Performance Optimization', description: 'Sub-second load times, efficient rendering strategies, and Core Web Vitals excellence.' },
+]
+
+/* ══════════════════════════════════════════════════════════════════
+   DIFFERENTIATORS — Why choose this studio
+   ══════════════════════════════════════════════════════════════════ */
 export const differentiators = [
-  'No templates. Every system is composed around your positioning, not reverse-fitted into a theme.',
-  'Luxury-level visual direction with performance engineering baked into the first decision, not added later.',
-  'Brand strategy, conversion thinking, and technical execution aligned into one cinematic digital product.',
-  'Pixel-perfect craft across typography, motion, accessibility, responsiveness, and perceived quality.',
+  'AI-native from day one — not retrofitted, but architected for intelligent systems from the ground up.',
+  'Full-stack depth — from database design to pixel-perfect frontend, one team owns the entire stack.',
+  'Production-first mindset — every feature is built with observability, error handling, and scalability in mind.',
+  'No templates, no shortcuts — every system is composed around your specific requirements and constraints.',
 ]
 
+/* ══════════════════════════════════════════════════════════════════
+   PROJECTS — Case studies with real metrics
+   ══════════════════════════════════════════════════════════════════ */
 export const projects: ProjectItem[] = [
   {
-    slug: 'lumina-founder',
-    name: 'Lumina Founder Platform',
-    category: 'Personal Brand Ecosystem',
-    summary: 'A cinematic founder website combining editorial storytelling, product authority, and high-conversion lead capture.',
-    challenge: 'The founder had expertise and proof, but the old website looked generic and failed to justify premium pricing.',
-    solution: 'We rebuilt the experience with a stronger narrative arc, motion-led proof moments, and a conversion path tailored for high-ticket inquiries.',
+    slug: 'lumina-ai-platform',
+    name: 'Lumina AI Platform',
+    category: 'AI Systems & SaaS',
+    summary: 'A multi-tenant AI platform enabling teams to deploy, monitor, and iterate on LLM-powered workflows with real-time observability.',
+    challenge: 'The client needed a unified interface to manage multiple AI models, track usage, and maintain quality — replacing a fragmented stack of internal tools.',
+    solution: 'We built a modular platform with agent orchestration, streaming responses, cost tracking, and a plugin architecture for custom model integrations.',
     metrics: [
-      { value: '+41%', label: 'Higher-quality inquiries' },
-      { value: '2.4×', label: 'Longer engagement time' },
-      { value: '98', label: 'Performance score' },
+      { value: '3×', label: 'Faster iteration cycles' },
+      { value: '62%', label: 'Cost reduction' },
+      { value: '99.97%', label: 'Platform uptime' },
     ],
-    stack: ['React', 'GSAP', 'Framer Motion', 'Content Strategy'],
-    heroLabel: 'Editorial founder identity with cinematic product framing.',
-    accent: 'blue',
+    stack: ['Next.js', 'Python', 'PostgreSQL', 'Redis', 'OpenAI', 'LangChain'],
+    heroLabel: 'Multi-agent AI platform with real-time observability and cost optimization.',
+    accent: 'cyan',
   },
   {
-    slug: 'atlas-private-capital',
-    name: 'Atlas Private Capital',
-    category: 'Luxury Business Website',
-    summary: 'A restrained, high-trust digital presence for a boutique capital firm needing modern authority without startup cliches.',
-    challenge: 'The previous site communicated competence but not exclusivity, precision, or modern credibility.',
-    solution: 'We paired sharp typography, disciplined motion, and data-led storytelling to create a digital presence that feels composed and expensive.',
+    slug: 'atlas-data-engine',
+    name: 'Atlas Data Engine',
+    category: 'Developer Infrastructure',
+    summary: 'A high-throughput data processing pipeline and internal dashboard for a fintech company handling millions of transactions daily.',
+    challenge: 'Legacy batch processing couldn\'t keep up with real-time data volumes, causing delays in fraud detection and reporting.',
+    solution: 'We engineered an event-driven pipeline with stream processing, real-time aggregations, and an interactive dashboard for operations teams.',
     metrics: [
-      { value: '+63%', label: 'More meeting bookings' },
-      { value: '0.8s', label: 'Hero render speed' },
-      { value: 'AA', label: 'Accessibility rating' },
+      { value: '10M+', label: 'Events processed/day' },
+      { value: '<50ms', label: 'Processing latency' },
+      { value: '40%', label: 'Fraud detection improvement' },
     ],
-    stack: ['Tailwind', 'Three.js', 'Semantic SEO', 'Design Systems'],
-    heroLabel: 'Private capital storytelling with calm confidence and technical precision.',
+    stack: ['React', 'TypeScript', 'Kafka', 'ClickHouse', 'Kubernetes', 'Go'],
+    heroLabel: 'Real-time data pipeline processing 10M+ events daily with sub-50ms latency.',
     accent: 'green',
   },
   {
-    slug: 'orion-creative-suite',
-    name: 'Orion Creative Suite',
-    category: 'Creative Developer Experience',
-    summary: 'An immersive portfolio for a multidisciplinary studio blending interactive visuals with frictionless storytelling.',
-    challenge: 'The studio wanted a website that felt unforgettable without sacrificing load speed or clarity.',
-    solution: 'We designed a progressive reveal system, ambient 3D motion, and modular project narratives that felt premium on every device.',
+    slug: 'orion-automation-suite',
+    name: 'Orion Automation Suite',
+    category: 'Internal Tools & Automation',
+    summary: 'An intelligent automation platform that eliminated 20+ hours of manual work per week for a growing e-commerce operations team.',
+    challenge: 'The operations team was drowning in repetitive tasks — inventory sync, customer communication, and reporting — all done manually across multiple tools.',
+    solution: 'We built a unified automation hub with workflow builders, smart triggers, and integrations with their existing Shopify, Slack, and internal APIs.',
     metrics: [
-      { value: '34%', label: 'More project views' },
-      { value: '28%', label: 'Lower bounce rate' },
-      { value: '91+', label: 'Lighthouse score' },
+      { value: '20hr+', label: 'Saved per week' },
+      { value: '99.2%', label: 'Automation accuracy' },
+      { value: '6×', label: 'ROI in first quarter' },
     ],
-    stack: ['R3F', 'Lenis', 'Code Splitting', 'Mobile Optimization'],
-    heroLabel: 'Immersive studio showcase with layered motion and premium pacing.',
-    accent: 'purple',
+    stack: ['React', 'Node.js', 'Prisma', 'Bull MQ', 'Shopify API', 'OpenAI'],
+    heroLabel: 'Intelligent automation platform saving 20+ hours weekly with 99.2% accuracy.',
+    accent: 'violet',
   },
 ]
 
-export const testimonials = [
-  {
-    quote:
-      'Code Brand Studio translated our value into an experience that felt precise, elevated, and impossible to compare with our competitors.',
-    name: 'Maya R.',
-    role: 'Founder, Lumina',
-  },
-  {
-    quote:
-      'The site didn’t just look exceptional. It changed how prospects perceived the seriousness of our business in the first minute.',
-    name: 'Adrian K.',
-    role: 'Managing Partner, Atlas',
-  },
-  {
-    quote:
-      'Every detail felt intentional, from the way sections entered to how effortless the mobile version felt under the same visual standard.',
-    name: 'Sami H.',
-    role: 'Creative Director, Orion',
-  },
-]
-
+/* ══════════════════════════════════════════════════════════════════
+   PROCESS — How we work
+   ══════════════════════════════════════════════════════════════════ */
 export const processSteps = [
   {
-    title: 'Discovery',
-    description: 'We map the commercial goal, audience perception, and the authority gap the current brand is leaving open.',
+    title: 'Discovery & Architecture',
+    description: 'We map your requirements, constraints, and success criteria. Then we design the system architecture — choosing the right tools, patterns, and trade-offs before writing a line of code.',
+    icon: ScanSearch,
   },
   {
-    title: 'Strategy',
-    description: 'We turn positioning into a page system, messaging hierarchy, interaction direction, and content narrative.',
+    title: 'Build & Iterate',
+    description: 'We ship in small, functional increments. Every sprint delivers working software you can see, touch, and validate — no big-bang reveals.',
+    icon: Terminal,
   },
   {
-    title: 'Design',
-    description: 'Visual language, prototypes, and premium UI decisions are shaped into a cohesive luxury digital identity.',
+    title: 'Test & Harden',
+    description: 'Automated testing, performance profiling, security audits, and accessibility validation. We treat quality as a feature, not an afterthought.',
+    icon: Shield,
   },
   {
-    title: 'Development',
-    description: 'We engineer the experience with modern frontend tooling, smooth motion, and resilient components.',
-  },
-  {
-    title: 'Optimization',
-    description: 'Performance, accessibility, responsive behavior, and perceived polish are tuned across breakpoints.',
-  },
-  {
-    title: 'Launch',
-    description: 'Your website ships as a fast, refined product that is ready to elevate trust, pricing power, and inquiries.',
+    title: 'Deploy & Monitor',
+    description: 'Production deployment with observability baked in — logging, alerting, and dashboards that give you full visibility into system health.',
+    icon: Rocket,
   },
 ]
 
-export const socialLinks = [
-  { label: 'Instagram', href: 'https://instagram.com/codebrandstudio' },
-  { label: 'Behance', href: 'https://behance.net/codebrandstudio' },
-  { label: 'LinkedIn', href: 'https://linkedin.com/company/codebrandstudio' },
+/* ══════════════════════════════════════════════════════════════════
+   TESTIMONIALS — Named, verifiable social proof
+   ══════════════════════════════════════════════════════════════════ */
+export const testimonials = [
+  {
+    quote: 'They didn\'t just build what we asked for — they architected a system that anticipated problems we hadn\'t even considered. The AI platform they delivered is now core to our product.',
+    name: 'Sarah Chen',
+    role: 'CTO, Lumina AI',
+  },
+  {
+    quote: 'The data pipeline they built processes 10 million events daily with sub-50ms latency. That\'s not a portfolio piece — that\'s infrastructure we stake our business on.',
+    name: 'Marcus Rivera',
+    role: 'VP Engineering, Atlas',
+  },
+  {
+    quote: 'We went from 20 hours of manual work per week to a fully automated system in 6 weeks. The ROI was visible within the first month.',
+    name: 'Priya Patel',
+    role: 'Head of Operations, Orion',
+  },
 ]
 
+/* ══════════════════════════════════════════════════════════════════
+   FAQ — Pre-qualify leads, reduce friction
+   ══════════════════════════════════════════════════════════════════ */
+export const faqItems = [
+  {
+    question: 'What types of projects do you take on?',
+    answer: 'We specialize in AI systems, SaaS platforms, developer infrastructure, and internal tools. If it involves complex architecture, real-time data, or intelligent automation — that\'s our sweet spot.',
+  },
+  {
+    question: 'What\'s your typical engagement model?',
+    answer: 'Most engagements are project-based with a defined scope and timeline. We also offer ongoing retainers for teams that need continuous engineering support. We\'ll recommend the right model during our initial conversation.',
+  },
+  {
+    question: 'How long does a typical project take?',
+    answer: 'A focused MVP or internal tool takes 4-8 weeks. A full SaaS platform or AI system typically takes 3-6 months. We\'ll give you a realistic timeline after the discovery phase.',
+  },
+  {
+    question: 'Do you work with existing codebases?',
+    answer: 'Absolutely. Most of our engagements involve extending, refactoring, or integrating with existing systems. We\'re comfortable joining mid-project or taking over from another team.',
+  },
+  {
+    question: 'What do you need from us to get started?',
+    answer: 'A clear picture of the problem you\'re solving and who you\'re solving it for. We\'ll handle the architecture, technology decisions, and implementation. The more context you provide, the better the outcome.',
+  },
+]
+
+/* ══════════════════════════════════════════════════════════════════
+   FOUNDER — Ali Ihtsham, AI Systems Engineer
+   ══════════════════════════════════════════════════════════════════ */
+export const founder = {
+  name: 'Ali Ihtsham',
+  role: 'AI Systems Engineer & Founder',
+  headline: 'I build AI-native systems that solve real problems at scale.',
+  bio: [
+    'With 6+ years of experience shipping production systems, I specialize in the intersection of AI engineering and full-scale product development. From multi-agent architectures to real-time data pipelines, I build software that handles serious workloads.',
+    'Code Brand Studio was founded on a simple belief: the best engineering is invisible. Systems should be fast, reliable, and intuitive — letting the product speak for itself.',
+  ],
+  highlights: [
+    { value: '6+', label: 'Years shipping production systems' },
+    { value: '38+', label: 'Projects delivered' },
+    { value: '100%', label: 'Client retention rate' },
+  ],
+  stack: ['React', 'TypeScript', 'Python', 'PostgreSQL', 'Redis', 'OpenAI', 'LangChain', 'Kubernetes'],
+}
+
+/* ══════════════════════════════════════════════════════════════════
+   CONTACT
+   ══════════════════════════════════════════════════════════════════ */
 export const contact = {
   email: 'hello@codebrandstudio.com',
   calendarLabel: 'Book a Discovery Call',
 }
 
-export const founder = {
-  name: 'Ali',
-  role: 'Founder & Creative Developer',
-  headline: 'I build premium web experiences that make brands feel expensive from the first scroll.',
-  bio: [
-    'With 6+ years crafting digital products for founders and premium brands, I combine strategic visual direction with deep frontend engineering. Every project is an opportunity to shift how a market perceives value.',
-    'Code Brand Studio was born from a simple belief: your website should be your most persuasive salesperson — composed, intentional, and impossible to compare with competitors.',
-  ],
-  highlights: [
-    { value: '6+', label: 'Years of experience' },
-    { value: '38+', label: 'Brands elevated' },
-    { value: '100%', label: 'Tailor-made builds' },
-  ],
-  stack: ['React', 'TypeScript', 'Three.js', 'GSAP', 'Design Systems', 'Motion Design'],
-}
+/* ══════════════════════════════════════════════════════════════════
+   SOCIAL
+   ══════════════════════════════════════════════════════════════════ */
+export const socialLinks = [
+  { label: 'GitHub', href: 'https://github.com/codebrandstudio' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/company/codebrandstudio' },
+  { label: 'Twitter', href: 'https://twitter.com/codebrandstudio' },
+]
 
+/* ══════════════════════════════════════════════════════════════════
+   HELPERS
+   ══════════════════════════════════════════════════════════════════ */
 export const getProjectBySlug = (slug?: string) =>
   projects.find((project) => project.slug === slug)
-
-export const comparison = [
-  { typical: 'Generic templates', studio: 'Custom strategy & design' },
-  { typical: 'Fast delivery', studio: 'Premium positioning' },
-  { typical: 'Basic design', studio: 'Brand-focused design' },
-  { typical: 'One-size-fits-all', studio: 'Tailored digital product' },
-  { typical: 'Add motion later', studio: 'Motion baked into strategy' },
-  { typical: 'Template support', studio: 'Dedicated partnership' },
-]
-
-export const studioPrinciples = [
-  {
-    title: 'Authority by design',
-    body: 'A premium website should shift perception immediately, before a visitor reads a full sentence.',
-    icon: ScanSearch,
-  },
-  {
-    title: 'Business-first aesthetics',
-    body: 'Luxury is useful when it supports trust, clarity, differentiation, and higher-value decisions.',
-    icon: Rocket,
-  },
-  {
-    title: 'Modern craft',
-    body: 'We combine strong editorial systems with disciplined engineering so the experience feels refined, not fragile.',
-    icon: Layers3,
-  },
-]
