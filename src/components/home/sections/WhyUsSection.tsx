@@ -77,7 +77,7 @@ export function WhyUsSection() {
           {comparisonRows.map((row, i) => (
             <div
               key={row.typical}
-              className="relative z-10 grid grid-cols-2 gap-6 py-4"
+              className="relative z-10 grid grid-cols-2 gap-6 py-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               onMouseEnter={() => setHoveredRow(i)}
               onMouseLeave={() => setHoveredRow(null)}
               onFocus={() => setHoveredRow(i)}
