@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { projects } from '../../../data/site'
@@ -7,16 +5,12 @@ import { Reveal } from '../../ui/Reveal'
 import { TiltCard } from '../../ui/TiltCard'
 
 function ProjectCard({ project, i }: { project: typeof projects[number]; i: number }) {
-  const [hovered, setHovered] = useState(false)
-
   return (
-    <Reveal delay={i * 0.08}>
+    <Reveal delay={i * 80} className="reveal-base">
       <TiltCard maxTilt={3}>
         <Link
           to={`/work/${project.slug}`}
           className="card-surface group block"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
         >
           <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr] lg:gap-10">
             {/* Left — Project info */}
@@ -43,29 +37,17 @@ function ProjectCard({ project, i }: { project: typeof projects[number]; i: numb
                 ))}
               </div>
 
-              {/* Stack — spring tag spawning */}
+              {/* Stack — CSS spring animation on hover */}
               <div className="mt-6 flex flex-wrap gap-2">
-                <AnimatePresence>
-                  {project.stack.map((tech, ti) => (
-                    <motion.span
-                      key={tech}
-                      className="rounded-full border border-white/[0.14] bg-white/[0.05] px-3.5 py-1.5 text-xs font-medium text-white/75"
-                      initial={{ scale: 0.9, opacity: 0.7 }}
-                      animate={hovered ? {
-                        scale: [0.9, 1.08, 1],
-                        opacity: 1,
-                        transition: {
-                          type: 'spring',
-                          damping: 12,
-                          stiffness: 300,
-                          delay: ti * 0.06,
-                        },
-                      } : { scale: 1, opacity: 1 }}
-                    >
-                      {tech}
-                    </motion.span>
-                  ))}
-                </AnimatePresence>
+                {project.stack.map((tech, ti) => (
+                  <span
+                    key={tech}
+                    className="stack-tag rounded-full border border-white/[0.14] bg-white/[0.05] px-3.5 py-1.5 text-xs font-medium text-white/75"
+                    style={{ transitionDelay: `${ti * 60}ms` }}
+                  >
+                    {tech}
+                  </span>
+                ))}
               </div>
 
               <span className="mt-6 inline-flex items-center gap-2 text-sm text-white/50 transition group-hover:text-white/80">
@@ -95,7 +77,7 @@ function ProjectCard({ project, i }: { project: typeof projects[number]; i: numb
 export function ProjectsSection() {
   return (
     <section id="work" className="section-shell" aria-label="Featured projects">
-      <Reveal>
+      <Reveal delay={0}>
         <p className="section-kicker">Work</p>
         <h2 className="section-title max-w-2xl">
           Systems we&apos;ve shipped.

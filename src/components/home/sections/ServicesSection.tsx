@@ -1,5 +1,4 @@
 import { useRef, useState, useCallback } from 'react'
-import { motion, useMotionValue, useSpring } from 'framer-motion'
 import { services } from '../../../data/site'
 import { Reveal } from '../../ui/Reveal'
 
@@ -36,32 +35,27 @@ function TerminalHoverCard({ title, description, icon: Icon }: { title: string; 
       onMouseLeave={handleMouseLeave}
     >
       {/* Terminal overlay */}
-      <motion.div
-        className="absolute inset-0 z-10 flex flex-col justify-end rounded-2xl bg-ink/95 p-4 font-mono text-[10px] leading-5"
-        initial={false}
-        animate={{ opacity: hovered ? 1 : 0 }}
-        transition={{ duration: 0.2 }}
-        style={{ pointerEvents: hovered ? 'auto' : 'none' }}
+      <div
+        className="absolute inset-0 z-10 flex flex-col justify-end rounded-2xl bg-ink/95 p-4 font-mono text-[10px] leading-5 transition-opacity duration-200"
+        style={{ opacity: hovered ? 1 : 0, pointerEvents: hovered ? 'auto' : 'none' }}
       >
         {terminalLines.slice(0, visibleLines).map((line, i) => (
-          <motion.div
+          <div
             key={i}
-            initial={{ opacity: 0, x: -8 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.15 }}
-            className={i === 1 ? 'text-cyan/80' : i === 2 ? 'text-emerald-400/80' : 'text-white/60'}
+            className={`transition-all duration-150 ${i === 1 ? 'text-cyan/80' : i === 2 ? 'text-emerald-400/80' : 'text-white/60'}`}
+            style={{
+              opacity: 1,
+              transform: 'translateX(0)',
+              transitionDelay: `${i * 50}ms`,
+            }}
           >
             {line.text}
-          </motion.div>
+          </div>
         ))}
         {hovered && (
-          <motion.span
-            className="mt-1 inline-block h-3 w-1.5 bg-cyan"
-            animate={{ opacity: [1, 0] }}
-            transition={{ duration: 0.6, repeat: Infinity }}
-          />
+          <span className="mt-1 inline-block h-3 w-1.5 bg-cyan animate-pulse" />
         )}
-      </motion.div>
+      </div>
 
       <Icon className="h-5 w-5 text-cyan/70 transition-colors group-hover:text-cyan" />
       <h3 className="mt-4 text-base font-semibold text-white">{title}</h3>
@@ -73,22 +67,25 @@ function TerminalHoverCard({ title, description, icon: Icon }: { title: string; 
 /* ── Bento grid with mouse-tracking spotlight ──────────────────── */
 function BentoGrid({ children }: { children: React.ReactNode }) {
   const gridRef = useRef<HTMLDivElement>(null)
-  const mouseX = useMotionValue(-200)
-  const mouseY = useMotionValue(-200)
-  const springX = useSpring(mouseX, { damping: 25, stiffness: 200 })
-  const springY = useSpring(mouseY, { damping: 25, stiffness: 200 })
+  const [mousePos, setMousePos] = useState({ x: -200, y: -200 })
 
   const onMouseMove = useCallback((e: React.MouseEvent) => {
     if (!gridRef.current) return
     const rect = gridRef.current.getBoundingClientRect()
-    mouseX.set(e.clientX - rect.left)
-    mouseY.set(e.clientY - rect.top)
-  }, [mouseX, mouseY])
+    setMousePos({ x: e.clientX - rect.left, y: e.clientY - rect.top })
+  }, [])
 
   const onMouseLeave = useCallback(() => {
-    mouseX.set(-200)
-    mouseY.set(-200)
-  }, [mouseX, mouseY])
+    setMousePos({ x: -200, y: -200 })
+  }, [])
+
+  // CSS transition handles the smoothing
+  const spotlightStyle = {
+    x: mousePos.x,
+    y: mousePos.y,
+    background: 'radial-gradient(circle, rgba(139,233,253,0.06) 0%, transparent 70%)',
+    transition: 'transform 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
+  } as React.CSSProperties
 
   return (
     <div
@@ -98,12 +95,11 @@ function BentoGrid({ children }: { children: React.ReactNode }) {
       onMouseLeave={onMouseLeave}
     >
       {/* Spotlight glow following cursor */}
-      <motion.div
+      <div
         className="pointer-events-none absolute z-0 h-[300px] w-[300px] -translate-x-1/2 -translate-y-1/2 rounded-full"
         style={{
-          x: springX,
-          y: springY,
-          background: 'radial-gradient(circle, rgba(139,233,253,0.06) 0%, transparent 70%)',
+          ...spotlightStyle,
+          transform: `translate(${mousePos.x}px, ${mousePos.y}px) translate(-50%, -50%)`,
         }}
         aria-hidden="true"
       />
@@ -118,7 +114,7 @@ export function ServicesSection() {
 
   return (
     <section id="services" className="section-shell" aria-label="Services">
-      <Reveal>
+      <Reveal delay={0}>
         <p className="section-kicker">Services</p>
         <h2 className="section-title">What we build.</h2>
         <p className="section-subtitle">
@@ -132,7 +128,7 @@ export function ServicesSection() {
             {rest.map((service, i) => {
               const Icon = service.icon
               return (
-                <Reveal key={service.title} delay={i * 0.06}>
+                <Reveal key={service.title} delay={i * 60} className="reveal-base">
                   <div className="card-surface group">
                     <Icon className="h-5 w-5 text-cyan/70 transition-colors group-hover:text-cyan" />
                     <h3 className="mt-4 text-base font-semibold text-white">
@@ -151,7 +147,7 @@ export function ServicesSection() {
 
       {/* Featured service banner with terminal hover */}
       {featured && (
-        <Reveal>
+        <Reveal delay={300} className="reveal-base">
           <div className="mt-6">
             <TerminalHoverCard
               title={featured.title}

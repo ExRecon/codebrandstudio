@@ -1,5 +1,11 @@
-@import '@fontsource-variable/inter';
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+/* ── Fonts (self-hosted with font-display: swap) ─────────────────── */
+/* Inter Variable - loaded via @fontsource-variable/inter package */
+@import '@fontsource-variable/inter/index.css';
+
+/* JetBrains Mono - self-hosted via @fontsource (includes font-display: swap) */
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+@import '@fontsource/jetbrains-mono/600.css';
 
 @tailwind base;
 @tailwind components;
@@ -151,6 +157,42 @@ html.lenis, html.lenis body {
   }
 }
 
+/* ── Reveal Animations (lightweight, CSS-driven) ───────────────── */
+.reveal-base {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-base.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-text-base {
+  opacity: 0.3;
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-text-base.reveal-text-visible {
+  opacity: 1;
+}
+
+/* Stagger helper for word-by-word reveal */
+.reveal-word {
+  display: inline-block;
+  opacity: 0.3;
+  transform: translateY(0.5em);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* ── Marquee ───────────────────────────────────────────────────── */
 @keyframes marquee {
   from { transform: translateX(0); }
@@ -162,10 +204,32 @@ html.lenis, html.lenis body {
   to { transform: translateX(0); }
 }
 
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-6px); }
+  60% { transform: translateY(-3px); }
+}
+
 .marquee-track {
   @apply flex gap-6;
   width: max-content;
   animation: marquee 30s linear infinite;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite ease-in-out;
+}
+
+/* ── Stack tag hover animation ───────────────────────────────────── */
+.stack-tag {
+  transform: scale(0.9);
+  opacity: 0.7;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.3s ease;
+}
+.group:hover .stack-tag {
+  transform: scale(1);
+  opacity: 1;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -181,5 +245,13 @@ html.lenis, html.lenis body {
     width: 100%;
     overflow-x: auto;
     padding-bottom: 0.5rem;
+  }
+
+  .reveal-base,
+  .reveal-text-base,
+  .reveal-word {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
   }
 }

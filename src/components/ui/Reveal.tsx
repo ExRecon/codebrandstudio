@@ -1,32 +1,81 @@
-import { motion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
 
-type RevealProps = {
+interface RevealProps {
   children: ReactNode
   delay?: number
   className?: string
-  direction?: 'up' | 'left' | 'right'
-  blur?: number
+  once?: boolean
 }
 
-const directionOffset = {
-  up: { y: 28, x: 0 },
-  left: { y: 0, x: -28 },
-  right: { y: 0, x: 28 },
-}
+const THRESHOLD = 0.12
+const ROOT_MARGIN = '0px 0px -60px 0px'
 
-export function Reveal({ children, delay = 0, className, direction = 'up', blur = 12 }: RevealProps) {
-  const offset = directionOffset[direction]
+export function Reveal({ children, delay = 0, className = '', once = true }: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setVisible(true), delay)
+          if (once) observer.unobserve(el)
+        } else if (!once) {
+          setVisible(false)
+        }
+      },
+      { threshold: THRESHOLD, rootMargin: ROOT_MARGIN }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [delay, once])
 
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, x: offset.x, y: offset.y, filter: `blur(${blur}px)` }}
-      whileInView={{ opacity: 1, x: 0, y: 0, filter: 'blur(0px)' }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1], delay }}
+    <div
+      ref={ref}
+      className={`${className} reveal-base ${visible ? 'reveal-visible' : ''}`}
+      style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
-    </motion.div>
+    </div>
+  )
+}
+
+export function RevealText({ children, delay = 0, className = '', once = true }: RevealProps) {
+  const ref = useRef<HTMLParagraphElement>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => setVisible(true), delay)
+          if (once) observer.unobserve(el)
+        } else if (!once) {
+          setVisible(false)
+        }
+      },
+      { threshold: THRESHOLD, rootMargin: ROOT_MARGIN }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [delay, once])
+
+  return (
+    <p
+      ref={ref}
+      className={`${className} reveal-text-base ${visible ? 'reveal-text-visible' : ''}`}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
+    </p>
   )
 }

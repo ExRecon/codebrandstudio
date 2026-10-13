@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion'
+import { Reveal } from '../../ui/Reveal'
 
 /* ── Client logos / social proof bar ───────────────────────────── */
 const clientLogos = [
@@ -51,9 +51,11 @@ export function SocialProofSection() {
       />
 
       <div className="mx-auto max-w-6xl px-5 sm:px-6 md:px-8">
-        <p className="mb-10 text-center text-xs uppercase tracking-[0.25em] text-white/40">
-          Trusted by engineering teams at
-        </p>
+        <Reveal delay={0} className="mb-10 text-center">
+          <p className="text-xs uppercase tracking-[0.25em] text-white/40">
+            Trusted by engineering teams at
+          </p>
+        </Reveal>
 
         {/* First row — left to right */}
         <div className="overflow-hidden">
@@ -66,23 +68,19 @@ export function SocialProofSection() {
         </div>
 
         {/* Single powerful testimonial */}
-        <motion.blockquote
-          className="mx-auto mt-14 max-w-2xl text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
-          <p className="text-lg leading-8 text-white/70 md:text-xl md:leading-9">
-            &ldquo;They didn&apos;t just build what we asked for — they architected a system that anticipated problems we hadn&apos;t even considered.&rdquo;
-          </p>
-          <footer className="mt-6">
-            <cite className="not-italic">
-              <span className="font-semibold text-white">Sarah Chen</span>
-              <span className="text-white/40"> — CTO, Lumina AI</span>
-            </cite>
-          </footer>
-        </motion.blockquote>
+        <Reveal delay={200} className="mx-auto mt-14 max-w-2xl text-center reveal-base">
+          <blockquote>
+            <p className="text-lg leading-8 text-white/70 md:text-xl md:leading-9">
+              &ldquo;They didn&apos;t just build what we asked for — they architected a system that anticipated problems we hadn&apos;t even considered.&rdquo;
+            </p>
+            <footer className="mt-6">
+              <cite className="not-italic">
+                <span className="font-semibold text-white">Sarah Chen</span>
+                <span className="text-white/40"> — CTO, Lumina AI</span>
+              </cite>
+            </footer>
+          </blockquote>
+        </Reveal>
       </div>
     </section>
   )

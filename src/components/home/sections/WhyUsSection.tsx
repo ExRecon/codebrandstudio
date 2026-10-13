@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { motion, LayoutGroup } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
 import { differentiators } from '../../../data/site'
 import { Reveal } from '../../ui/Reveal'
 
@@ -14,10 +13,20 @@ const comparisonRows = [
 
 export function WhyUsSection() {
   const [hoveredRow, setHoveredRow] = useState<number | null>(null)
+  const highlightRef = useRef<HTMLDivElement>(null)
+
+  // Smooth highlight movement via CSS transition
+  useEffect(() => {
+    if (highlightRef.current && hoveredRow !== null) {
+      const rowHeight = 53
+      highlightRef.current.style.transform = `translateY(${hoveredRow * rowHeight}px)`
+      highlightRef.current.style.height = `${rowHeight}px`
+    }
+  }, [hoveredRow])
 
   return (
     <section id="why-us" className="section-shell" aria-label="Why choose us">
-      <Reveal>
+      <Reveal delay={0}>
         <p className="section-kicker">Why us</p>
         <h2 className="section-title max-w-2xl">
           Built different. Engineered to last.
@@ -26,7 +35,7 @@ export function WhyUsSection() {
 
       <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {differentiators.map((item, index) => (
-          <Reveal key={index} delay={index * 0.06}>
+          <Reveal key={index} delay={index * 60} className="reveal-base">
             <div className="card-surface relative overflow-hidden">
               <span className="pointer-events-none absolute -top-2 -right-1 text-[4rem] font-bold leading-none text-white/[0.04] select-none" aria-hidden="true">
                 {String(index + 1).padStart(2, '0')}
@@ -52,44 +61,35 @@ export function WhyUsSection() {
           </div>
         </div>
 
-        <LayoutGroup>
-          <div className="relative divide-y divide-white/[0.04]">
-            {/* Highlight pill that tracks hovered row */}
-            {hoveredRow !== null && (
-              <motion.div
-                className="pointer-events-none absolute inset-x-0 z-0 rounded-lg border border-cyan/10 bg-cyan/[0.04]"
-                layoutId="highlight"
-                style={{
-                  top: hoveredRow * 53,
-                  height: 53,
-                }}
-                transition={{
-                  type: 'spring',
-                  damping: 25,
-                  stiffness: 300,
-                  mass: 0.6,
-                }}
-                aria-hidden="true"
-              />
-            )}
+        <div className="relative divide-y divide-white/[0.04]">
+          {/* Highlight pill that tracks hovered row */}
+          <div
+            ref={highlightRef}
+            className="pointer-events-none absolute inset-x-0 z-0 rounded-lg border border-cyan/10 bg-cyan/[0.04] transition-all duration-300 ease-out"
+            style={{
+              transform: hoveredRow !== null ? `translateY(${hoveredRow * 53}px)` : 'translateY(-100%)',
+              height: hoveredRow !== null ? 53 : 0,
+              opacity: hoveredRow !== null ? 1 : 0,
+            }}
+            aria-hidden="true"
+          />
 
-            {comparisonRows.map((row, i) => (
-              <div
-                key={row.typical}
-                className="relative z-10 grid grid-cols-2 gap-6 py-4 cursor-default"
-                onMouseEnter={() => setHoveredRow(i)}
-                onMouseLeave={() => setHoveredRow(null)}
-              >
-                <p className="text-sm leading-6 text-white/45 transition-colors duration-200">
-                  {row.typical}
-                </p>
-                <p className="text-sm leading-6 text-white/70 transition-colors duration-200">
-                  {row.studio}
-                </p>
-              </div>
-            ))}
-          </div>
-        </LayoutGroup>
+          {comparisonRows.map((row, i) => (
+            <div
+              key={row.typical}
+              className="relative z-10 grid grid-cols-2 gap-6 py-4 cursor-default"
+              onMouseEnter={() => setHoveredRow(i)}
+              onMouseLeave={() => setHoveredRow(null)}
+            >
+              <p className="text-sm leading-6 text-white/45 transition-colors duration-200">
+                {row.typical}
+              </p>
+              <p className="text-sm leading-6 text-white/70 transition-colors duration-200">
+                {row.studio}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )
