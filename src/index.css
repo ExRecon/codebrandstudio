@@ -63,6 +63,7 @@
 
 html {
   background: #050505;
+  overflow-x: hidden;
 }
 
 body {
@@ -70,6 +71,7 @@ body {
   min-width: 320px;
   background: #050505;
   color: #f5f7fb;
+  overflow-x: hidden;
 }
 
 a {
