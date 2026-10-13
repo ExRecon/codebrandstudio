@@ -30,14 +30,12 @@ export function TestimonialsSection() {
             animation: paused ? 'none' : 'marquee 30s linear infinite',
             width: 'max-content',
           }}
-          role="list"
           aria-label="Client testimonials"
         >
           {items.map((item, index) => (
             <article
               key={`${item.name}-${index}`}
               className="card-surface w-[340px] shrink-0 md:w-[400px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
-              role="listitem"
               tabIndex={0}
             >
               <p className="text-base leading-7 text-white/70 md:text-lg md:leading-8">

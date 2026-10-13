@@ -120,7 +120,7 @@ html.lenis, html.lenis body {
   }
 
   .section-subtitle {
-    @apply mt-5 max-w-2xl text-base leading-7 text-white/60 md:text-lg md:leading-8;
+    @apply mt-5 max-w-2xl text-base leading-7 text-white/80 md:text-lg md:leading-8;
   }
 
   .button-primary {

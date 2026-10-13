@@ -30,7 +30,7 @@ export function HeroSection() {
             <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
             <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
           </div>
-          <span className="font-mono text-xs text-white/40">codebrandstudio.io</span>
+          <span className="font-mono text-xs text-white/60">codebrandstudio.io</span>
         </Reveal>
 
         {/* Split-text headline reveal */}
@@ -72,7 +72,7 @@ export function HeroSection() {
               <p className="text-2xl font-bold tracking-tight text-white md:text-3xl">
                 <RollingCounter target={stat.value} delay={1400 + i * 150} />
               </p>
-              <p className="mt-1 text-xs text-white/40">{stat.label}</p>
+              <p className="mt-1 text-xs text-white/60">{stat.label}</p>
             </div>
           ))}
         </Reveal>
@@ -82,7 +82,7 @@ export function HeroSection() {
       <Reveal delay={2000} className="absolute bottom-8 left-1/2 -translate-x-1/2">
         <a
           href="#about"
-          className="flex flex-col items-center gap-2 text-white/30 transition-colors hover:text-white/50"
+          className="flex flex-col items-center gap-2 text-white/50 transition-colors hover:text-white/70"
           aria-label="Scroll to about section"
         >
           <span className="text-[10px] uppercase tracking-[0.3em]">Scroll</span>

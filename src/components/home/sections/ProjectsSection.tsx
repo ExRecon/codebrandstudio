@@ -32,7 +32,7 @@ function ProjectCard({ project, i }: { project: typeof projects[number]; i: numb
                     <p className="text-2xl font-bold tracking-tight text-white">
                       {metric.value}
                     </p>
-                    <p className="mt-1 text-xs text-white/40">{metric.label}</p>
+                    <p className="mt-1 text-xs text-white/60">{metric.label}</p>
                   </div>
                 ))}
               </div>

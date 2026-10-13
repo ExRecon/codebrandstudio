@@ -83,7 +83,6 @@ export function WhyUsSection() {
               onFocus={() => setHoveredRow(i)}
               onBlur={() => setHoveredRow(null)}
               tabIndex={0}
-              role="row"
             >
               <p className="text-sm leading-6 text-white/60 transition-colors duration-200">
                 {row.typical}
