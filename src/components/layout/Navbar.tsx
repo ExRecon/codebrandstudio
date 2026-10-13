@@ -116,10 +116,14 @@ export function Navbar() {
           }`}
         >
           {/* Logo */}
-          <a href="#hero" className="group flex items-center gap-2" aria-label="Code Brand Studio — Home">
-            <div className="relative flex h-8 w-8 items-center justify-center">
+          <a
+            href="#hero"
+            className="group inline-flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
+            aria-label="Code Brand Studio — Home"
+          >
+            <div className="relative flex h-8 w-8 items-center justify-center" aria-hidden="true">
               <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-cyan/20 to-violet/10 transition-all duration-300 group-hover:from-cyan/30 group-hover:to-violet/20" />
-              <span className="relative text-sm font-semibold tracking-tight text-white">C</span>
+              <span className="relative text-base font-semibold tracking-tight text-white">C</span>
             </div>
             <span className="hidden text-sm font-medium tracking-wide text-white/70 transition-colors group-hover:text-white sm:inline">
               Code Brand

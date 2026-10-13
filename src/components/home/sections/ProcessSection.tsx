@@ -136,10 +136,10 @@ export function ProcessSection() {
 
                 <div className="pt-1">
                   <h3 className="text-xl font-semibold tracking-tight text-white md:text-2xl">
-                    <span className="mr-3 text-white/30">{String(index + 1).padStart(2, '0')}</span>
+                    <span className="mr-3 text-white/60">{String(index + 1).padStart(2, '0')}</span>
                     {step.title}
                   </h3>
-                  <p className="mt-2 max-w-2xl text-base leading-7 text-white/55">
+                  <p className="mt-2 max-w-2xl text-base leading-7 text-white/70">
                     {step.description}
                   </p>
                 </div>

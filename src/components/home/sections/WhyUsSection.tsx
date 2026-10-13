@@ -50,7 +50,7 @@ export function WhyUsSection() {
       <div className="mx-auto mt-16 max-w-xl">
         <div className="grid grid-cols-2 gap-6 border-b border-white/[0.06] pb-5">
           <div>
-            <p className="text-xs uppercase tracking-[0.25em] text-white/40">
+            <p className="text-xs uppercase tracking-[0.25em] text-white/60">
               Typical Freelancer
             </p>
           </div>
@@ -77,14 +77,18 @@ export function WhyUsSection() {
           {comparisonRows.map((row, i) => (
             <div
               key={row.typical}
-              className="relative z-10 grid grid-cols-2 gap-6 py-4 cursor-default"
+              className="relative z-10 grid grid-cols-2 gap-6 py-4"
               onMouseEnter={() => setHoveredRow(i)}
               onMouseLeave={() => setHoveredRow(null)}
+              onFocus={() => setHoveredRow(i)}
+              onBlur={() => setHoveredRow(null)}
+              tabIndex={0}
+              role="row"
             >
-              <p className="text-sm leading-6 text-white/45 transition-colors duration-200">
+              <p className="text-sm leading-6 text-white/60 transition-colors duration-200">
                 {row.typical}
               </p>
-              <p className="text-sm leading-6 text-white/70 transition-colors duration-200">
+              <p className="text-sm leading-6 text-white/90 transition-colors duration-200 font-medium">
                 {row.studio}
               </p>
             </div>

@@ -36,8 +36,9 @@ export function TestimonialsSection() {
           {items.map((item, index) => (
             <article
               key={`${item.name}-${index}`}
-              className="card-surface w-[340px] shrink-0 md:w-[400px]"
+              className="card-surface w-[340px] shrink-0 md:w-[400px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan/70 focus-visible:ring-offset-2 focus-visible:ring-offset-ink"
               role="listitem"
+              tabIndex={0}
             >
               <p className="text-base leading-7 text-white/70 md:text-lg md:leading-8">
                 &ldquo;{item.quote}&rdquo;
@@ -45,7 +46,7 @@ export function TestimonialsSection() {
               <footer className="mt-6 border-t border-white/[0.06] pt-5">
                 <cite className="not-italic">
                   <p className="font-semibold text-white">{item.name}</p>
-                  <p className="mt-0.5 text-sm text-white/45">{item.role}</p>
+                  <p className="mt-0.5 text-sm text-white/60">{item.role}</p>
                 </cite>
               </footer>
             </article>
